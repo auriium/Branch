@@ -1,11 +1,11 @@
 package me.aurium.beetle.branch.bases;
 
+import me.aurium.beetle.api.command.Context;
+import me.aurium.beetle.api.command.ContextHandler;
 import me.aurium.beetle.api.nodes.impl.StringBlockPath;
 import me.aurium.beetle.api.nodes.path.BlockPath;
 import me.aurium.beetle.branch.CommandBase;
 import me.aurium.beetle.branch.CommandNode;
-import me.aurium.beetle.branch.Context;
-import me.aurium.beetle.branch.ContextHandler;
 
 import java.util.Optional;
 
@@ -31,7 +31,9 @@ public class SimpleBase<T> implements CommandBase<T> {
     }
 
     @Override
-    public void handle(Context<T> context) {
-        getHandler(context).consume(context);
+    public void handleContext(Context<T> context) {
+        getHandler(context).handle(context);
+
+        return;
     }
 }

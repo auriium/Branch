@@ -1,50 +1,59 @@
 package me.aurium.beetle.branch.bases;
 
-import me.aurium.beetle.api.command.AbstractCommand;
-import me.aurium.beetle.branch.CommandBase;
+import me.aurium.beetle.api.command.Command;
+import me.aurium.beetle.api.command.ContextSource;
 import me.aurium.beetle.branch.CommandNode;
-import me.aurium.beetle.branch.Context;
-import me.aurium.beetle.branch.ContextHandler;
-import me.aurium.beetle.branch.impl.CommonContext;
 
-public class CommandableBase<T> implements CommandBase<T>, AbstractCommand<T> {
+import java.util.Collection;
+
+public class CommandableBase<T> extends SimpleBase<T> implements Command<T> {
 
     private final String name;
     private final String permission;
-    private final CommandNode<T> node;
+    private final ContextSource<T> source;
 
-    public CommandableBase(String name, String permission, CommandNode<T> node) {
+    public CommandableBase(CommandNode<T> node, String name, String permission, ContextSource<T> source) {
+        super(node);
         this.name = name;
         this.permission = permission;
-        this.node = node;
-    }
-
-    @Override
-    public ContextHandler<T> getHandler(Context<T> context) {
-        return null;
-    }
-
-    @Override
-    public void handle(Context<T> context) {
-
+        this.source = source;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public String getPermission() {
+        return permission;
+    }
+
+    @Override
+    public boolean execute(T t, String s, String[] strings) {
+
+        this.handleContext(source.context(t,s,strings));
+
+        return true;
+    }
+
+    @Override
+    public Collection<String> getAliases() {
         return null;
     }
 
     @Override
-    public boolean execute(T t, String alias, String[] strings) {
-        Context<T> context = new CommonContext<>(t,alias,strings);
+    public Collection<String> tabComplete(T sender, String alias, String[] args) {
+        return null;
+    }
 
-        handle(context);
+    @Override
+    public String getUsage() {
+        return null;
+    }
 
-        return true;
+    @Override
+    public String getDescription() {
+        return null;
     }
 }

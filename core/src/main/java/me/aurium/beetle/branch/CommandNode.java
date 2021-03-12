@@ -1,5 +1,6 @@
 package me.aurium.beetle.branch;
 
+import me.aurium.beetle.api.command.ContextHandler;
 import me.aurium.beetle.api.nodes.Node;
 
 public interface CommandNode<T> extends Node<CommandNode<T>> {
@@ -9,5 +10,9 @@ public interface CommandNode<T> extends Node<CommandNode<T>> {
      * @return said contexthandler...
      */
     ContextHandler<T> getContextHandler();
+
+    //TODO tabcompleteHandler
+    //TabContextHandler<T> getSpecificTabHandler(BlockPath path);
+    //TabContextHandler<T> getTabHandler(); //tabhandler (probably just return this.id)
 
 }

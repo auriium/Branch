@@ -1,15 +1,16 @@
 package me.aurium.beetle.branch.nodes;
 
+import me.aurium.beetle.api.command.ContextHandler;
 import me.aurium.beetle.api.nodes.path.Block;
 import me.aurium.beetle.api.nodes.path.BlockPath;
 import me.aurium.beetle.branch.CommandNode;
-import me.aurium.beetle.branch.ContextHandler;
+import me.aurium.beetle.branch.IndividualNode;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
-public class SingleCommandNode<T> implements CommandNode<T> {
+public class SingleCommandNode<T> implements IndividualNode<T> {
 
     private final CommandNode<T> root;
     private final CommandNode<T> parent;
