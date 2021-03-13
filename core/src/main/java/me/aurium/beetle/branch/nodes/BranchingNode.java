@@ -7,7 +7,9 @@ import me.aurium.beetle.branch.PreStoredHashSet;
 import me.aurium.beetle.branch.CommandNode;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public class BranchingNode<T> implements CommandNode<T> {
 
@@ -61,5 +63,40 @@ public class BranchingNode<T> implements CommandNode<T> {
     @Override
     public ContextHandler<T> getContextHandler() {
         return nodes.getAlreadyStored().getContextHandler();
+    }
+
+    public static class Builder<T> {
+        private final CommandNode<T> root;
+        private final CommandNode<T> parent;
+
+        private Block block;
+
+        private Set<CommandNode<T>> commands;
+        private CommandNode<T> noArgs;
+
+        private boolean linked = false;
+
+        public Builder(CommandNode<T> root, CommandNode<T> parent) {
+            this.root = root;
+            this.parent = parent;
+            this.commands = new HashSet<>();
+        }
+
+        public BranchingNode<T> build() {
+
+            if (linked) {
+                if (noArgs == null) {
+                    throw new IllegalStateException("Cannot be linked with no noargs handler!");
+                } else {
+                    PreStoredHashSet<CommandNode<T>> set = new PreStoredHashSet<>(noArgs, commands, true);
+                }
+            } else {
+
+            }
+
+
+
+            return new BranchingNode<>()
+        }
     }
 }

@@ -5,6 +5,7 @@ import me.aurium.beetle.api.command.ContextSource;
 import me.aurium.beetle.api.nodes.path.Block;
 import me.aurium.beetle.api.nodes.path.BlockPath;
 import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.PreStoredHashSet;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -13,7 +14,9 @@ import java.util.Optional;
  * Node representing literally the command itself
  *
  * If you were to lay it out, it would be like
- * /kitpvp join
+ * /kitpvp join val val
+ *
+ * BaseNode ValueSelectorNode ValueNode ValueNode
  *
  * @param <T>
  */
@@ -21,8 +24,9 @@ public class BaseNode<T> implements CommandNode<T> {
 
     private final ContextSource<T> source;
     private final Block commandIdentifier;
+    private CommandNode<T> delegate;
 
-    public BaseNode(ContextSource<T> source, CommandNode<T> delegate, Block commandIdentifier)  {
+    public BaseNode(ContextSource<T> source, Block commandIdentifier)  {
         this.source = source;
         this.commandIdentifier = commandIdentifier;
     }
@@ -57,12 +61,28 @@ public class BaseNode<T> implements CommandNode<T> {
 
     @Override
     public Optional<CommandNode<T>> getSpecificNode(BlockPath blockPath) {
-        return null
+        return null;
     }
 
     @Override
     public Collection<CommandNode<T>> getLinkedNodes() {
         return null;
+    }
+
+    //TODO move to builder style shit
+
+    public void setDelegate(SingleNode.BuilderConsumer<T> consumer) {
+        if (delegate != null) throw new IllegalStateException("Delegate already exists!");
+
+        SingleNode.Builder<T> builder = new SingleNode.Builder<>(this,this);
+
+        consumer.consume(builder);
+
+        delegate = builder.build();
+    }
+
+    public void setDelegate() {
+
     }
 
 }
