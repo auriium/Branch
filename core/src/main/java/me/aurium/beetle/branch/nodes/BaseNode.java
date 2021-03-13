@@ -4,20 +4,27 @@ import me.aurium.beetle.api.command.ContextHandler;
 import me.aurium.beetle.api.command.ContextSource;
 import me.aurium.beetle.api.nodes.path.Block;
 import me.aurium.beetle.api.nodes.path.BlockPath;
-import me.aurium.beetle.branch.AlreadyStoredHashSet;
 import me.aurium.beetle.branch.CommandNode;
 
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * Node representing literally the command itself
+ *
+ * If you were to lay it out, it would be like
+ * /kitpvp join
+ *
+ * @param <T>
+ */
 public class BaseNode<T> implements CommandNode<T> {
 
-    private final AlreadyStoredHashSet<CommandNode<T>> set;
     private final ContextSource<T> source;
+    private final Block commandIdentifier;
 
-    public BaseNode(ContextSource<T> source, AlreadyStoredHashSet<CommandNode<T>> nodes)  {
-        this.set = nodes;
+    public BaseNode(ContextSource<T> source, CommandNode<T> delegate, Block commandIdentifier)  {
         this.source = source;
+        this.commandIdentifier = commandIdentifier;
     }
 
     @Override
@@ -27,12 +34,15 @@ public class BaseNode<T> implements CommandNode<T> {
 
     @Override
     public BlockPath getAbsolutePath() {
-        return null;
+        // FIXME: 3/12/21 This entire class will not work because the
+        // FIXME: 3/12/21 utils produce a blockpath from the args **ALONE**. The utils must produce a blockpath from command
+        // FIXME: 3/12/21 NOT ALIAS + args
+        return getShortPath().asSingleBlockpath();
     }
 
     @Override
     public Block getShortPath() {
-        return null;
+        return commandIdentifier;
     }
 
     @Override
@@ -47,7 +57,7 @@ public class BaseNode<T> implements CommandNode<T> {
 
     @Override
     public Optional<CommandNode<T>> getSpecificNode(BlockPath blockPath) {
-        return getSpecificNode(blockPath);
+        return null
     }
 
     @Override
@@ -55,13 +65,4 @@ public class BaseNode<T> implements CommandNode<T> {
         return null;
     }
 
-    public static class Assembly {
-        public static <T> BaseNode<T> of(ContextSource<T> source, AlreadyStoredHashSet<CommandNode<T>> nodes) {
-            return new BaseNode<>(source,nodes);
-        }
-
-        public static <T> BaseNode<T> of(ContextSource<T> source, CommandNode<T> singleNode) {
-            return new BaseNode<>(source,new AlreadyStoredHashSet<>(singleNode));
-        }
-    }
 }

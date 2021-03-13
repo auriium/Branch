@@ -1,37 +1,35 @@
-package me.aurium.beetle.branch.nodes;
+package me.aurium.beetle.branch.newnode;
 
 import me.aurium.beetle.api.command.ContextHandler;
 import me.aurium.beetle.api.nodes.path.Block;
 import me.aurium.beetle.api.nodes.path.BlockPath;
 import me.aurium.beetle.branch.CommandNode;
-import me.aurium.beetle.branch.IndividualNode;
+import me.aurium.beetle.branch.PreStoredHashSet;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 
-public class SingleCommandNode<T> implements IndividualNode<T> {
+public class NewBranchingNode<T> implements CommandNode<T> {
 
+    private PreStoredHashSet<CommandNode<T>> nodes;
     private final CommandNode<T> root;
     private final CommandNode<T> parent;
-    private final Block identifier;
-    private final ContextHandler<T> handler;
+    private final Block path;
 
-    public SingleCommandNode(CommandNode<T> root, CommandNode<T> parent, Block identifier, ContextHandler<T> contextHandler) {
+    public NewBranchingNode(CommandNode<T> root, CommandNode<T> parent, Block path) {
         this.root = root;
         this.parent = parent;
-        this.identifier = identifier;
-        this.handler = contextHandler;
+        this.path = path;
     }
 
     @Override
     public BlockPath getAbsolutePath() {
-        return parent.getAbsolutePath().resolve(identifier);
+        return parent.getAbsolutePath().resolve(path);
     }
 
     @Override
     public Block getShortPath() {
-        return identifier;
+        return path;
     }
 
     @Override
@@ -46,16 +44,23 @@ public class SingleCommandNode<T> implements IndividualNode<T> {
 
     @Override
     public Optional<CommandNode<T>> getSpecificNode(BlockPath blockPath) {
-        return Optional.of(this);
+        for (CommandNode<T> node : this.getLinkedNodes()) {
+            if (blockPath.startsWith(node.getShortPath())) {
+                return node.getSpecificNode(blockPath);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
     public Collection<CommandNode<T>> getLinkedNodes() {
-        return Collections.emptySet();
+        return nodes.getContents();
     }
 
     @Override
     public ContextHandler<T> getContextHandler() {
-        return handler;
+        return nodes.getAlreadyStored().getContextHandler();
     }
+
+
 }

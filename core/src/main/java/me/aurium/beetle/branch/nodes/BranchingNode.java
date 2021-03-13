@@ -3,20 +3,20 @@ package me.aurium.beetle.branch.nodes;
 import me.aurium.beetle.api.command.ContextHandler;
 import me.aurium.beetle.api.nodes.path.Block;
 import me.aurium.beetle.api.nodes.path.BlockPath;
-import me.aurium.beetle.branch.AlreadyStoredHashSet;
+import me.aurium.beetle.branch.PreStoredHashSet;
 import me.aurium.beetle.branch.CommandNode;
 
 import java.util.Collection;
 import java.util.Optional;
 
-public class BranchingCommandNode<T> implements CommandNode<T> {
+public class BranchingNode<T> implements CommandNode<T> {
 
-    private final AlreadyStoredHashSet<CommandNode<T>> nodes;
+    private final PreStoredHashSet<CommandNode<T>> nodes;
     private final CommandNode<T> root;
     private final CommandNode<T> parent;
     private final Block path;
 
-    public BranchingCommandNode(AlreadyStoredHashSet<CommandNode<T>> nodes, CommandNode<T> root, CommandNode<T> parent, Block path) {
+    public BranchingNode(PreStoredHashSet<CommandNode<T>> nodes, CommandNode<T> root, CommandNode<T> parent, Block path) {
         this.nodes = nodes;
         this.root = root;
         this.parent = parent;
