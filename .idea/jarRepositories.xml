@@ -31,5 +31,10 @@
       <option name="name" value="solar-releases" />
       <option name="url" value="https://mvn-repo.platinum-mc.com/releases" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="repsy" />
+      <option name="name" value="repsy" />
+      <option name="url" value="https://repo.repsy.io/mvn/elytraforce/default" />
+    </remote-repository>
   </component>
 </project>

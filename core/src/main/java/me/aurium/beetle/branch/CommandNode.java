@@ -1,8 +1,9 @@
 package me.aurium.beetle.branch;
 
-import me.aurium.beetle.api.block.path.Block;
-import me.aurium.beetle.api.block.path.BlockPath;
 import me.aurium.beetle.api.command.ContextHandler;
+import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
+import me.aurium.beetle.branch.block.Block;
+import me.aurium.beetle.branch.block.BlockPath;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -10,18 +11,17 @@ import java.util.Optional;
 public interface CommandNode<T> {
 
     Block getIdentifier();
+    ContextHandlerAdapter<T> getContextHandler();
 
-    Optional<T> getSpecificNode(BlockPath path);
+    Optional<CommandNode<T>> getSpecificNode(BlockPath path);
+    Collection<CommandNode<T>> getLinkedNodes();
 
-    Collection<T> getLinkedNodes();
 
-    /**
-     * Represents the context handler to be used if there are no args or args are incorrect
-     * @return said contexthandler...
-     */
-    ContextHandler<T> getContextHandler();
 
-    /*TODO tabcompleteHandler
+
+
+
+    /* TODO tabcompleteHandler
     TabContextHandler<T> getSpecificTabHandler(BlockPath path);
     TabContextHandler<T> getTabHandler(); //tabhandler (probably just return this.id)*/
 
