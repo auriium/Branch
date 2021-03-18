@@ -4,6 +4,7 @@ import me.aurium.beetle.branch.CommandNode;
 import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.EmptyBlock;
+import me.aurium.beetle.branch.block.StringBlock;
 import me.aurium.beetle.branch.nodes.SingleNode;
 
 import java.util.Objects;
@@ -15,6 +16,10 @@ public class SingleBuilder<T> implements AloneBuilder<T> {
 
     public void withIdentifier(Block identifier) {
         this.block = identifier;
+    }
+
+    public void withIdentifier(String string) {
+        this.block = StringBlock.of(string);
     }
 
     public void withHandler(ContextHandlerAdapter<T> handler) {

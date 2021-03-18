@@ -4,6 +4,7 @@ import me.aurium.beetle.branch.CommandNode;
 import me.aurium.beetle.branch.block.EmptyBlock;
 import me.aurium.beetle.branch.IdentifiableNode;
 import me.aurium.beetle.branch.block.Block;
+import me.aurium.beetle.branch.block.StringBlock;
 import me.aurium.beetle.branch.nodes.BranchingNode;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
@@ -24,13 +25,17 @@ public class BranchingBuilder<T> implements Builder<T> {
         this.block = block;
     }
 
+    public void withIdentifier(String string) {
+        this.block = StringBlock.of(string);
+    }
+
     public <C extends Builder<T>> void withNode(C key, Consumer<C> consumer) {
         consumer.accept(key);
 
         commands.add(key.build());
     }
 
-    public <C extends SingleBuilder<T>> void withNoArgs(C key, Consumer<C> consumer, boolean linked) {
+    public <C extends SingleBuilder<T>> void withNoArgs(C key, boolean linked, Consumer<C> consumer) {
         consumer.accept(key);
 
         this.noArgs = key.build();
