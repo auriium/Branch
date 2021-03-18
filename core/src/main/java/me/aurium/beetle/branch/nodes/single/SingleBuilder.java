@@ -1,7 +1,6 @@
 package me.aurium.beetle.branch.nodes.single;
 
-import me.aurium.beetle.api.command.ContextHandler;
-import me.aurium.beetle.branch.Builder;
+import me.aurium.beetle.branch.builder.Builder;
 import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
 import me.aurium.beetle.branch.block.Block;
 
@@ -29,10 +28,6 @@ public class SingleBuilder<T> implements Builder<T> {
         Objects.requireNonNull(contextHandler);
 
         return new SingleNode<>(block, contextHandler);
-    }
-
-    public static SingleBuilder<?> of(boolean fancyBuilder) {
-        return null;
     }
 
 }

@@ -1,11 +1,10 @@
 package me.aurium.beetle.branch.nodes.branching;
 
-import me.aurium.beetle.branch.Builder;
+import me.aurium.beetle.branch.builder.Builder;
 import me.aurium.beetle.branch.CommandNode;
-import me.aurium.beetle.branch.nodes.single.SingleBuilder;
-import me.aurium.beetle.branch.util.PreStoredHashSet;
 import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.nodes.single.SingleNode;
+import me.aurium.beetle.branch.builder.BuilderPair;
+import me.aurium.beetle.branch.util.PreStoredHashSet;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,41 +25,18 @@ public class BranchingBuilder<T> implements Builder<T> {
         return this;
     }
 
-    public BranchingBuilder<T> single(Consumer<SingleBuilder<T>> consumer) {
-        SingleBuilder<T> builder = new SingleBuilder<>();
+    public <C extends Builder<T>> void coolShit(BuilderPair<C> key, Consumer<C> consumer) {
+        C builder = key.newBuilder();
 
         consumer.accept(builder);
 
-        this.commands.add(builder);
-
-        return null;
+        commands.add(builder.build());
     }
 
-    public <C extends Builder<T>> BranchingBuilder<T> withBuilder(Consumer<C> consumer) {
-        return null;
-    }
+    public <C extends Builder<T>> void something(C key, Consumer<C> consumer) {
+        consumer.accept(key);
 
-
-    @Deprecated
-    public BranchingBuilder<T> withNode(CommandNode<T> commandNode) {
-        this.commands.add(commandNode);
-
-        return this;
-    }
-
-    @Deprecated
-    public BranchingBuilder<T> withBuilder(Builder<T> builder) {
-        this.commands.add(builder.build());
-
-        return this;
-    }
-
-    @Deprecated
-    public BranchingBuilder<T> withNoArgs(SingleNode<T> node, boolean linked) {
-        this.noArgs = node;
-        this.linked = linked;
-
-        return this;
+        commands.add(key.build());
     }
 
     @Override
@@ -83,7 +59,17 @@ public class BranchingBuilder<T> implements Builder<T> {
         return new BranchingNode<>(set,block);
     }
 
-    public static <C> BranchingBuilder<C> make() {
-        return new BranchingBuilder<>();
+    public BranchingBuilder<T> add(Builder<T> builder) {
+        this.commands.add(builder.build());
+
+        return this;
+    }
+
+    public BranchingBuilder<T> wiff(Builder<T> builder) {
+        return new BranchingBuilder<T>().add(builder);
+    }
+
+    public static <T> BranchingBuilder<T> with(Builder<T> builder) {
+        return new BranchingBuilder<T>().add(builder);
     }
 }

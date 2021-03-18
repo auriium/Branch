@@ -1,6 +1,7 @@
 package me.aurium.beetle.branch.examples;
 
 import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.adapter.ContextAdapter;
 import me.aurium.beetle.branch.adapter.ContextAdapterFactory;
 import me.aurium.beetle.branch.block.StringBlock;
 import me.aurium.beetle.branch.launchpoints.AbstractBranchCommand;
@@ -15,8 +16,16 @@ public class ExampleAbstractCommand extends AbstractBranchCommand<String> {
 
     @Override
     public CommandNode<String> getBaseNode() {
-        return new BranchingBuilder<String>()
-                .withBuilder(BranchingBuilder.make()).build();
+        new BranchingBuilder<String>().something(new SingleBuilder<>(),shit -> {
+            shit.withIdentifier(StringBlock.of("Sup"));
+            shit.withHandler(context -> {
+                ContextAdapter<String> s = context;
+                //as you can see it's actually typed correctly now (s is a ContextAdapter<String>)
+            });
+        });
+
+
+        return null;
     }
 
     @Override

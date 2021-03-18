@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch;
+package me.aurium.beetle.branch.builder;
 
 import me.aurium.beetle.branch.CommandNode;
 

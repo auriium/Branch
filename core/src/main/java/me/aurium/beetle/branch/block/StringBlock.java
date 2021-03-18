@@ -3,7 +3,7 @@ public class StringBlock implements Block {
 
     private final String identifier;
 
-    public StringBlock(String identifier) {
+    StringBlock(String identifier) {
         this.identifier = identifier;
     }
 
@@ -18,6 +18,8 @@ public class StringBlock implements Block {
     }
 
     public static Block of(String string) {
+        if (string.contains(" ")) throw new IllegalStateException("Identifier cannot have spaces!");
+
         return new StringBlock(string);
     }
 
