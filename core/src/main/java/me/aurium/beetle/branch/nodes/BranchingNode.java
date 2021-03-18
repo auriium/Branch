@@ -25,6 +25,9 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
     @Override
     public Optional<IdentifiableNode<T>> getSpecificNode(BlockPath blockPath) {
+        if (blockPath.isEmpty()) return Optional.ofNullable(nodes.getAlreadyStored());
+        //TODO aurium - maybe we need some kind of guaruntee that it isn't empty? probably not since we can never really know
+
         for (IdentifiableNode<T> node : this.getLinkedNodes()) {
             if (blockPath.startsWith(node.getIdentifier())) {
                 return node.getSpecificNode(blockPath.withoutBase());

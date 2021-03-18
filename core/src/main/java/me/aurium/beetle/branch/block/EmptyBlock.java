@@ -13,7 +13,7 @@ public class EmptyBlock implements Block{
 
     @Override
     public BlockPath asSingleBlockpath() {
-        return StringBlockPath.ofEmpty();
+        return CommonBlockPath.ofEmpty();
     }
 
     @Override

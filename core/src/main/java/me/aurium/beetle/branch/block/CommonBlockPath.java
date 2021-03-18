@@ -3,7 +3,7 @@ package me.aurium.beetle.branch.block;
 import java.util.LinkedList;
 import java.util.List;
 
-public class StringBlockPath implements BlockPath {
+public class CommonBlockPath implements BlockPath {
 
     public final static String COMMON_SPLITTER = "-";
 
@@ -13,7 +13,7 @@ public class StringBlockPath implements BlockPath {
     private final boolean isSevered;
     private final String splitter;
 
-    public StringBlockPath(BlockPath root, BlockPath parent, LinkedList<Block> blocks, boolean isSevered, String splitter) {
+    public CommonBlockPath(BlockPath root, BlockPath parent, LinkedList<Block> blocks, boolean isSevered, String splitter) {
         this.root = root;
         this.parent = parent;
         this.blocks = blocks;
@@ -21,7 +21,7 @@ public class StringBlockPath implements BlockPath {
         this.splitter = splitter;
     }
 
-    public StringBlockPath(LinkedList<Block> list, boolean isSevered, String splitter) {
+    public CommonBlockPath(LinkedList<Block> list, boolean isSevered, String splitter) {
         this.root = this;
         this.parent = this;
         this.blocks = list;
@@ -29,12 +29,17 @@ public class StringBlockPath implements BlockPath {
         this.splitter = splitter;
     }
 
-    public StringBlockPath(String splitter) {
+    public CommonBlockPath(String splitter) {
         this.root = this;
         this.parent = this;
         this.blocks = new LinkedList<>();
         this.isSevered = true;
         this.splitter = splitter;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return blocks.isEmpty();
     }
 
     @Override
@@ -71,7 +76,7 @@ public class StringBlockPath implements BlockPath {
             block.addLast(pathBlocks);
         }
 
-        return new StringBlockPath(root,this,pathBlocks,pathBlocks.size() > 1,this.splitter);
+        return new CommonBlockPath(root,this,pathBlocks,pathBlocks.size() > 1,this.splitter);
     }
 
     @Override
@@ -81,7 +86,7 @@ public class StringBlockPath implements BlockPath {
 
         block.addLast(pathBlocks);
 
-        return new StringBlockPath(root,this,pathBlocks,pathBlocks.size() > 1,this.splitter);
+        return new CommonBlockPath(root,this,pathBlocks,pathBlocks.size() > 1,this.splitter);
     }
 
     @Override
@@ -93,7 +98,7 @@ public class StringBlockPath implements BlockPath {
     public BlockPath fromIndex(int index) {
         LinkedList<Block> clone = new LinkedList<>(blocks.subList(index, blocks.size()));
 
-        return new StringBlockPath(clone.get(0).asSingleBlockpath(),this.parent,clone,clone.size() > 1,splitter);
+        return new CommonBlockPath(clone.get(0).asSingleBlockpath(),this.parent,clone,clone.size() > 1,splitter);
     }
 
     @Override
@@ -112,7 +117,7 @@ public class StringBlockPath implements BlockPath {
         StringBuilder base = new StringBuilder();
 
         for (Block block : this.blocks) {
-            base.append('{').append(block.getIdentifier()).append('}').append(splitter);
+            base.append('{').append(block.getIdentifier()).append('}');
         }
 
 
@@ -124,7 +129,7 @@ public class StringBlockPath implements BlockPath {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StringBlockPath that = (StringBlockPath) o;
+        CommonBlockPath that = (CommonBlockPath) o;
         return blocks.equals(that.blocks);
     }
 
@@ -134,7 +139,7 @@ public class StringBlockPath implements BlockPath {
     }
 
     public static BlockPath ofEmpty() {
-        return new StringBlockPath(COMMON_SPLITTER);
+        return new CommonBlockPath(COMMON_SPLITTER);
     }
 
     public static BlockPath of(String string, String splitter) {
@@ -150,13 +155,13 @@ public class StringBlockPath implements BlockPath {
             blocklist.addLast(StringBlock.of(s));
         }
 
-        return new StringBlockPath(blocklist,commandArguments.length > 1,splitter);
+        return new CommonBlockPath(blocklist,commandArguments.length > 1,splitter);
     }
 
     public static BlockPath of(Block block, String splitter) {
         LinkedList<Block> send = new LinkedList<>();
         send.addLast(block);
-        return new StringBlockPath(send,true,splitter);
+        return new CommonBlockPath(send,true,splitter);
     }
 
     public static BlockPath of(String string) {

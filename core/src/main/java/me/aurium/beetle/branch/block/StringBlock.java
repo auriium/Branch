@@ -14,7 +14,7 @@ public class StringBlock implements Block {
 
     @Override
     public BlockPath asSingleBlockpath() {
-        return StringBlockPath.of(this);
+        return CommonBlockPath.of(this);
     }
 
     public static Block of(String string) {

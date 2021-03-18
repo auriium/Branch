@@ -32,7 +32,6 @@ public class BranchingCommand extends AbstractBranchCommand<String> {
                     //logic
                 });
             });
-
             //argument /kitpvp invites <on/off>
             kitpvp.withNode(new BranchingBuilder<>(), invites -> {
                 invites.withIdentifier("invites");
@@ -56,7 +55,6 @@ public class BranchingCommand extends AbstractBranchCommand<String> {
                     });
                 });
             });
-
             //argument /kitpvp help, which is the default
             kitpvp.withNoArgs(new SingleBuilder<>(), true, help -> {
                 help.withIdentifier("help");

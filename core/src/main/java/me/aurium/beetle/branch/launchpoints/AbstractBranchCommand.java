@@ -5,7 +5,7 @@ import me.aurium.beetle.branch.CommandNode;
 import me.aurium.beetle.branch.adapter.ContextAdapter;
 import me.aurium.beetle.branch.adapter.ContextAdapterFactory;
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.block.StringBlockPath;
+import me.aurium.beetle.branch.block.CommonBlockPath;
 
 public abstract class AbstractBranchCommand<T> implements BranchCommand<T> {
 
@@ -18,7 +18,8 @@ public abstract class AbstractBranchCommand<T> implements BranchCommand<T> {
     @Override
     public boolean execute(T t, String s, String[] strings) {
 
-        BlockPath path = StringBlockPath.of(strings);
+        BlockPath path = CommonBlockPath.of(strings);
+
         CommandNode<T> baseNode = getBaseNode();
 
         baseNode.getSpecificNode(path).ifPresentOrElse(node -> {

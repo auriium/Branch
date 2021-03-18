@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface BlockPath {
 
+    boolean isEmpty();
+
     boolean isSevered();
     boolean endsWith(Block path);
     boolean startsWith(Block path);

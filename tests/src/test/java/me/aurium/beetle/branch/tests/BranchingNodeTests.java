@@ -21,18 +21,21 @@ public class BranchingNodeTests extends AbstractTests {
         command.execute(SENDER,ALIAS,of("help"));
     }
 
+    @Test
     public void testNotLinkedNodeExecution() {
         beginTest("BranchingNode: Unlinked Node Execution");
 
         command.execute(SENDER,ALIAS,of("invites","unrinked"));
     }
 
+    @Test
     public void testBranchingExecution() {
         beginTest("BranchingNode: Branching Execution");
 
         command.execute(SENDER,ALIAS,of("join"));
     }
 
+    @Test
     public void testBranchInBranchExecution() {
         beginTest("BranchingNode: Branch in Branch Execution");
 
