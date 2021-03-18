@@ -1,10 +1,10 @@
-package me.aurium.beetle.branch.nodes.branching;
+package me.aurium.beetle.branch.builders;
 
-import me.aurium.beetle.branch.builder.Builder;
 import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.block.EmptyBlock;
+import me.aurium.beetle.branch.IdentifiableNode;
 import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.builder.BuilderPair;
-import me.aurium.beetle.branch.nodes.single.SingleBuilder;
+import me.aurium.beetle.branch.nodes.BranchingNode;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
 import java.util.HashSet;
@@ -14,10 +14,10 @@ import java.util.function.Consumer;
 
 public class BranchingBuilder<T> implements Builder<T> {
 
-    private final Set<CommandNode<T>> commands = new HashSet<>();
+    private final Set<IdentifiableNode<T>> commands = new HashSet<>();
 
     private Block block;
-    private CommandNode<T> noArgs;
+    private IdentifiableNode<T> noArgs;
     private boolean linked;
 
     public void withIdentifier(Block block) {
@@ -42,7 +42,7 @@ public class BranchingBuilder<T> implements Builder<T> {
 
         Objects.requireNonNull(block);
 
-        PreStoredHashSet<CommandNode<T>> set;
+        PreStoredHashSet<IdentifiableNode<T>> set;
 
         if (noArgs == null) {
             if (linked) {
@@ -55,5 +55,23 @@ public class BranchingBuilder<T> implements Builder<T> {
         }
 
         return new BranchingNode<>(set,block);
+    }
+
+    @Override
+    public CommandNode<T> buildWithoutIdentifier() {
+
+        PreStoredHashSet<IdentifiableNode<T>> set;
+
+        if (noArgs == null) {
+            if (linked) {
+                throw new IllegalStateException("Attempted link without no-arguments handler!");
+            } else {
+                set = new PreStoredHashSet<>(commands,false);
+            }
+        } else {
+            set = new PreStoredHashSet<>(noArgs,commands,linked);
+        }
+
+        return new BranchingNode<>(set, EmptyBlock.of());
     }
 }

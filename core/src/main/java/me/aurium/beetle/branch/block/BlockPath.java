@@ -55,6 +55,10 @@ public interface BlockPath {
      */
     List<Block> getAllBlocks();
 
+    /**
+     * DO NOT USE THIS FOR COMPARISONS. THIS IS FOR DEBUGGING ONLY.
+     * @return
+     */
     String toString();
 
 }

@@ -2,16 +2,17 @@ package me.aurium.beetle.branch.adapter;
 
 import me.aurium.beetle.api.command.Context;
 import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.IdentifiableNode;
 import me.aurium.beetle.branch.block.BlockPath;
 
 public class ContextWrapper<T> implements ContextAdapter<T> {
 
     private final Context<T> context;
-    private final CommandNode<T> executedNode;
+    private final IdentifiableNode<T> executedNode;
     private final CommandNode<T> baseNode;
     private final BlockPath executedPath;
 
-    public ContextWrapper(Context<T> context, CommandNode<T> executedNode, CommandNode<T> baseNode, BlockPath executedPath) {
+    public ContextWrapper(Context<T> context, IdentifiableNode<T> executedNode, CommandNode<T> baseNode, BlockPath executedPath) {
         this.context = context;
         this.executedNode = executedNode;
         this.baseNode = baseNode;
@@ -19,7 +20,7 @@ public class ContextWrapper<T> implements ContextAdapter<T> {
     }
 
     @Override
-    public CommandNode<T> getExecutedNode() {
+    public IdentifiableNode<T> getExecutedNode() {
         return executedNode;
     }
 

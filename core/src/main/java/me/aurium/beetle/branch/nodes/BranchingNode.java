@@ -1,6 +1,6 @@
-package me.aurium.beetle.branch.nodes.branching;
+package me.aurium.beetle.branch.nodes;
 
-import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.IdentifiableNode;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
 import me.aurium.beetle.branch.block.Block;
@@ -8,12 +8,12 @@ import me.aurium.beetle.branch.block.BlockPath;
 
 import java.util.*;
 
-public class BranchingNode<T> implements CommandNode<T> {
+public class BranchingNode<T> implements IdentifiableNode<T> {
 
-    private final PreStoredHashSet<CommandNode<T>> nodes;
+    private final PreStoredHashSet<IdentifiableNode<T>> nodes;
     private final Block path;
 
-    public BranchingNode(PreStoredHashSet<CommandNode<T>> nodes, Block path) {
+    public BranchingNode(PreStoredHashSet<IdentifiableNode<T>> nodes, Block path) {
         this.nodes = nodes;
         this.path = path;
     }
@@ -24,8 +24,8 @@ public class BranchingNode<T> implements CommandNode<T> {
     }
 
     @Override
-    public Optional<CommandNode<T>> getSpecificNode(BlockPath blockPath) {
-        for (CommandNode<T> node : this.getLinkedNodes()) {
+    public Optional<IdentifiableNode<T>> getSpecificNode(BlockPath blockPath) {
+        for (IdentifiableNode<T> node : this.getLinkedNodes()) {
             if (blockPath.startsWith(node.getIdentifier())) {
                 return node.getSpecificNode(blockPath.withoutBase());
             }
@@ -34,7 +34,7 @@ public class BranchingNode<T> implements CommandNode<T> {
     }
 
     @Override
-    public Collection<CommandNode<T>> getLinkedNodes() {
+    public Collection<IdentifiableNode<T>> getLinkedNodes() {
         return nodes.getContents();
     }
 

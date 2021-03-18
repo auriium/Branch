@@ -65,13 +65,13 @@ public class StringBlockPath implements BlockPath {
     @Override
     public BlockPath resolve(BlockPath path) {
 
-        LinkedList<Block> pathblocks = this.blocks;
+        LinkedList<Block> pathBlocks = this.blocks;
 
         for (Block block : path.getAllBlocks()) {
-            pathblocks.addLast(block);
+            block.addLast(pathBlocks);
         }
 
-        return new StringBlockPath(root,this,pathblocks,false,this.splitter);
+        return new StringBlockPath(root,this,pathBlocks,pathBlocks.size() > 1,this.splitter);
     }
 
     @Override
@@ -79,9 +79,9 @@ public class StringBlockPath implements BlockPath {
 
         LinkedList<Block> pathBlocks = this.blocks;
 
-        pathBlocks.addLast(block);
+        block.addLast(pathBlocks);
 
-        return new StringBlockPath(root,this,pathBlocks,false,this.splitter);
+        return new StringBlockPath(root,this,pathBlocks,pathBlocks.size() > 1,this.splitter);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class StringBlockPath implements BlockPath {
         StringBuilder base = new StringBuilder();
 
         for (Block block : this.blocks) {
-            base.append(splitter).append(block.getIdentifier());
+            base.append('{').append(block.getIdentifier()).append('}').append(splitter);
         }
 
 
@@ -133,6 +133,9 @@ public class StringBlockPath implements BlockPath {
         return blocks.hashCode();
     }
 
+    public static BlockPath ofEmpty() {
+        return new StringBlockPath(COMMON_SPLITTER);
+    }
 
     public static BlockPath of(String string, String splitter) {
         String[] subparts = string.split(splitter);

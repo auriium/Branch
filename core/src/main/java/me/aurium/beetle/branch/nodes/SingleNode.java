@@ -1,10 +1,9 @@
-package me.aurium.beetle.branch.nodes.single;
+package me.aurium.beetle.branch.nodes;
 
-import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.IdentifiableNode;
 import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.nodes.AloneNode;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -26,12 +25,12 @@ public class SingleNode<T> implements AloneNode<T> {
     }
 
     @Override
-    public Optional<CommandNode<T>> getSpecificNode(BlockPath blockPath) {
+    public Optional<IdentifiableNode<T>> getSpecificNode(BlockPath blockPath) {
         return Optional.of(this);
     }
 
     @Override
-    public Collection<CommandNode<T>> getLinkedNodes() {
+    public Collection<IdentifiableNode<T>> getLinkedNodes() {
         return Collections.emptySet();
     }
 

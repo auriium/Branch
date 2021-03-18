@@ -1,8 +1,10 @@
-package me.aurium.beetle.branch.nodes.single;
+package me.aurium.beetle.branch.builders;
 
+import me.aurium.beetle.branch.CommandNode;
 import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
 import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.builder.AloneBuilder;
+import me.aurium.beetle.branch.block.EmptyBlock;
+import me.aurium.beetle.branch.nodes.SingleNode;
 
 import java.util.Objects;
 
@@ -24,6 +26,13 @@ public class SingleBuilder<T> implements AloneBuilder<T> {
         Objects.requireNonNull(contextHandler);
 
         return new SingleNode<>(block, contextHandler);
+    }
+
+    @Override
+    public CommandNode<T> buildWithoutIdentifier() {
+        Objects.requireNonNull(contextHandler);
+
+        return new SingleNode<>(EmptyBlock.of(),contextHandler);
     }
 
 }

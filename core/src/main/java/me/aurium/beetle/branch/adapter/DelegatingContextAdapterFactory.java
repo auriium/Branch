@@ -3,6 +3,7 @@ package me.aurium.beetle.branch.adapter;
 import me.aurium.beetle.api.command.Context;
 import me.aurium.beetle.api.command.ContextSource;
 import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.IdentifiableNode;
 import me.aurium.beetle.branch.block.BlockPath;
 
 /**
@@ -19,7 +20,7 @@ public class DelegatingContextAdapterFactory<T> implements ContextAdapterFactory
     public final ContextSource<T> delegate;
 
     @Override
-    public ContextAdapter<T> produce(T t, String alias, String[] strings, CommandNode<T> executedNode, CommandNode<T> baseNode, BlockPath path) {
+    public ContextAdapter<T> produce(T t, String alias, String[] strings, IdentifiableNode<T> executedNode, CommandNode<T> baseNode, BlockPath path) {
 
         Context<T> context = context(t,alias,strings);
 

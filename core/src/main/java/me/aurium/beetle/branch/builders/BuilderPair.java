@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.builder;
+package me.aurium.beetle.branch.builders;
 
 public interface BuilderPair<T extends Builder<?>> {
 

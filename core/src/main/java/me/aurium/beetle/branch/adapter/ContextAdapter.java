@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.adapter;
 
-import me.aurium.beetle.api.command.Context;
 import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.IdentifiableNode;
 import me.aurium.beetle.branch.block.BlockPath;
 
 /**
@@ -10,7 +10,7 @@ import me.aurium.beetle.branch.block.BlockPath;
  */
 public interface ContextAdapter<T> {
 
-    CommandNode<T> getExecutedNode();
+    IdentifiableNode<T> getExecutedNode();
     CommandNode<T> getBaseExecutedNode();
 
     BlockPath executedPath();

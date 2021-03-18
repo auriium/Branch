@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.adapter;
 
-import me.aurium.beetle.branch.nodes.branching.BranchingBuilder;
-import me.aurium.beetle.branch.nodes.single.SingleBuilder;
+import me.aurium.beetle.branch.builders.BranchingBuilder;
+import me.aurium.beetle.branch.builders.SingleBuilder;
 
 public interface BuilderFactory<T> {
 
