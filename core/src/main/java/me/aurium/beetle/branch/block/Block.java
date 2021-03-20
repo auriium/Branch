@@ -9,10 +9,10 @@ public interface Block {
 
     boolean equals(Object object);
 
-    default void addLast(LinkedList<Block> list) {
+    default void addLast(BlockList list) {
         list.addLast(this);
     }
-    default void addFirst(LinkedList<Block> list) {
+    default void addFirst(BlockList list) {
         list.addFirst(this);
     }
 

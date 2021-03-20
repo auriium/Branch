@@ -50,7 +50,7 @@ public class ContextWrapper<T> implements ContextAdapter<T> {
     }
 
     @Override
-    public void debugString(String var1) {
+    public void messageSender(String var1) {
         context.debugString(var1);
     }
 }

@@ -11,25 +11,25 @@ public class SingleNodeTests extends AbstractTests {
     @DisplayName("Test command with single variable, single node")
     @Test
     public void testSingleVarExecution() {
-        beginTest("SingleNode: Single argument execution");
+        logTestStarting("SingleNode: Single argument execution");
 
-        command.execute(SENDER,ALIAS,of("arg1"));
+        command.execute(SENDER,ALIAS,new String[]{"arg1"});
     }
 
     @DisplayName("Test command with no arguments, single node")
     @Test
     public void testNoArgsExecution() {
-        beginTest("SingleNode: No arguments execution");
+        logTestStarting("SingleNode: No arguments execution");
 
-        command.execute(SENDER,ALIAS,of());
+        command.execute(SENDER,ALIAS,new String[]{"join"});
     }
 
     @DisplayName("Test command with two arguments, single node")
     @Test
     public void testMultiArgsExecution() {
-        beginTest("SingleNode: Argument overflow execution");
+        logTestStarting("SingleNode: Argument overflow execution");
 
-        command.execute(SENDER,ALIAS,of("arg1","arg2"));
+        command.execute(SENDER,ALIAS,new String[]{"arg1","arg2"});
     }
 
 

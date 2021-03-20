@@ -15,11 +15,8 @@ public abstract class AbstractTests {
     protected final static String SENDER = "Tester";
     protected final static String ALIAS = "TestCommand";
 
-    protected String[] of(String... strings) {
-        return strings;
-    }
-
-    protected void beginTest(String name) {
+    //@A248 is there a better way to do this with junit5? i'm not used to it. Is ther also a way to make the logger messages less ugly? They look shitty compared to juni4
+    protected void logTestStarting(String name) {
         logger.info(() -> "(BRANCH) Beginning test: " + name);
     }
 

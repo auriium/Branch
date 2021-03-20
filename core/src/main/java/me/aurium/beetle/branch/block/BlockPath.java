@@ -1,7 +1,5 @@
 package me.aurium.beetle.branch.block;
 
-import java.util.List;
-
 public interface BlockPath {
 
     boolean isEmpty();
@@ -55,7 +53,7 @@ public interface BlockPath {
      * Returns an ordered set of blocks
      * @return ordered set of blocks
      */
-    List<Block> getAllBlocks();
+    BlockList getAllBlocks();
 
     /**
      * DO NOT USE THIS FOR COMPARISONS. THIS IS FOR DEBUGGING ONLY.

@@ -17,12 +17,12 @@ public class EmptyBlock implements Block{
     }
 
     @Override
-    public void addFirst(LinkedList<Block> list) {
+    public void addFirst(BlockList list) {
         //nooops
     }
 
     @Override
-    public void addLast(LinkedList<Block> list) {
+    public void addLast(BlockList list) {
         //noops
     }
 

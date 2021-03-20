@@ -1,7 +1,6 @@
 package me.aurium.beetle.branch.block;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class CommonBlockPath implements BlockPath {
 
@@ -9,11 +8,11 @@ public class CommonBlockPath implements BlockPath {
 
     private final BlockPath root;
     private final BlockPath parent;
-    private final LinkedList<Block> blocks;
+    private final BlockList blocks;
     private final boolean isSevered;
     private final String splitter;
 
-    public CommonBlockPath(BlockPath root, BlockPath parent, LinkedList<Block> blocks, boolean isSevered, String splitter) {
+    public CommonBlockPath(BlockPath root, BlockPath parent, BlockList blocks, boolean isSevered, String splitter) {
         this.root = root;
         this.parent = parent;
         this.blocks = blocks;
@@ -21,7 +20,7 @@ public class CommonBlockPath implements BlockPath {
         this.splitter = splitter;
     }
 
-    public CommonBlockPath(LinkedList<Block> list, boolean isSevered, String splitter) {
+    public CommonBlockPath(BlockList list, boolean isSevered, String splitter) {
         this.root = this;
         this.parent = this;
         this.blocks = list;
@@ -32,7 +31,7 @@ public class CommonBlockPath implements BlockPath {
     public CommonBlockPath(String splitter) {
         this.root = this;
         this.parent = this;
-        this.blocks = new LinkedList<>();
+        this.blocks = new ArrayBlockList();
         this.isSevered = true;
         this.splitter = splitter;
     }
@@ -70,7 +69,7 @@ public class CommonBlockPath implements BlockPath {
     @Override
     public BlockPath resolve(BlockPath path) {
 
-        LinkedList<Block> pathBlocks = this.blocks;
+        BlockList pathBlocks = this.blocks;
 
         for (Block block : path.getAllBlocks()) {
             block.addLast(pathBlocks);
@@ -82,7 +81,7 @@ public class CommonBlockPath implements BlockPath {
     @Override
     public BlockPath resolve(Block block) {
 
-        LinkedList<Block> pathBlocks = this.blocks;
+        BlockList pathBlocks = this.blocks;
 
         block.addLast(pathBlocks);
 
@@ -96,7 +95,7 @@ public class CommonBlockPath implements BlockPath {
 
     @Override
     public BlockPath fromIndex(int index) {
-        LinkedList<Block> clone = new LinkedList<>(blocks.subList(index, blocks.size()));
+        BlockList clone = new ArrayBlockList(blocks.subList(index,blocks.size()));
 
         return new CommonBlockPath(clone.get(0).asSingleBlockpath(),this.parent,clone,clone.size() > 1,splitter);
     }
@@ -107,7 +106,7 @@ public class CommonBlockPath implements BlockPath {
     }
 
     @Override
-    public List<Block> getAllBlocks() {
+    public BlockList getAllBlocks() {
         return this.blocks;
     }
 
@@ -149,7 +148,7 @@ public class CommonBlockPath implements BlockPath {
     }
 
     public static BlockPath of(String[] commandArguments, String splitter) {
-        LinkedList<Block> blocklist = new LinkedList<>();
+        BlockList blocklist = new ArrayBlockList();
 
         for (String s : commandArguments) {
             blocklist.addLast(StringBlock.of(s));
@@ -159,7 +158,7 @@ public class CommonBlockPath implements BlockPath {
     }
 
     public static BlockPath of(Block block, String splitter) {
-        LinkedList<Block> send = new LinkedList<>();
+        BlockList send = new ArrayBlockList();
         send.addLast(block);
         return new CommonBlockPath(send,true,splitter);
     }

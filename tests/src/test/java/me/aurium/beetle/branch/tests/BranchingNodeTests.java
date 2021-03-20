@@ -9,37 +9,37 @@ public class BranchingNodeTests extends AbstractTests {
 
     @Test
     public void testNoArgsExecution() {
-        beginTest("BranchingNode: NoArgs");
+        logTestStarting("BranchingNode: NoArgs");
 
-        command.execute(SENDER,ALIAS,of());
+        command.execute(SENDER,ALIAS,new String[]{""});
     }
 
     @Test
     public void testLinkedNodeExecution() {
-        beginTest("BranchingNode: Linked Node Execution");
+        logTestStarting("BranchingNode: Linked Node Execution");
 
-        command.execute(SENDER,ALIAS,of("help"));
+        command.execute(SENDER,ALIAS,new String[]{"help"});
     }
 
     @Test
     public void testNotLinkedNodeExecution() {
-        beginTest("BranchingNode: Unlinked Node Execution");
+        logTestStarting("BranchingNode: Unlinked Node Execution");
 
-        command.execute(SENDER,ALIAS,of("invites","unrinked"));
+        command.execute(SENDER,ALIAS,new String[]{"invites","nonexistent"});
     }
 
     @Test
     public void testBranchingExecution() {
-        beginTest("BranchingNode: Branching Execution");
+        logTestStarting("BranchingNode: Branching Execution");
 
-        command.execute(SENDER,ALIAS,of("join"));
+        command.execute(SENDER,ALIAS,new String[]{"join"});
     }
 
     @Test
     public void testBranchInBranchExecution() {
-        beginTest("BranchingNode: Branch in Branch Execution");
+        logTestStarting("BranchingNode: Branch in Branch Execution");
 
-        command.execute(SENDER,ALIAS,of("invites","on"));
+        command.execute(SENDER,ALIAS,new String[]{"invites","on"});
     }
 
 

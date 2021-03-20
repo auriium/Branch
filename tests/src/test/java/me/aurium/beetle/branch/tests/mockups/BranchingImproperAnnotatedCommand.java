@@ -2,8 +2,8 @@ package me.aurium.beetle.branch.tests.mockups;
 
 import me.aurium.beetle.branch.adapter.ContextAdapter;
 import me.aurium.beetle.branch.annotate.BranchCommand;
-import me.aurium.beetle.branch.annotate.BranchingNode;
-import me.aurium.beetle.branch.annotate.SingleNode;
+import me.aurium.beetle.branch.annotate.marker.BranchingNode;
+import me.aurium.beetle.branch.annotate.marker.SingleNode;
 
 //rule of thumb: If 1 alonenode is found in the class, it is considered an alone-node based class.
 //if more than 1 commandnode is found in the class, it is considered a branching node based class

@@ -20,7 +20,7 @@ public interface ContextAdapter<T> {
     T getSender();
     String getAlias();
     String[] getArgs();
-    void debugString(String var1);
+    void messageSender(String var1);
 
     boolean equals(Object var1);
 

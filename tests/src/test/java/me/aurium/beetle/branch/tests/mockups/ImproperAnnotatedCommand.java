@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.tests.mockups;
 
 import me.aurium.beetle.branch.annotate.BranchCommand;
-import me.aurium.beetle.branch.annotate.SingleNode;
+import me.aurium.beetle.branch.annotate.marker.SingleNode;
 
 @BranchCommand
 public class ImproperAnnotatedCommand {
