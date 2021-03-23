@@ -1,12 +1,15 @@
 package me.aurium.beetle.branch.nodes;
 
-import me.aurium.beetle.branch.IdentifiableNode;
-import me.aurium.beetle.branch.util.PreStoredHashSet;
-import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
+import me.aurium.beetle.branch.context.NodeContext;
+import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
+import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
+import me.aurium.beetle.branch.util.PreStoredHashSet;
 
-import java.util.*;
+import java.util.Optional;
 
 public class BranchingNode<T> implements IdentifiableNode<T> {
 
@@ -24,11 +27,10 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     }
 
     @Override
-    public Optional<IdentifiableNode<T>> getSpecificNode(BlockPath blockPath) {
+    public Optional<CommandNode<T>> getSpecificNode(BlockPath blockPath) {
         if (blockPath.isEmpty()) return Optional.ofNullable(nodes.getAlreadyStored());
-        //TODO aurium - maybe we need some kind of guaruntee that it isn't empty? probably not since we can never really know
 
-        for (IdentifiableNode<T> node : this.getLinkedNodes()) {
+        for (IdentifiableNode<T> node : nodes.getContents()) {
             if (blockPath.startsWith(node.getIdentifier())) {
                 return node.getSpecificNode(blockPath.withoutBase());
             }
@@ -37,13 +39,20 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     }
 
     @Override
-    public Collection<IdentifiableNode<T>> getLinkedNodes() {
-        return nodes.getContents();
+    public ExecutionHandler<T> getExecutionHandler(NodeContext<T> adapter) {
+        return nodes.getAlreadyStored().getExecutionHandler(adapter);
     }
 
     @Override
-    public ContextHandlerAdapter<T> getContextHandler() {
-        return nodes.getAlreadyStored().getContextHandler();
+    public SuggestionHandler<T> getSuggestionHandler(NodeContext<T> adapter) {
+        //TODO sort this out
+
+        return (context) -> {
+            //this works because this suggestion handler only gets called if we are on this object lmfao
+            Block matchableBlock = context.executedPath().getAllBlocks().getLast();
+
+            return null;
+        };
     }
 
 }

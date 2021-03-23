@@ -11,18 +11,12 @@
 
     <artifactId>branch-core</artifactId>
 
+    <version>0.1.1</version>
+
     <properties>
         <maven.compiler.source>${compiler.version}</maven.compiler.source>
         <maven.compiler.target>${compiler.version}</maven.compiler.target>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>me.aurium</groupId>
-            <artifactId>beetle-core</artifactId>
-            <version>0.4.1</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
@@ -33,6 +27,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

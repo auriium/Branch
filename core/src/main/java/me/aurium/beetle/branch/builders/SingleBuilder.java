@@ -1,18 +1,18 @@
 package me.aurium.beetle.branch.builders;
 
-import me.aurium.beetle.branch.CommandNode;
-import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.EmptyBlock;
 import me.aurium.beetle.branch.block.StringBlock;
+import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.nodes.SingleNode;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 import java.util.Objects;
 
 public class SingleBuilder<T> implements AloneBuilder<T> {
 
     private Block block;
-    private ContextHandlerAdapter<T> contextHandler;
+    private ExecutionHandler<T> contextHandler;
 
     public void withIdentifier(Block identifier) {
         this.block = identifier;
@@ -22,7 +22,7 @@ public class SingleBuilder<T> implements AloneBuilder<T> {
         this.block = StringBlock.of(string);
     }
 
-    public void withHandler(ContextHandlerAdapter<T> handler) {
+    public void withHandler(ExecutionHandler<T> handler) {
         this.contextHandler = handler;
     }
 

@@ -1,11 +1,11 @@
 package me.aurium.beetle.branch.builders;
 
-import me.aurium.beetle.branch.CommandNode;
-import me.aurium.beetle.branch.block.EmptyBlock;
-import me.aurium.beetle.branch.IdentifiableNode;
 import me.aurium.beetle.branch.block.Block;
+import me.aurium.beetle.branch.block.EmptyBlock;
 import me.aurium.beetle.branch.block.StringBlock;
 import me.aurium.beetle.branch.nodes.BranchingNode;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
 import java.util.HashSet;

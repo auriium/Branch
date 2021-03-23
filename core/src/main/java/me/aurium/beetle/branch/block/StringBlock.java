@@ -1,4 +1,5 @@
 package me.aurium.beetle.branch.block;
+
 public class StringBlock implements Block {
 
     private final String identifier;

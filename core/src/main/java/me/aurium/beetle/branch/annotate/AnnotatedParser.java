@@ -1,10 +1,10 @@
 package me.aurium.beetle.branch.annotate;
 
-import me.aurium.beetle.api.command.Command;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 public interface AnnotatedParser<T> {
 
-    Command<T> parse(AnnotatedCommand command);
-    Command<T> parser(AnnotatedCommand command, ParserOptions options);
+    CommandNode<T> parse(Class<AnnotatedCommand> command);
+    CommandNode<T> parser(Class<AnnotatedCommand> command, ParserOptions options);
 
 }

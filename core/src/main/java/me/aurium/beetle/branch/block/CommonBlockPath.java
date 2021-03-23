@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.block;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class CommonBlockPath implements BlockPath {
 
@@ -31,7 +31,7 @@ public class CommonBlockPath implements BlockPath {
     public CommonBlockPath(String splitter) {
         this.root = this;
         this.parent = this;
-        this.blocks = new ArrayBlockList();
+        this.blocks = new DelegatingBlockList(new ArrayList<>());
         this.isSevered = true;
         this.splitter = splitter;
     }
@@ -71,7 +71,7 @@ public class CommonBlockPath implements BlockPath {
 
         BlockList pathBlocks = this.blocks;
 
-        for (Block block : path.getAllBlocks()) {
+        for (Block block : path.getAllBlocks().getBackingList()) {
             block.addLast(pathBlocks);
         }
 
@@ -95,9 +95,11 @@ public class CommonBlockPath implements BlockPath {
 
     @Override
     public BlockPath fromIndex(int index) {
-        BlockList clone = new ArrayBlockList(blocks.subList(index,blocks.size()));
+        BlockList clone = new DelegatingBlockList(new ArrayList<>(
+                blocks.getBackingList().subList(index,blocks.size())
+        ));
 
-        return new CommonBlockPath(clone.get(0).asSingleBlockpath(),this.parent,clone,clone.size() > 1,splitter);
+        return new CommonBlockPath(clone.getBackingList().get(0).asSingleBlockpath(),this.parent,clone,clone.size() > 1,splitter);
     }
 
     @Override
@@ -115,7 +117,7 @@ public class CommonBlockPath implements BlockPath {
 
         StringBuilder base = new StringBuilder();
 
-        for (Block block : this.blocks) {
+        for (Block block : this.blocks.getBackingList()) {
             base.append('{').append(block.getIdentifier()).append('}');
         }
 
@@ -148,7 +150,7 @@ public class CommonBlockPath implements BlockPath {
     }
 
     public static BlockPath of(String[] commandArguments, String splitter) {
-        BlockList blocklist = new ArrayBlockList();
+        BlockList blocklist = new DelegatingBlockList(new ArrayList<>());
 
         for (String s : commandArguments) {
             blocklist.addLast(StringBlock.of(s));
@@ -158,7 +160,7 @@ public class CommonBlockPath implements BlockPath {
     }
 
     public static BlockPath of(Block block, String splitter) {
-        BlockList send = new ArrayBlockList();
+        BlockList send = new DelegatingBlockList(new ArrayList<>());
         send.addLast(block);
         return new CommonBlockPath(send,true,splitter);
     }

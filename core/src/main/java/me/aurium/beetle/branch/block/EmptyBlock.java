@@ -1,14 +1,10 @@
 package me.aurium.beetle.branch.block;
 
-import me.aurium.beetle.api.util.NotImplementedException;
-
-import java.util.LinkedList;
-
 public class EmptyBlock implements Block{
 
     @Override
     public String getIdentifier() {
-        throw new NotImplementedException("Empty block should not exist in path!");
+        throw new UnsupportedOperationException("Empty block should not exist in path!");
     }
 
     @Override

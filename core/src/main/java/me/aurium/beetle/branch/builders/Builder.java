@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.builders;
 
-import me.aurium.beetle.branch.CommandNode;
-import me.aurium.beetle.branch.IdentifiableNode;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
 
 public interface Builder<C>{
 

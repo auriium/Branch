@@ -1,22 +1,28 @@
 package me.aurium.beetle.branch.nodes;
 
-import me.aurium.beetle.branch.IdentifiableNode;
-import me.aurium.beetle.branch.adapter.ContextHandlerAdapter;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
+import me.aurium.beetle.branch.context.NodeContext;
+import me.aurium.beetle.branch.handlers.EmptySuggestionHandler;
+import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
+import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.api.EndpointNode;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 
-public class SingleNode<T> implements AloneNode<T> {
+public class SingleNode<T> implements EndpointNode<T> {
 
     private final Block identifier;
-    private final ContextHandlerAdapter<T> handler;
 
-    public SingleNode(Block identifier, ContextHandlerAdapter<T> contextHandler) {
+    private final ExecutionHandler<T> executionHandler;
+    private final SuggestionHandler<T> suggestionHandler;
+
+    public SingleNode(Block identifier, ExecutionHandler<T> executionHandler) {
         this.identifier = identifier;
-        this.handler = contextHandler;
+
+        this.executionHandler = executionHandler;
+        this.suggestionHandler = new EmptySuggestionHandler<>();
     }
 
     @Override
@@ -25,18 +31,19 @@ public class SingleNode<T> implements AloneNode<T> {
     }
 
     @Override
-    public Optional<IdentifiableNode<T>> getSpecificNode(BlockPath blockPath) {
+    public Optional<CommandNode<T>> getSpecificNode(BlockPath blockPath) {
         return Optional.of(this);
     }
 
     @Override
-    public Collection<IdentifiableNode<T>> getLinkedNodes() {
-        return Collections.emptySet();
+    public ExecutionHandler<T> getExecutionHandler(NodeContext<T> adapter) {
+        return executionHandler;
     }
 
     @Override
-    public ContextHandlerAdapter<T> getContextHandler() {
-        return handler;
+    public SuggestionHandler<T> getSuggestionHandler(NodeContext<T> adapter) {
+        return suggestionHandler;
     }
+
 
 }

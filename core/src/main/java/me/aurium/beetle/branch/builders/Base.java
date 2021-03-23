@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.builders;
 
-import me.aurium.beetle.branch.CommandNode;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 import java.util.function.Consumer;
 
@@ -10,6 +10,11 @@ public class Base {
         consumer.accept(key);
 
         return key.buildWithoutIdentifier();
+    }
+
+    //TODO a separate base logic to consume a ClassParser and turn it into a command :)
+    public static <T> CommandNode<T> base() {
+        return null;
     }
 
 }

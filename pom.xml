@@ -9,7 +9,7 @@
     <version>0.1.0</version>
     <modules>
         <module>core</module>
-        <module>tests</module>
+        <module>beetle-impl</module>
     </modules>
 
     <parent>

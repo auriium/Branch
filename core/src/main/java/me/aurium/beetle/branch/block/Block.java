@@ -1,7 +1,5 @@
 package me.aurium.beetle.branch.block;
 
-import java.util.LinkedList;
-
 public interface Block {
 
     String getIdentifier();
