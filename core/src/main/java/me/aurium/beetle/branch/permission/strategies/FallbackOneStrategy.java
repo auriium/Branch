@@ -16,6 +16,7 @@ public class FallbackOneStrategy<T> implements FallbackStrategy<T> {
         CommandNode<T> toBeExecuted = stagedContext.getExecutedNode();
 
         if (!toBeExecuted.getPermission().attempt(stagedContext)) {
+
             //NO PERMISSIONS! fall back to the node above it. However, if toBeExecuted is the base node, fall back to the fallbackhandler
 
             return null;

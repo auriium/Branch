@@ -10,6 +10,10 @@ import me.aurium.beetle.branch.nodes.result.NullableNodeResult;
 import me.aurium.beetle.branch.permission.Permission;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
+/**
+ * TODO: missing a Node for noargs will cause it to rely on fallback rather than throwning exceptions and being bad
+ * @param <T>
+ */
 public class BranchingNode<T> implements IdentifiableNode<T> {
 
     private final PreStoredHashSet<IdentifiableNode<T>> nodes;
