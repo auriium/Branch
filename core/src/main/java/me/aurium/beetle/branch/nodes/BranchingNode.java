@@ -10,16 +10,17 @@ import me.aurium.beetle.branch.nodes.result.NullableNodeResult;
 import me.aurium.beetle.branch.permission.Permission;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
-import java.util.Optional;
-
 public class BranchingNode<T> implements IdentifiableNode<T> {
 
     private final PreStoredHashSet<IdentifiableNode<T>> nodes;
     private final Block path;
 
-    public BranchingNode(PreStoredHashSet<IdentifiableNode<T>> nodes, Block path) {
+    private final Permission<T> permission;
+
+    public BranchingNode(PreStoredHashSet<IdentifiableNode<T>> nodes, Block path, Permission<T> permission) {
         this.nodes = nodes;
         this.path = path;
+        this.permission = permission;
     }
 
     @Override
@@ -62,7 +63,7 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
     @Override
     public Permission<T> getPermission() {
-        return null;
+        return permission;
     }
 
 

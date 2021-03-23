@@ -21,6 +21,11 @@ public class DelegatingBlockList implements BlockList{
     }
 
     @Override
+    public void removeLast() {
+        blocks.remove(blocks.size()-1);
+    }
+
+    @Override
     public Block getFirst() {
         return blocks.get(0);
     }

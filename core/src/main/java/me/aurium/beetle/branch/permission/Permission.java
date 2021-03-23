@@ -1,14 +1,12 @@
 package me.aurium.beetle.branch.permission;
 
-import me.aurium.beetle.branch.context.NodeContext;
-
-import java.util.function.Predicate;
+import me.aurium.beetle.branch.context.StagedContext;
 
 /**
  *
  */
 public interface Permission<T> {
 
-   Predicate<NodeContext<T>> attempt();
+   boolean attempt(StagedContext<T> context);
 
 }

@@ -6,6 +6,8 @@ import me.aurium.beetle.branch.block.StringBlock;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.nodes.SingleNode;
 import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.permission.Permission;
+import me.aurium.beetle.branch.permission.permissions.EmptyPermission;
 
 import java.util.Objects;
 
@@ -13,6 +15,7 @@ public class SingleBuilder<C> implements AloneBuilder<C> {
 
     private Block block;
     private ExecutionHandler<C> contextHandler;
+    private Permission<C> permission = new EmptyPermission<>();
 
     public void withIdentifier(Block identifier) {
         this.block = identifier;
@@ -26,18 +29,22 @@ public class SingleBuilder<C> implements AloneBuilder<C> {
         this.contextHandler = handler;
     }
 
+    public void withPermission(Permission<C> permission) {
+        this.permission = permission;
+    }
+
     public SingleNode<C> build() {
         Objects.requireNonNull(block);
         Objects.requireNonNull(contextHandler);
 
-        return new SingleNode<>(block, contextHandler);
+        return new SingleNode<>(block, contextHandler, permission);
     }
 
     @Override
     public CommandNode<C> buildWithoutIdentifier() {
         Objects.requireNonNull(contextHandler);
 
-        return new SingleNode<>(EmptyBlock.of(),contextHandler);
+        return new SingleNode<>(EmptyBlock.of(),contextHandler, permission);
     }
 
 }

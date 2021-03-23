@@ -8,8 +8,8 @@ import me.aurium.beetle.branch.nodes.api.CommandNode;
  */
 public interface ContextProducer<T> {
 
-    NodeContext<T> produce(T t, String alias, String[] strings, CommandNode<T> executedNode, CommandNode<T> baseNode, BlockPath executedPath, BlockPath fullPath);
+    NodeContext<T> produce(T sender, String alias, String[] strings, CommandNode<T> executedNode, CommandNode<T> baseNode, BlockPath executedPath, BlockPath basePath);
 
-    Context<T> produce(T t, String alias, String[] strings);
+    Context<T> produce(T sender, String alias, String[] strings);
 
 }

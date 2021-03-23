@@ -14,4 +14,7 @@ public interface NodeContext<T> extends Context<T> {
 
     boolean equals(Object comparison);
 
+    //TODO add more cool features like the debug message sender,
+    // because NodeContext should be a collection of both context and context-specific actions? /review a248
+
 }

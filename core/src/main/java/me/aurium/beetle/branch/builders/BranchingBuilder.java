@@ -6,6 +6,8 @@ import me.aurium.beetle.branch.block.StringBlock;
 import me.aurium.beetle.branch.nodes.BranchingNode;
 import me.aurium.beetle.branch.nodes.api.CommandNode;
 import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
+import me.aurium.beetle.branch.permission.Permission;
+import me.aurium.beetle.branch.permission.permissions.EmptyPermission;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
 import java.util.HashSet;
@@ -21,12 +23,18 @@ public class BranchingBuilder<T> implements Builder<T> {
     private IdentifiableNode<T> noArgs;
     private boolean linked;
 
+    private Permission<T> permission = new EmptyPermission<>();
+
     public void withIdentifier(Block block) {
         this.block = block;
     }
 
     public void withIdentifier(String string) {
         this.block = StringBlock.of(string);
+    }
+
+    public void withPermission(Permission<T> permission) {
+        this.permission = permission;
     }
 
     public <C extends Builder<T>> void withNode(C key, Consumer<C> consumer) {
@@ -59,7 +67,7 @@ public class BranchingBuilder<T> implements Builder<T> {
             set = new PreStoredHashSet<>(noArgs,commands,linked);
         }
 
-        return new BranchingNode<>(set,block);
+        return new BranchingNode<>(set,block, permission);
     }
 
     @Override
@@ -77,6 +85,6 @@ public class BranchingBuilder<T> implements Builder<T> {
             set = new PreStoredHashSet<>(noArgs,commands,linked);
         }
 
-        return new BranchingNode<>(set, EmptyBlock.of());
+        return new BranchingNode<>(set, EmptyBlock.of(), permission);
     }
 }

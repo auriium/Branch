@@ -96,6 +96,17 @@ public class CommonBlockPath implements BlockPath {
     }
 
     @Override
+    public BlockPath withoutTop() {
+        BlockList clone = new DelegatingBlockList(new ArrayList<>(
+                blocks.getBackingList()
+        ));;
+
+        clone.removeLast();
+
+        return new CommonBlockPath(root,parent.getParent(),clone,clone.size() > 1, splitter);
+    }
+
+    @Override
     public BlockPath fromIndex(int index) {
         BlockList clone = new DelegatingBlockList(new ArrayList<>(
                 blocks.getBackingList().subList(index,blocks.size())

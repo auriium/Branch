@@ -19,5 +19,9 @@ public interface CommandNode<T> {
     ExecutionHandler<T> getExecutionHandler();
     SuggestionHandler<T> getSuggestionHandler();
 
+    /**
+     * Gets the permission required to execute and interact with this node. Depending on the base, this may cause the node to become locked, or just completely be ignored.
+     * @return the permission binding
+     */
     Permission<T> getPermission();
 }

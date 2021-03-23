@@ -17,10 +17,14 @@ public class SingleNode<T> implements EndpointNode<T> {
     private final ExecutionHandler<T> executionHandler;
     private final SuggestionHandler<T> suggestionHandler;
 
-    public SingleNode(Block identifier, ExecutionHandler<T> executionHandler) {
+    private final Permission<T> permission;
+
+    public SingleNode(Block identifier, ExecutionHandler<T> executionHandler, Permission<T> permission) {
         this.identifier = identifier;
 
         this.executionHandler = executionHandler;
+        this.permission = permission;
+
         this.suggestionHandler = new EmptySuggestionHandler<>();
     }
 
@@ -46,7 +50,7 @@ public class SingleNode<T> implements EndpointNode<T> {
 
     @Override
     public Permission<T> getPermission() {
-        return null;
+        return permission;
     }
 
 

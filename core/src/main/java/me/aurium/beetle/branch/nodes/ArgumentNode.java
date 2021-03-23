@@ -7,10 +7,10 @@ import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
 import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
 import me.aurium.beetle.branch.argument.Argument;
 import me.aurium.beetle.branch.nodes.result.GetNodeResult;
+import me.aurium.beetle.branch.nodes.result.NullableNodeResult;
 import me.aurium.beetle.branch.permission.Permission;
 
 import java.util.List;
-import java.util.Optional;
 
 //kinda like a branching node except it throws forward and not to the sides
 public class ArgumentNode<T> implements IdentifiableNode<T> {
@@ -19,10 +19,13 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
     private final List<Argument<?>> sequentialValueNodes; //the nodes in order from here on out
     private final SingleNode<T> noArgs;
 
-    public ArgumentNode(Block identifier, List<Argument<?>> sequentialValueNodes, SingleNode<T> noArgs) {
+    private final Permission<T> permission;
+
+    public ArgumentNode(Block identifier, List<Argument<?>> sequentialValueNodes, SingleNode<T> noArgs, Permission<T> permission) {
         this.identifier = identifier;
         this.sequentialValueNodes = sequentialValueNodes;
         this.noArgs = noArgs;
+        this.permission = permission;
     }
 
 
@@ -34,7 +37,7 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
 
     @Override
     public GetNodeResult<T> getSpecificNode(BlockPath path) {
-        return null;
+        return new NullableNodeResult<>(this,path);
     }
 
     /*if (path.isEmpty()) return Optional.of(noArgs);
@@ -73,7 +76,7 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
 
     @Override
     public Permission<T> getPermission() {
-        return null;
+        return permission;
     }
 
     @Override

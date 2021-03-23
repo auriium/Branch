@@ -4,7 +4,6 @@ import me.aurium.beetle.branch.context.ContextProducer;
 import me.aurium.beetle.branch.nodes.base.SimpleNodeBase;
 import me.aurium.beetle.branch.nodes.api.CommandNode;
 import me.aurium.beetle.branch.nodes.base.NodeBase;
-import me.aurium.beetle.branch.permission.PermAccessor;
 import me.aurium.beetle.branch.permission.Permission;
 
 public class Implement extends AbstractBaseCommand<String> {

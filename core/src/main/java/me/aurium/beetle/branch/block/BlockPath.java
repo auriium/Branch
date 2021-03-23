@@ -29,6 +29,7 @@ public interface BlockPath {
     BlockPath resolve(Block block);
 
     BlockPath withoutBase();
+    BlockPath withoutTop();
 
     BlockPath fromIndex(int index);
 
