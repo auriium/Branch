@@ -1,11 +1,12 @@
 package me.aurium.beetle.branch.converted.launchpoints;
 
+import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.converted.BranchCommand;
 import me.aurium.beetle.branch.nodes.api.CommandNode;
 import me.aurium.beetle.branch.context.NodeContext;
 import me.aurium.beetle.branch.context.ContextProducer;
-import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.block.CommonBlockPath;
+import me.aurium.beetle.branch.nodes.result.GetNodeResult;
 
 public abstract class AbstractBranchCommand<T> implements BranchCommand<T> {
 
@@ -22,14 +23,17 @@ public abstract class AbstractBranchCommand<T> implements BranchCommand<T> {
 
         CommandNode<T> baseNode = getBaseNode();
 
-        baseNode.getSpecificNode(path).ifPresentOrElse(node -> {
-            //TODO some kind of thing here
-            NodeContext<T> adapter = factory.produce(t,s,strings,node,baseNode,path);
+        //this logic should be in a Base
+        GetNodeResult<T> result = baseNode.getSpecificNode(path);
 
-            node.getExecutionHandler(adapter).handle(adapter);
-        }, () -> {
-            noArgsMissingOrError(factory.produce(t,s,strings));
-        });
+        result.resultingNode().ifPresentOrElse(node -> {
+
+            //TODO some kind of thing here
+            NodeContext<T> adapter = factory.produce(t,s,strings,node,baseNode,path, result.resultingPath());
+
+            node.getExecutionHandler().handle(adapter);
+
+        }, () -> noArgsMissingOrError(factory.produce(t,s,strings)));
 
         return true;
     }

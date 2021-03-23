@@ -1,5 +1,7 @@
 package me.aurium.beetle.branch.block;
 
+import me.aurium.beetle.branch.context.NodeContext;
+
 public interface BlockPath {
 
     boolean isEmpty();
@@ -25,6 +27,7 @@ public interface BlockPath {
      * @return a cloned path plus that block
      */
     BlockPath resolve(Block block);
+
     BlockPath withoutBase();
 
     BlockPath fromIndex(int index);

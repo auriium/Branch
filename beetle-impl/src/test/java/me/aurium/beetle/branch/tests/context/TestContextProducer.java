@@ -8,14 +8,13 @@ import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 public class TestContextProducer implements ContextProducer<String> {
 
-
     @Override
-    public NodeContext<String> produce(String s, String alias, String[] strings, CommandNode<String> executedNode, CommandNode<String> baseNode, BlockPath path) {
-        return new TestContext(s,alias,strings,executedNode,baseNode,path);
+    public NodeContext<String> produce(String s, String alias, String[] strings, CommandNode<String> executedNode, CommandNode<String> baseNode, BlockPath executedPath, BlockPath fullPath) {
+        return new TestContext(s,alias,strings,executedNode,baseNode, executedPath, fullPath);
     }
 
     @Override
     public Context<String> produce(String s, String alias, String[] strings) {
-        return new TestContext(s,alias,strings,null,null,null);
+        return new TestContext(s,alias,strings,null,null,null,null);
     }
 }

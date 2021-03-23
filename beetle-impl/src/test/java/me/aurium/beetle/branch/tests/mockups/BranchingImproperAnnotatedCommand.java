@@ -15,24 +15,28 @@ public class BranchingImproperAnnotatedCommand {
     @SingleNode(identifier = "branch1")
     public void branch1(NodeContext<String> nodeContext) {
         nodeContext.getSender();
+
+        //do some action, command looks like this: /command branch1
     }
 
     @SingleNode(identifier = "branch2")
     public void branch2(NodeContext<String> nodeContext) {
         nodeContext.getSender();
+
+        //do some action here, command looks like this: /command branch2
     }
 
     @BranchingNode(identifier = "branching1")
     public static class branching1 {
 
-        @SingleNode(identifier = "fuckOffPissBoy")
+        @SingleNode(identifier = "mee")
         public void lol() {
-
+            //do some action here, command looks like this: /command branching1 mee
         }
 
         @SingleNode(identifier = "cringe")
-        public void haha() {
-
+        public void haha(NodeContext<String> context) {
+            //do some action here, command looks like this /command branching1 cringe
         }
 
     }

@@ -1,9 +1,10 @@
 package me.aurium.beetle.branch.nodes.api;
 
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.context.NodeContext;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
+import me.aurium.beetle.branch.nodes.result.GetNodeResult;
+import me.aurium.beetle.branch.permission.Permission;
 
 import java.util.Optional;
 
@@ -13,9 +14,10 @@ import java.util.Optional;
  */
 public interface CommandNode<T> {
 
-    Optional<CommandNode<T>> getSpecificNode(BlockPath path);
+    GetNodeResult<T> getSpecificNode(BlockPath path);
 
-    ExecutionHandler<T> getExecutionHandler(NodeContext<T> adapter);
-    SuggestionHandler<T> getSuggestionHandler(NodeContext<T> adapter);
+    ExecutionHandler<T> getExecutionHandler();
+    SuggestionHandler<T> getSuggestionHandler();
 
+    Permission<T> getPermission();
 }

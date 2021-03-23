@@ -2,12 +2,12 @@ package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.context.NodeContext;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
 import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
-import me.aurium.beetle.branch.nodes.argument.Argument;
+import me.aurium.beetle.branch.argument.Argument;
+import me.aurium.beetle.branch.nodes.result.GetNodeResult;
+import me.aurium.beetle.branch.permission.Permission;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,8 +33,8 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
 
 
     @Override
-    public Optional<CommandNode<T>> getSpecificNode(BlockPath path) {
-        return Optional.of(this);
+    public GetNodeResult<T> getSpecificNode(BlockPath path) {
+        return null;
     }
 
     /*if (path.isEmpty()) return Optional.of(noArgs);
@@ -56,12 +56,23 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
         */
 
     @Override
-    public ExecutionHandler<T> getExecutionHandler(NodeContext<T> adapter) {
-        return null;
+    public ExecutionHandler<T> getExecutionHandler() {
+        return (context) -> {
+            BlockPath path = context.executedPath();
+
+            //sort
+        };
     }
 
     @Override
-    public SuggestionHandler<T> getSuggestionHandler(NodeContext<T> adapter) {
+    public SuggestionHandler<T> getSuggestionHandler() {
+        return (context) -> {
+            return null;
+        };
+    }
+
+    @Override
+    public Permission<T> getPermission() {
         return null;
     }
 

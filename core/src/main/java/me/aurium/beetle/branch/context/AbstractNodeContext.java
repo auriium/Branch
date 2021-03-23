@@ -7,13 +7,15 @@ public abstract class AbstractNodeContext<T> extends AbstractContext<T> implemen
 
     private final CommandNode<T> executed;
     private final CommandNode<T> base;
-    private final BlockPath path;
+    private final BlockPath executedPath;
+    private final BlockPath fullPath;
 
-    protected AbstractNodeContext(T t, String alias, String[] args, CommandNode<T> executed, CommandNode<T> base, BlockPath path) {
+    protected AbstractNodeContext(T t, String alias, String[] args, CommandNode<T> executed, CommandNode<T> base, BlockPath executedPath, BlockPath fullPath) {
         super(t, alias, args);
         this.executed = executed;
         this.base = base;
-        this.path = path;
+        this.executedPath = executedPath;
+        this.fullPath = fullPath;
     }
 
     @Override
@@ -28,6 +30,11 @@ public abstract class AbstractNodeContext<T> extends AbstractContext<T> implemen
 
     @Override
     public BlockPath executedPath() {
-        return path;
+        return executedPath;
+    }
+
+    @Override
+    public BlockPath fullPath() {
+        return fullPath;
     }
 }

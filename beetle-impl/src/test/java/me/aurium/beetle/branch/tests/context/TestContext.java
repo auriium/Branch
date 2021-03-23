@@ -10,8 +10,8 @@ public class TestContext extends AbstractNodeContext<String> {
 
     private final Logger logger = LoggerFactory.getLogger(TestContext.class);
 
-    protected TestContext(String s, String alias, String[] args, CommandNode<String> executed, CommandNode<String> base, BlockPath path) {
-        super(s, alias, args, executed, base, path);
+    protected TestContext(String s, String alias, String[] args, CommandNode<String> executed, CommandNode<String> base, BlockPath executedPath, BlockPath fullPath) {
+        super(s, alias, args, executed, base, executedPath, fullPath);
     }
 
     @Override

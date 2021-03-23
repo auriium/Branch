@@ -2,14 +2,13 @@ package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.context.NodeContext;
 import me.aurium.beetle.branch.handlers.EmptySuggestionHandler;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
 import me.aurium.beetle.branch.nodes.api.EndpointNode;
-
-import java.util.Optional;
+import me.aurium.beetle.branch.nodes.result.GetNodeResult;
+import me.aurium.beetle.branch.nodes.result.NullableNodeResult;
+import me.aurium.beetle.branch.permission.Permission;
 
 public class SingleNode<T> implements EndpointNode<T> {
 
@@ -31,18 +30,23 @@ public class SingleNode<T> implements EndpointNode<T> {
     }
 
     @Override
-    public Optional<CommandNode<T>> getSpecificNode(BlockPath blockPath) {
-        return Optional.of(this);
+    public GetNodeResult<T> getSpecificNode(BlockPath blockPath) {
+        return new NullableNodeResult<>(this,blockPath);
     }
 
     @Override
-    public ExecutionHandler<T> getExecutionHandler(NodeContext<T> adapter) {
+    public ExecutionHandler<T> getExecutionHandler() {
         return executionHandler;
     }
 
     @Override
-    public SuggestionHandler<T> getSuggestionHandler(NodeContext<T> adapter) {
+    public SuggestionHandler<T> getSuggestionHandler() {
         return suggestionHandler;
+    }
+
+    @Override
+    public Permission<T> getPermission() {
+        return null;
     }
 
 

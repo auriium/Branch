@@ -1,6 +1,7 @@
-package me.aurium.beetle.branch.nodes.argument;
+package me.aurium.beetle.branch.argument;
 
 import me.aurium.beetle.branch.block.Block;
+import me.aurium.beetle.branch.context.NodeContext;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,8 @@ import java.util.Optional;
 public interface Argument<T> {
 
     String getLabel();
-    List<String> getBounds();
+
+    List<String> getBounds(NodeContext<T> context);
 
     boolean check(Block toParse);
     T parse(Block block);

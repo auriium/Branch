@@ -9,10 +9,10 @@ import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 import java.util.Objects;
 
-public class SingleBuilder<T> implements AloneBuilder<T> {
+public class SingleBuilder<C> implements AloneBuilder<C> {
 
     private Block block;
-    private ExecutionHandler<T> contextHandler;
+    private ExecutionHandler<C> contextHandler;
 
     public void withIdentifier(Block identifier) {
         this.block = identifier;
@@ -22,11 +22,11 @@ public class SingleBuilder<T> implements AloneBuilder<T> {
         this.block = StringBlock.of(string);
     }
 
-    public void withHandler(ExecutionHandler<T> handler) {
+    public void withHandler(ExecutionHandler<C> handler) {
         this.contextHandler = handler;
     }
 
-    public SingleNode<T> build() {
+    public SingleNode<C> build() {
         Objects.requireNonNull(block);
         Objects.requireNonNull(contextHandler);
 
@@ -34,7 +34,7 @@ public class SingleBuilder<T> implements AloneBuilder<T> {
     }
 
     @Override
-    public CommandNode<T> buildWithoutIdentifier() {
+    public CommandNode<C> buildWithoutIdentifier() {
         Objects.requireNonNull(contextHandler);
 
         return new SingleNode<>(EmptyBlock.of(),contextHandler);

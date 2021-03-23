@@ -10,6 +10,7 @@ public interface NodeContext<T> extends Context<T> {
     CommandNode<T> getBaseExecutedNode();
 
     BlockPath executedPath();
+    BlockPath fullPath();
 
     boolean equals(Object comparison);
 

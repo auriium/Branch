@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.nodes.argument;
+package me.aurium.beetle.branch.argument;
 
 public interface ArgumentContextHandler<T> {
 

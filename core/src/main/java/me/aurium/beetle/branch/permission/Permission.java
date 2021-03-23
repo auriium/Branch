@@ -1,11 +1,14 @@
 package me.aurium.beetle.branch.permission;
 
+import me.aurium.beetle.branch.context.NodeContext;
+
+import java.util.function.Predicate;
+
 /**
- * Representing something that you can have that determines the accessibility of a command
+ *
  */
 public interface Permission<T> {
 
-    boolean hasAccessToUse(T user);
-    boolean hasAccessToSee(T user);
+   Predicate<NodeContext<T>> attempt();
 
 }
