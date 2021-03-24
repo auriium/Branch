@@ -12,6 +12,6 @@ public class EmptySuggestionHandler<T> implements SuggestionHandler<T> {
 
     @Override
     public List<String> handle(NodeContext<T> adapter) {
-        return emptyList;
+        return List.of();
     }
 }
