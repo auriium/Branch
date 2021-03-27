@@ -1,8 +1,8 @@
-package me.aurium.beetle.branch.context;
+package me.aurium.beetle.branch.handlers.context;
 
 import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.handlers.api.FallbackHandler;
-import me.aurium.beetle.branch.nodes.CommandNode;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 
 public interface NodeContext<T> extends Context<T> {

@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.context;
+package me.aurium.beetle.branch.handlers.context;
 
 public abstract class AbstractContext<T> implements Context<T> {
 

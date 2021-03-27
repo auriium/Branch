@@ -3,11 +3,11 @@ package me.aurium.beetle.branch.nodes.builders;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.EmptyBlock;
 import me.aurium.beetle.branch.block.StringBlock;
-import me.aurium.beetle.branch.builders.AloneBuilder;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.nodes.SingleNode;
-import me.aurium.beetle.branch.permission.Permission;
-import me.aurium.beetle.branch.permission.permissions.EmptyPermission;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.fallback.permission.Permission;
+import me.aurium.beetle.branch.fallback.permission.permissions.EmptyPermission;
 
 import java.util.Objects;
 
@@ -41,7 +41,7 @@ public class SingleBuilder<C> implements AloneBuilder<C> {
     }
 
     @Override
-    public me.aurium.beetle.branch.nodes.CommandNode<C> buildWithoutIdentifier() {
+    public CommandNode<C> buildWithoutIdentifier() {
         Objects.requireNonNull(contextHandler);
 
         return new SingleNode<>(EmptyBlock.of(),contextHandler, permission);

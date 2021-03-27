@@ -1,12 +1,12 @@
-package me.aurium.beetle.branch.permission.strategies;
+package me.aurium.beetle.branch.fallback.permission.strategies;
 
 import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.block.CommonBlockPath;
-import me.aurium.beetle.branch.context.Context;
-import me.aurium.beetle.branch.context.ContextProducer;
-import me.aurium.beetle.branch.context.NodeContext;
+import me.aurium.beetle.branch.handlers.context.Context;
+import me.aurium.beetle.branch.handlers.context.ContextProducer;
+import me.aurium.beetle.branch.handlers.context.NodeContext;
 import me.aurium.beetle.branch.handlers.api.FallbackHandler;
-import me.aurium.beetle.branch.nodes.CommandNode;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
 import me.aurium.beetle.branch.nodes.result.NodeResult;
 
 /**

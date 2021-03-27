@@ -1,6 +1,6 @@
-package me.aurium.beetle.branch.permission.permissions;
+package me.aurium.beetle.branch.fallback.permission.permissions;
 
-import me.aurium.beetle.branch.permission.Permission;
+import me.aurium.beetle.branch.fallback.permission.Permission;
 
 public class EmptyPermission<T> implements Permission<T> {
 

@@ -3,8 +3,9 @@ package me.aurium.beetle.branch.nodes;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
+import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
 import me.aurium.beetle.branch.nodes.result.*;
-import me.aurium.beetle.branch.permission.Permission;
+import me.aurium.beetle.branch.fallback.permission.Permission;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
 /**

@@ -1,8 +1,8 @@
-package me.aurium.beetle.branch.permission.strategies;
+package me.aurium.beetle.branch.fallback.permission.strategies;
 
-import me.aurium.beetle.branch.context.ContextProducer;
+import me.aurium.beetle.branch.handlers.context.ContextProducer;
 import me.aurium.beetle.branch.handlers.api.FallbackHandler;
-import me.aurium.beetle.branch.nodes.CommandNode;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 public interface ExecutionFallbackStrategy<T> {
 

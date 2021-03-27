@@ -1,9 +1,9 @@
 package me.aurium.beetle.branch.argument;
 
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.context.NodeContext;
+import me.aurium.beetle.branch.handlers.context.NodeContext;
 import me.aurium.beetle.branch.handlers.api.FallbackHandler;
-import me.aurium.beetle.branch.nodes.CommandNode;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 public class DelegatingArgumentContext<T> implements ArgumentContext<T>{
 

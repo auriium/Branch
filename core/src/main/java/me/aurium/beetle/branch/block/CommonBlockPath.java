@@ -1,7 +1,5 @@
 package me.aurium.beetle.branch.block;
 
-import me.aurium.beetle.branch.context.NodeContext;
-
 import java.util.ArrayList;
 
 public class CommonBlockPath implements BlockPath {

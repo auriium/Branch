@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.permission;
+package me.aurium.beetle.branch.fallback.permission;
 
 /**
  *

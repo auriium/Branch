@@ -4,9 +4,10 @@ import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
 import me.aurium.beetle.branch.argument.Argument;
+import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
 import me.aurium.beetle.branch.nodes.result.ExecutionResult;
 import me.aurium.beetle.branch.nodes.result.NodeResult;
-import me.aurium.beetle.branch.permission.Permission;
+import me.aurium.beetle.branch.fallback.permission.Permission;
 
 import java.util.List;
 

@@ -5,5 +5,7 @@
     <file url="file://$PROJECT_DIR$/beetle-impl/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spigot-impl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spigot-impl/src/main/resources" charset="UTF-8" />
   </component>
 </project>

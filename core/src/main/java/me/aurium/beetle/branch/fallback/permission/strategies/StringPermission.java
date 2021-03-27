@@ -1,6 +1,6 @@
-package me.aurium.beetle.branch.permission.strategies;
+package me.aurium.beetle.branch.fallback.permission.strategies;
 
-import me.aurium.beetle.branch.permission.Permission;
+import me.aurium.beetle.branch.fallback.permission.Permission;
 
 /**
  * Represents a permission that is controlled by a string identifier

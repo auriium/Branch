@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.argument;
 
 import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.context.NodeContext;
+import me.aurium.beetle.branch.handlers.context.NodeContext;
 
 import java.util.List;
 import java.util.Optional;

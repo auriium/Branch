@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.annotate.marker.permission;
 
-import me.aurium.beetle.branch.permission.strategies.StringPermission;
+import me.aurium.beetle.branch.fallback.permission.strategies.StringPermission;
 
 public interface StringPermChecker {
 

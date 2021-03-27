@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.builders;
+package me.aurium.beetle.branch.nodes.builders;
 
 /**
  * yet another marker interface

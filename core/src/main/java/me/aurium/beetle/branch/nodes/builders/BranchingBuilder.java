@@ -3,12 +3,11 @@ package me.aurium.beetle.branch.nodes.builders;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.EmptyBlock;
 import me.aurium.beetle.branch.block.StringBlock;
-import me.aurium.beetle.branch.builders.Builder;
+import me.aurium.beetle.branch.fallback.permission.Permission;
+import me.aurium.beetle.branch.fallback.permission.permissions.EmptyPermission;
 import me.aurium.beetle.branch.nodes.BranchingNode;
-import me.aurium.beetle.branch.nodes.CommandNode;
-import me.aurium.beetle.branch.nodes.IdentifiableNode;
-import me.aurium.beetle.branch.permission.Permission;
-import me.aurium.beetle.branch.permission.permissions.EmptyPermission;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
 import java.util.HashSet;
@@ -18,13 +17,23 @@ import java.util.function.Consumer;
 
 public class BranchingBuilder<T> implements Builder<T> {
 
-    private final Set<IdentifiableNode<T>> commands = new HashSet<>();
+    private final Set<IdentifiableNode<T>> commands;
 
     private Block block;
     private IdentifiableNode<T> noArgs;
+
     private boolean linked;
 
-    private Permission<T> permission = new EmptyPermission<>();
+    private Permission<T> permission;
+
+    public BranchingBuilder() {
+        this.commands = new HashSet<>();
+
+/*        this.noArgs = new SingleNode<>(new EmptyBlock(), messageProvider::handleDefaultBranching, new EmptyPermission<>());*/
+        this.linked = false;
+
+        this.permission = new EmptyPermission<>();
+    }
 
     public void withIdentifier(Block block) {
         this.block = block;
@@ -51,12 +60,15 @@ public class BranchingBuilder<T> implements Builder<T> {
         this.linked = linked;
     }
 
+
     @Override
     public BranchingNode<T> build() {
 
         Objects.requireNonNull(block);
 
         PreStoredHashSet<IdentifiableNode<T>> set;
+
+
 
         if (noArgs == null) {
             if (linked) {

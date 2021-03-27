@@ -1,9 +1,7 @@
 package me.aurium.beetle.branch.nodes.result;
 
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.nodes.CommandNode;
-
-import java.util.Optional;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
 
 public class NodeResult<T> {
 

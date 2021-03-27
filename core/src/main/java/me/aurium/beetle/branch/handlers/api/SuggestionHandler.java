@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.handlers.api;
 
-import me.aurium.beetle.branch.context.NodeContext;
+import me.aurium.beetle.branch.handlers.context.NodeContext;
 
 import java.util.List;
 

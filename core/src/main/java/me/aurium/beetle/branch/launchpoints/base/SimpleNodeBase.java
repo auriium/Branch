@@ -1,9 +1,9 @@
 package me.aurium.beetle.branch.launchpoints.base;
 
-import me.aurium.beetle.branch.context.ContextProducer;
+import me.aurium.beetle.branch.handlers.context.ContextProducer;
 import me.aurium.beetle.branch.handlers.api.FallbackHandler;
-import me.aurium.beetle.branch.nodes.CommandNode;
-import me.aurium.beetle.branch.permission.strategies.ExecutionFallbackStrategy;
+import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.fallback.permission.strategies.ExecutionFallbackStrategy;
 
 import java.util.List;
 

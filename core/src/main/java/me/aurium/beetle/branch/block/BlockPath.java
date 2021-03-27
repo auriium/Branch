@@ -1,7 +1,5 @@
 package me.aurium.beetle.branch.block;
 
-import me.aurium.beetle.branch.context.NodeContext;
-
 public interface BlockPath {
 
     boolean isEmpty();

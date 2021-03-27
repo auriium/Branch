@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.nodes;
+package me.aurium.beetle.branch.nodes.api;
 
 /**
  * Marker interface for a node that is alone (so not branching, but not merging either)

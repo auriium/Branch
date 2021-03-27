@@ -8,7 +8,9 @@ import me.aurium.beetle.branch.launchpoints.base.NodeBase;
  */
 public interface CentralizedManager<T> {
 
-    CentralizedManagerBinder getBinder();
+    CentralizedManagerBinder getBinder(); //think of Beetle's accessors for files, except this time it's for commands? idk
+
+
 
 
 }
