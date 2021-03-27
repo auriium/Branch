@@ -2,7 +2,7 @@ package me.aurium.beetle.branch.converted;
 
 import me.aurium.beetle.api.command.Command;
 import me.aurium.beetle.branch.context.Context;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.CommandNode;
 
 public interface BranchCommand<T> extends Command<T> {
 

@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="beetle-impl" />
         <module name="tests" />
         <module name="branch-core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="beetle-impl" target="11" />
       <module name="branch-tests" target="11" />
       <module name="core" target="11" />
       <module name="tests" target="11" />

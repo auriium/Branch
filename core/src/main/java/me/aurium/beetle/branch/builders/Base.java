@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.builders;
 
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.CommandNode;
 
 import java.util.function.Consumer;
 

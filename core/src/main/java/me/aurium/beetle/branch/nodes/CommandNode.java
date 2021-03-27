@@ -1,12 +1,10 @@
-package me.aurium.beetle.branch.nodes.api;
+package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.result.GetNodeResult;
+import me.aurium.beetle.branch.nodes.result.ExecutionResult;
+import me.aurium.beetle.branch.nodes.result.NodeResult;
 import me.aurium.beetle.branch.permission.Permission;
-
-import java.util.Optional;
 
 /**
  * Base object
@@ -14,9 +12,9 @@ import java.util.Optional;
  */
 public interface CommandNode<T> {
 
-    GetNodeResult<T> getSpecificNode(BlockPath path);
+    NodeResult<T> getSpecificNode(BlockPath path);
 
-    ExecutionHandler<T> getExecutionHandler();
+    ExecutionResult<T> getExecutionHandler();
     SuggestionHandler<T> getSuggestionHandler();
 
     /**

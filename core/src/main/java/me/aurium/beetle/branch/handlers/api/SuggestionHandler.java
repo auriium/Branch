@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface SuggestionHandler<T> {
 
-    List<String> handle(NodeContext<T> adapter);
+    List<String> handle(NodeContext<T> context);
 
 }

@@ -2,11 +2,8 @@ package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
-import me.aurium.beetle.branch.nodes.result.GetNodeResult;
-import me.aurium.beetle.branch.nodes.result.NullableNodeResult;
+import me.aurium.beetle.branch.nodes.result.*;
 import me.aurium.beetle.branch.permission.Permission;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
@@ -33,24 +30,30 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     }
 
     @Override
-    public GetNodeResult<T> getSpecificNode(BlockPath blockPath) {
+    public NodeResult<T> getSpecificNode(BlockPath blockPath) {
 
-        if (blockPath.isEmpty()) return new NullableNodeResult<>(nodes.getAlreadyStored(),blockPath);
+        if (blockPath.isEmpty()) return new NodeResult<>(this,blockPath);
 
         for (IdentifiableNode<T> node : nodes.getContents()) {
 
             BlockPath subPath = blockPath.withoutBase(); //get everything after the index
 
             if (blockPath.startsWith(node.getIdentifier())) {
-                return node.getSpecificNode(blockPath.withoutBase());
+                return node.getSpecificNode(subPath);
             }
         }
-        return new NullableNodeResult<>(nodes.getAlreadyStored(), blockPath);
+        return new NodeResult<>(this, blockPath);
     }
 
     @Override
-    public ExecutionHandler<T> getExecutionHandler() {
-        return nodes.getAlreadyStored().getExecutionHandler();
+    public ExecutionResult<T> getExecutionHandler() {
+
+        if (nodes.getAlreadyStored().isPresent()) {
+            return nodes.getAlreadyStored().get().getExecutionHandler();
+        } else {
+            return ExecutionResult.empty(); //FALL BACK SOLDIER
+        }
+
     }
 
     @Override

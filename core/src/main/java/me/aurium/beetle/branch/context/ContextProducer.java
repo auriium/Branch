@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.context;
 
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.CommandNode;
 
 /**
  * Produces context adapters, like the stock ContextSource for contexts.

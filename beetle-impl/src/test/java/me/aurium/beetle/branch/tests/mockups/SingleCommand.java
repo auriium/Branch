@@ -1,9 +1,9 @@
 package me.aurium.beetle.branch.tests.mockups;
 
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.CommandNode;
 import me.aurium.beetle.branch.context.ContextProducer;
 import me.aurium.beetle.branch.builders.Base;
-import me.aurium.beetle.branch.builders.SingleBuilder;
+import me.aurium.beetle.branch.nodes.builders.SingleBuilder;
 import me.aurium.beetle.branch.converted.launchpoints.AbstractBranchCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

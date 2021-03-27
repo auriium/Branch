@@ -10,6 +10,7 @@
     <modules>
         <module>core</module>
         <module>beetle-impl</module>
+        <module>spigot-impl</module>
     </modules>
 
     <parent>

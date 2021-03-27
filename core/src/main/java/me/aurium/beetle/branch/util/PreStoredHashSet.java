@@ -1,6 +1,7 @@
 package me.aurium.beetle.branch.util;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -55,8 +56,8 @@ public class PreStoredHashSet<T> {
      * get already store thing
      * @return already stored thing or null
      */
-    public T getAlreadyStored() {
-        return alreadyStored;
+    public Optional<T> getAlreadyStored() {
+        return Optional.ofNullable(alreadyStored);
     }
 
 }

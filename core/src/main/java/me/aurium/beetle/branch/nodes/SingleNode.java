@@ -5,9 +5,8 @@ import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.handlers.EmptySuggestionHandler;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.api.EndpointNode;
-import me.aurium.beetle.branch.nodes.result.GetNodeResult;
-import me.aurium.beetle.branch.nodes.result.NullableNodeResult;
+import me.aurium.beetle.branch.nodes.result.ExecutionResult;
+import me.aurium.beetle.branch.nodes.result.NodeResult;
 import me.aurium.beetle.branch.permission.Permission;
 
 public class SingleNode<T> implements EndpointNode<T> {
@@ -34,13 +33,13 @@ public class SingleNode<T> implements EndpointNode<T> {
     }
 
     @Override
-    public GetNodeResult<T> getSpecificNode(BlockPath blockPath) {
-        return new NullableNodeResult<>(this,blockPath);
+    public NodeResult<T> getSpecificNode(BlockPath blockPath) {
+        return new NodeResult<>(this,blockPath);
     }
 
     @Override
-    public ExecutionHandler<T> getExecutionHandler() {
-        return executionHandler;
+    public ExecutionResult<T> getExecutionHandler() {
+        return new ExecutionResult<>(executionHandler);
     }
 
     @Override

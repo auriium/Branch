@@ -1,7 +1,8 @@
 package me.aurium.beetle.branch.converted.launchpoints;
 
 import me.aurium.beetle.branch.context.ContextProducer;
-import me.aurium.beetle.branch.nodes.base.NodeBase;
+import me.aurium.beetle.branch.launchpoints.base.NodeBase;
+/*
 
 public abstract class AbstractBaseCommand<T> extends AbstractBranchCommand<T> {
 
@@ -11,3 +12,4 @@ public abstract class AbstractBaseCommand<T> extends AbstractBranchCommand<T> {
 
     public abstract NodeBase<T,?> getBase();
 }
+*/

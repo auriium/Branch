@@ -1,12 +1,10 @@
 package me.aurium.beetle.branch.permission;
 
-import me.aurium.beetle.branch.context.StagedContext;
-
 /**
  *
  */
 public interface Permission<T> {
 
-   boolean attempt(StagedContext<T> context);
+   boolean attempt(T sender, String alias, String[] args); //because fuck you
 
 }

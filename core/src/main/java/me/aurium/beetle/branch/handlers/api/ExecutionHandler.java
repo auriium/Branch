@@ -4,6 +4,6 @@ import me.aurium.beetle.branch.context.NodeContext;
 
 public interface ExecutionHandler<T> {
 
-    void handle(NodeContext<T> adapter);
+    void handle(NodeContext<T> context);
 
 }

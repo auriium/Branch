@@ -95,11 +95,11 @@ public class CommonBlockPath implements BlockPath {
         return fromIndex(0);
     }
 
-    @Override
+    @Override //TODO need a logic check here
     public BlockPath withoutTop() {
         BlockList clone = new DelegatingBlockList(new ArrayList<>(
                 blocks.getBackingList()
-        ));;
+        ));
 
         clone.removeLast();
 

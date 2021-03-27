@@ -2,12 +2,12 @@ package me.aurium.beetle.branch.converted.launchpoints;
 
 import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.converted.BranchCommand;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.CommandNode;
 import me.aurium.beetle.branch.context.NodeContext;
 import me.aurium.beetle.branch.context.ContextProducer;
 import me.aurium.beetle.branch.block.CommonBlockPath;
-import me.aurium.beetle.branch.nodes.result.GetNodeResult;
 
+/*
 public abstract class AbstractBranchCommand<T> implements BranchCommand<T> {
 
     private final ContextProducer<T> factory;
@@ -38,3 +38,4 @@ public abstract class AbstractBranchCommand<T> implements BranchCommand<T> {
         return true;
     }
 }
+*/

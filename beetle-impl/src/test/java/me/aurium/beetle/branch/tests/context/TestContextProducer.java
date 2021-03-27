@@ -4,7 +4,7 @@ import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.context.Context;
 import me.aurium.beetle.branch.context.ContextProducer;
 import me.aurium.beetle.branch.context.NodeContext;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.CommandNode;
 
 public class TestContextProducer implements ContextProducer<String> {
 

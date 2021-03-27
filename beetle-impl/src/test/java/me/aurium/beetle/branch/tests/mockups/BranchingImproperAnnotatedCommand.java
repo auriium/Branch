@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.tests.mockups;
 
 import me.aurium.beetle.branch.context.NodeContext;
-import me.aurium.beetle.branch.annotate.BranchCommand;
+import me.aurium.beetle.branch.annotate.marker.BranchCommand;
 import me.aurium.beetle.branch.annotate.marker.BranchingNode;
 import me.aurium.beetle.branch.annotate.marker.SingleNode;
 

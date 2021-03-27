@@ -2,7 +2,8 @@ package me.aurium.beetle.branch.argument;
 
 import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.context.NodeContext;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.handlers.api.FallbackHandler;
+import me.aurium.beetle.branch.nodes.CommandNode;
 
 public class DelegatingArgumentContext<T> implements ArgumentContext<T>{
 
@@ -47,6 +48,16 @@ public class DelegatingArgumentContext<T> implements ArgumentContext<T>{
     @Override
     public BlockPath executedPath() {
         return delegate.executedPath();
+    }
+
+    @Override
+    public BlockPath fullPath() {
+        return delegate.fullPath();
+    }
+
+    @Override
+    public FallbackHandler<T> getFallbackAction() {
+        return delegate.getFallbackAction();
     }
 
     @Override

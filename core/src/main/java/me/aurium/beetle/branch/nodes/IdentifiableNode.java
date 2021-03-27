@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.nodes.api;
+package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
 

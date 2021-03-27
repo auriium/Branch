@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.context;
 
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.CommandNode;
 
 public abstract class AbstractNodeContext<T> extends AbstractContext<T> implements NodeContext<T> {
 

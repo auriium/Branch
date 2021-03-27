@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.annotate;
+package me.aurium.beetle.branch.annotate.marker;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -2,17 +2,17 @@ package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
 import me.aurium.beetle.branch.argument.Argument;
-import me.aurium.beetle.branch.nodes.result.GetNodeResult;
-import me.aurium.beetle.branch.nodes.result.NullableNodeResult;
+import me.aurium.beetle.branch.nodes.result.ExecutionResult;
+import me.aurium.beetle.branch.nodes.result.NodeResult;
 import me.aurium.beetle.branch.permission.Permission;
 
 import java.util.List;
 
 //kinda like a branching node except it throws forward and not to the sides
+
+//one of these days ill actually finish this class LMFAO
 public class ArgumentNode<T> implements IdentifiableNode<T> {
 
     private final Block identifier;
@@ -36,8 +36,8 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
 
 
     @Override
-    public GetNodeResult<T> getSpecificNode(BlockPath path) {
-        return new NullableNodeResult<>(this,path);
+    public NodeResult<T> getSpecificNode(BlockPath path) {
+        return new NodeResult<>(this,path);
     }
 
     /*if (path.isEmpty()) return Optional.of(noArgs);
@@ -59,12 +59,10 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
         */
 
     @Override
-    public ExecutionHandler<T> getExecutionHandler() {
-        return (context) -> {
-            BlockPath path = context.executedPath();
-
-            //sort
-        };
+    public ExecutionResult<T> getExecutionHandler() {
+        return new ExecutionResult<>((context) -> {
+            BlockPath executed = context.executedPath();
+        });
     }
 
     @Override

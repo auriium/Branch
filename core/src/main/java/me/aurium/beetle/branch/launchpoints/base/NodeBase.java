@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.nodes.base;
+package me.aurium.beetle.branch.launchpoints.base;
 
 import java.util.List;
 
