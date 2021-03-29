@@ -25,7 +25,7 @@ public class SimpleNodeBase<C> implements NodeBase<C> {
 
     @Override
     public void execute(C executor, String alias, String[] args) {
-        strategy.executeStrategy(executor,alias,args,baseNode, fallbackHandler,factory);
+        strategy.executeStrategy(executor,alias,args,baseNode, fallbackHandler, factory);
     }
 
     @Override

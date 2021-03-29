@@ -19,7 +19,7 @@ public class PassthroughStrategy<T> implements ExecutionFallbackStrategy<T> {
         NodeResult<T> result = baseNode.getSpecificNode(path);
 
         result.resultingNode().getExecutionHandler().getExecution().ifPresentOrElse(
-                present -> present.handle(producer.produce(sender,alias,args, result.resultingNode(), baseNode, result.resultingPath(), path)),
+                present -> present.handle(producer.produce(sender,alias,args, result.resultingNode(), baseNode, result.resultingPath(), path, fallback)),
                 () -> { fallback.handle(producer.produce(sender,alias,args));
         });
     }

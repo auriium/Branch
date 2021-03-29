@@ -1,7 +1,7 @@
 package me.aurium.beetle.branch.annotate.parsers;
 
 import me.aurium.beetle.branch.annotate.marker.permission.Permission;
-import me.aurium.beetle.branch.fallback.permission.strategies.StringPermission;
+import me.aurium.beetle.branch.fallback.permission.StringPermission;
 
 import java.lang.annotation.Annotation;
 

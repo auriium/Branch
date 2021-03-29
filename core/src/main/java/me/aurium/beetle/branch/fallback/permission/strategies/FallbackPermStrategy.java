@@ -27,13 +27,8 @@ import me.aurium.beetle.branch.nodes.result.NodeResult;
  */
 public class FallbackPermStrategy<T> implements ExecutionFallbackStrategy<T> {
 
-    //TODO a248, this is one of the most important classes. in depth logic review because all of this is untested
-    // and i have no idea if it's gonna work haha. Also if you can think of a way to reduce the boilerplate of the while loops that'd
-    // be nice but i'm pretty sure theyre essential
-
     @Override
     public void executeStrategy(T sender, String alias, String[] args, CommandNode<T> baseNode, FallbackHandler<T> fallback, ContextProducer<T> producer) {
-
         BlockPath pathToTest = CommonBlockPath.of(args);
         NodeResult<T> toBeExecuted = baseNode.getSpecificNode(pathToTest);
 
@@ -58,10 +53,16 @@ public class FallbackPermStrategy<T> implements ExecutionFallbackStrategy<T> {
             }
         }
 
-        NodeContext<T> produced = producer.produce(sender,alias,args, toBeExecuted.resultingNode(), baseNode, toBeExecuted.resultingPath(), pathToTest);
+        NodeContext<T> produced = producer.produce(sender,alias,args, toBeExecuted.resultingNode(), baseNode, toBeExecuted.resultingPath(), pathToTest, fallback);
 
         toBeExecuted.resultingNode().getExecutionHandler().getExecution().get().handle(produced);
     }
+
+    //TODO a248, this is one of the most important classes. in depth logic review because all of this is untested
+    // and i have no idea if it's gonna work haha. Also if you can think of a way to reduce the boilerplate of the while loops that'd
+    // be nice but i'm pretty sure theyre essential
+
+
 
 
 

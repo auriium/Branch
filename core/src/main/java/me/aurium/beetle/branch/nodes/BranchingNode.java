@@ -8,6 +8,8 @@ import me.aurium.beetle.branch.nodes.result.*;
 import me.aurium.beetle.branch.fallback.permission.Permission;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
+import java.util.stream.Collectors;
+
 /**
  * TODO: missing a Node for noargs will cause it to rely on fallback rather than throwning exceptions and being bad
  * @param <T>
@@ -64,6 +66,8 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
         return (context) -> {
             //this works because this suggestion handler only gets called if we are on this object lmfao
             Block matchableBlock = context.executedPath().getAllBlocks().getLast();
+
+            nodes.getContents().stream().map(IdentifiableNode::getIdentifier).collect(Collectors.toList());
 
             return null;
         };
