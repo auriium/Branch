@@ -1,4 +1,4 @@
-package me.aurium.beetle.branch.fallback.permission.strategies;
+package me.aurium.beetle.branch.fallback.permission;
 
 import me.aurium.beetle.branch.fallback.permission.Permission;
 

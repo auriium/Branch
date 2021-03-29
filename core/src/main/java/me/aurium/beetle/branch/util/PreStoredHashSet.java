@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class PreStoredHashSet<T> {
 
-    private T alreadyStored;
+    private final T alreadyStored;
     private final Set<T> otherThingsInTheSet;
     private final boolean linked;
 
