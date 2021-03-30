@@ -1,5 +1,6 @@
 package me.aurium.beetle.branch.handlers;
 
+import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.handlers.context.NodeContext;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
 
@@ -11,7 +12,7 @@ public class EmptySuggestionHandler<T> implements SuggestionHandler<T> {
     private final List<String> emptyList = new ArrayList<>();
 
     @Override
-    public List<String> handle(NodeContext<T> adapter) {
+    public List<Block> handle(NodeContext<T> adapter) {
         return List.of();
     }
 }

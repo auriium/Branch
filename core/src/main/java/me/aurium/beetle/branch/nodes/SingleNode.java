@@ -1,14 +1,16 @@
 package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.block.BlockPath;
 import me.aurium.beetle.branch.handlers.EmptySuggestionHandler;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.api.EndpointNode;
-import me.aurium.beetle.branch.nodes.result.ExecutionResult;
-import me.aurium.beetle.branch.nodes.result.NodeResult;
+import me.aurium.beetle.branch.nodes.model.EndpointNode;
+import me.aurium.beetle.branch.nodes.results.ExecutionResult;
+import me.aurium.beetle.branch.nodes.results.SearchInput;
+import me.aurium.beetle.branch.nodes.results.SearchInfo;
 import me.aurium.beetle.branch.fallback.permission.Permission;
+import me.aurium.beetle.branch.nodes.results.model.Result;
+import me.aurium.beetle.branch.nodes.results.model.SuccessfulResult;
 
 public class SingleNode<T> implements EndpointNode<T> {
 
@@ -34,10 +36,13 @@ public class SingleNode<T> implements EndpointNode<T> {
     }
 
     @Override
-    public NodeResult<T> getSpecificNode(BlockPath blockPath) {
-        return new NodeResult<>(this,blockPath);
+    public Result<SearchInfo<T>> getSpecificNode(SearchInput input) {
+        input.getReducablePath().removeFirst(); //consume
+
+        return new SuccessfulResult<>(new SearchInfo<>(this,input));
     }
 
+    //TODO these maybe need to go somewhere else to a sort of parser
     @Override
     public ExecutionResult<T> getExecutionHandler() {
         return new ExecutionResult<>(executionHandler);

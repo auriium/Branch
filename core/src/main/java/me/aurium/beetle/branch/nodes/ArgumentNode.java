@@ -1,19 +1,9 @@
 package me.aurium.beetle.branch.nodes;
 
-import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.argument.Argument;
-import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
-import me.aurium.beetle.branch.nodes.result.ExecutionResult;
-import me.aurium.beetle.branch.nodes.result.NodeResult;
-import me.aurium.beetle.branch.fallback.permission.Permission;
-
-import java.util.List;
-
 //kinda like a branching node except it throws forward and not to the sides
 
 //one of these days ill actually finish this class LMFAO
+/*
 public class ArgumentNode<T> implements IdentifiableNode<T> {
 
     private final Block identifier;
@@ -37,15 +27,18 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
 
 
     @Override
-    public NodeResult<T> getSpecificNode(BlockPath path) {
-        return new NodeResult<>(this,path);
+    public SearchResult<T> getSpecificNode(SearchInput input) {
+        return new SearchResult<>(this, input);
     }
 
-    /*if (path.isEmpty()) return Optional.of(noArgs);
+    */
+/*if (path.isEmpty()) return Optional.of(noArgs);
 
-        return Optional.of(this);*/
+        return Optional.of(this);*//*
 
-        /* This was pointless, see below note
+
+        */
+/* This was pointless, see below note
 
         //we can either do this shit, or we can return **THIS** no matter what and let the context handler be variable, since the context handler delegates
         //to another adapter anyways
@@ -57,12 +50,13 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
         if (position == size) return Optional.of(sequentialValueNodes.get(size - 1));
 
         return Optional.of(sequentialValueNodes.get(position));
-        */
+        *//*
+
 
     @Override
     public ExecutionResult<T> getExecutionHandler() {
         return new ExecutionResult<>((context) -> {
-            BlockPath executed = context.executedPath();
+            Deque<Block> executed = context.executedPath();
         });
     }
 
@@ -83,3 +77,4 @@ public class ArgumentNode<T> implements IdentifiableNode<T> {
         return identifier;
     }
 }
+*/

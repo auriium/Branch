@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.annotate;
 
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.model.CommandNode;
 
 public interface AnnotatedParser<T> {
 
