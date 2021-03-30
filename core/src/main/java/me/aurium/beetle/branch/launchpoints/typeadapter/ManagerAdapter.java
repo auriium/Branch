@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 public interface ManagerAdapter<INPUT,OUTPUT extends INPUT> {
 
     OUTPUT adapt(INPUT input);
-
     boolean canAdapt(INPUT input);
 
     Consumer<INPUT> failedAdaptAction();

@@ -4,18 +4,13 @@ public class StringBlock implements Block {
 
     private final String identifier;
 
-    StringBlock(String identifier) {
+    public StringBlock(String identifier) {
         this.identifier = identifier;
     }
 
     @Override
     public String getIdentifier() {
         return identifier;
-    }
-
-    @Override
-    public BlockPath asSingleBlockpath() {
-        return CommonBlockPath.of(this);
     }
 
     public static Block of(String string) {
@@ -30,6 +25,11 @@ public class StringBlock implements Block {
         if (o == null || getClass() != o.getClass()) return false;
         StringBlock that = (StringBlock) o;
         return identifier.equalsIgnoreCase(that.identifier);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
     }
 
     @Override

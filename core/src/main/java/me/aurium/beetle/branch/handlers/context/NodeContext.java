@@ -1,21 +1,16 @@
 package me.aurium.beetle.branch.handlers.context;
 
-import me.aurium.beetle.branch.block.BlockPath;
-import me.aurium.beetle.branch.handlers.api.FallbackHandler;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.fallback.message.BaseContext;
+import me.aurium.beetle.branch.nodes.model.CommandNode;
+import me.aurium.beetle.branch.nodes.results.SearchInfo;
 
 
 public interface NodeContext<T> extends Context<T> {
 
-    CommandNode<T> getExecutedNode();
     CommandNode<T> getBaseExecutedNode();
 
-    BlockPath executedPath();
-    BlockPath fullPath();
-
-    boolean equals(Object comparison);
-
-    FallbackHandler<T> getFallbackAction();
+    SearchInfo<T> getResults();
+    BaseContext<T> getBaseContext();
 
     //TODO add more cool features like the debug message sender,
     // because NodeContext should be a collection of both context and context-specific actions? /review a248

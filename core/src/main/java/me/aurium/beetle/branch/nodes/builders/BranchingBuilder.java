@@ -6,8 +6,8 @@ import me.aurium.beetle.branch.block.StringBlock;
 import me.aurium.beetle.branch.fallback.permission.Permission;
 import me.aurium.beetle.branch.fallback.permission.permissions.EmptyPermission;
 import me.aurium.beetle.branch.nodes.BranchingNode;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
-import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
+import me.aurium.beetle.branch.nodes.model.CommandNode;
+import me.aurium.beetle.branch.nodes.model.IdentifiableNode;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
 import java.util.HashSet;
@@ -45,6 +45,12 @@ public class BranchingBuilder<T> implements Builder<T> {
 
     public void withPermission(Permission<T> permission) {
         this.permission = permission;
+    }
+
+    public BranchingBuilder<T> addNode(IdentifiableNode<T> node) {
+        commands.add(node);
+
+        return this;
     }
 
     public <C extends Builder<T>> void withNode(C key, Consumer<C> consumer) {
@@ -99,5 +105,9 @@ public class BranchingBuilder<T> implements Builder<T> {
         }
 
         return new BranchingNode<>(set, EmptyBlock.of(), permission);
+    }
+
+    public static <C> BranchingBuilder<C> make() {
+        return new BranchingBuilder<>();
     }
 }

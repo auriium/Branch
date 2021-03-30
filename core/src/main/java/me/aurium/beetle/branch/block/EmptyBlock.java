@@ -8,18 +8,8 @@ public class EmptyBlock implements Block{
     }
 
     @Override
-    public BlockPath asSingleBlockpath() {
-        return CommonBlockPath.ofEmpty();
-    }
-
-    @Override
-    public void addFirst(BlockList list) {
-        //nooops
-    }
-
-    @Override
-    public void addLast(BlockList list) {
-        //noops
+    public boolean isEmpty() {
+        return true;
     }
 
     public static EmptyBlock of() {

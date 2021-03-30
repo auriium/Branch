@@ -1,10 +1,10 @@
 package me.aurium.beetle.branch.launchpoints.base;
 
+import me.aurium.beetle.branch.fallback.permission.strategies.CommonFallbackStrategy;
 import me.aurium.beetle.branch.handlers.context.ContextProducer;
 import me.aurium.beetle.branch.handlers.api.FallbackHandler;
-import me.aurium.beetle.branch.nodes.api.CommandNode;
+import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.fallback.permission.strategies.ExecutionFallbackStrategy;
-import me.aurium.beetle.branch.fallback.permission.strategies.FallbackPermStrategy;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -15,7 +15,7 @@ public class NodeBaseBuilder<T> {
 
     private CommandNode<T> base;
     private FallbackHandler<T> fallbackHandler = (shit) -> shit.messageSender("Error running command with arguments: " + Arrays.toString(shit.getArgs()));
-    private ExecutionFallbackStrategy<T> strategy = new FallbackPermStrategy<>();
+    private ExecutionFallbackStrategy<T> strategy = new CommonFallbackStrategy<>();
 
     public <X> NodeBaseBuilder(ContextProducer<T> producer) {
         this.producer = producer;
@@ -44,6 +44,8 @@ public class NodeBaseBuilder<T> {
         Objects.requireNonNull(fallbackHandler);
         Objects.requireNonNull(strategy);
 
-        return new SimpleNodeBase<>(base,producer,fallbackHandler,strategy);
+        return null;
+
+        //return new SimpleNodeBase<>(base,producer,fallbackHandler,strategy);
     }
 }

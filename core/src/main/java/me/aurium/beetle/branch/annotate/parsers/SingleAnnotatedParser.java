@@ -40,6 +40,8 @@ public class SingleAnnotatedParser<T> {
                 }
 
 
+                //all of this is really really stupid lmfao we should be working with an instance of the class
+
                 if (parameters[0].getType().isAssignableFrom(NodeContext.class)) {
 
 

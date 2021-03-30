@@ -1,17 +1,25 @@
 package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.block.BlockPath;
+import me.aurium.beetle.branch.handlers.api.BranchHandler;
 import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.api.IdentifiableNode;
-import me.aurium.beetle.branch.nodes.result.*;
+import me.aurium.beetle.branch.handlers.context.NodeContext;
+import me.aurium.beetle.branch.nodes.model.CommandNode;
+import me.aurium.beetle.branch.nodes.model.IdentifiableNode;
+import me.aurium.beetle.branch.nodes.results.*;
 import me.aurium.beetle.branch.fallback.permission.Permission;
+import me.aurium.beetle.branch.nodes.results.model.FailingResult;
+import me.aurium.beetle.branch.nodes.results.model.Result;
 import me.aurium.beetle.branch.util.PreStoredHashSet;
 
-import java.util.stream.Collectors;
+import java.util.Deque;
+import java.util.List;
 
 /**
- * TODO: missing a Node for noargs will cause it to rely on fallback rather than throwning exceptions and being bad
+ * TODO: missing a Node for noargs will cause it to rely on fallback rather than throwning exceptions and being bad (DONE - ish)
+ *
+ * Nodes should always assume that the first block in the blockpath is theirs to consume
+ *
  * @param <T>
  */
 public class BranchingNode<T> implements IdentifiableNode<T> {
@@ -33,19 +41,19 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     }
 
     @Override
-    public NodeResult<T> getSpecificNode(BlockPath blockPath) {
+    public SearchInfo<T> getSpecificNode(SearchInput input) {
 
-        if (blockPath.isEmpty()) return new NodeResult<>(this,blockPath);
+        Deque<Block> blockPath = input.getReducablePath();
 
         for (IdentifiableNode<T> node : nodes.getContents()) {
+            if (blockPath.getFirst().equals(node.getIdentifier())) {
+                blockPath.removeFirst(); //consume
 
-            BlockPath subPath = blockPath.withoutBase(); //get everything after the index
-
-            if (blockPath.startsWith(node.getIdentifier())) {
-                return node.getSpecificNode(subPath);
+                return node.getSpecificNode(input);
             }
         }
-        return new NodeResult<>(this, blockPath);
+
+        return new SearchInfo<>(this, input); //empty handling is in the strategy
     }
 
     @Override
@@ -64,11 +72,8 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
         //TODO sort this out
 
         return (context) -> {
+
             //this works because this suggestion handler only gets called if we are on this object lmfao
-            Block matchableBlock = context.executedPath().getAllBlocks().getLast();
-
-            nodes.getContents().stream().map(IdentifiableNode::getIdentifier).collect(Collectors.toList());
-
             return null;
         };
     }
@@ -76,6 +81,22 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     @Override
     public Permission<T> getPermission() {
         return permission;
+    }
+
+    public static final class BranchingHandler<T> implements BranchHandler<T> {
+
+        private final CommandNode<T> alreadyPresent;
+
+        @Override
+        public void getExecution(NodeContext<T> context) {
+
+        }
+
+        @Override
+        public List<String> getSuggestions(NodeContext<T> context) {
+            return null;
+        }
+
     }
 
 
