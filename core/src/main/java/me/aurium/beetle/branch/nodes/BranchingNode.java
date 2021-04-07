@@ -1,19 +1,20 @@
 package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
+import me.aurium.beetle.branch.interfacing.responses.SendableResponse;
+import me.aurium.beetle.branch.interfacing.CoreKeys;
 import me.aurium.beetle.branch.handlers.api.BranchHandler;
-import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
+import me.aurium.beetle.branch.handlers.api.Execution;
 import me.aurium.beetle.branch.handlers.context.NodeContext;
-import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.model.IdentifiableNode;
 import me.aurium.beetle.branch.nodes.results.*;
-import me.aurium.beetle.branch.fallback.permission.Permission;
-import me.aurium.beetle.branch.nodes.results.model.FailingResult;
+import me.aurium.beetle.branch.fallback.permissions.Permission;
 import me.aurium.beetle.branch.nodes.results.model.Result;
-import me.aurium.beetle.branch.util.PreStoredHashSet;
+import me.aurium.beetle.branch.fun.PreStoredHashSet;
 
 import java.util.Deque;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * TODO: missing a Node for noargs will cause it to rely on fallback rather than throwning exceptions and being bad (DONE - ish)
@@ -26,6 +27,7 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
     private final PreStoredHashSet<IdentifiableNode<T>> nodes;
     private final Block path;
+    private final BranchHandler<T> handler;
 
     private final Permission<T> permission;
 
@@ -33,6 +35,8 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
         this.nodes = nodes;
         this.path = path;
         this.permission = permission;
+
+        this.handler = new BranchingHandler<>(nodes);
     }
 
     @Override
@@ -57,25 +61,8 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     }
 
     @Override
-    public ExecutionResult<T> getExecutionHandler() {
-
-        if (nodes.getAlreadyStored().isPresent()) {
-            return nodes.getAlreadyStored().get().getExecutionHandler();
-        } else {
-            return ExecutionResult.empty(); //FALL BACK SOLDIER
-        }
-
-    }
-
-    @Override
-    public SuggestionHandler<T> getSuggestionHandler() {
-        //TODO sort this out
-
-        return (context) -> {
-
-            //this works because this suggestion handler only gets called if we are on this object lmfao
-            return null;
-        };
+    public BranchHandler<T> getHandling() {
+        return handler;
     }
 
     @Override
@@ -85,18 +72,36 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
     public static final class BranchingHandler<T> implements BranchHandler<T> {
 
-        private final CommandNode<T> alreadyPresent;
+        private final PreStoredHashSet<IdentifiableNode<T>> nodeShit;
+
+        public BranchingHandler(PreStoredHashSet<IdentifiableNode<T>> nodeShit) {
+            this.nodeShit = nodeShit;
+        }
+
 
         @Override
-        public void getExecution(NodeContext<T> context) {
-
+        public Result<Execution> getExecution(NodeContext<T> context) {
+            if (nodeShit.getAlreadyStored() == null) {
+                return Result.fail(new NoIntegratedNoArgsBlurb());
+            } else {
+                return nodeShit.getAlreadyStored().getHandling().getExecution(context);
+            }
         }
 
         @Override
         public List<String> getSuggestions(NodeContext<T> context) {
-            return null;
+
+            //TODO fix this bullshit, add close-to-queue
+            return nodeShit.getContents().stream().map(s -> s.getIdentifier().getIdentifier()).collect(Collectors.toList());
         }
 
+    }
+
+    public static final class NoIntegratedNoArgsBlurb extends SendableResponse {
+
+        public NoIntegratedNoArgsBlurb() {
+            super(CoreKeys.NO_INTEGRATED_NOARGS);
+        }
     }
 
 

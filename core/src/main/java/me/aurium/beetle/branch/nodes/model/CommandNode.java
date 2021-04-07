@@ -1,11 +1,9 @@
 package me.aurium.beetle.branch.nodes.model;
 
-import me.aurium.beetle.branch.handlers.api.SuggestionHandler;
-import me.aurium.beetle.branch.nodes.results.ExecutionResult;
+import me.aurium.beetle.branch.handlers.api.BranchHandler;
 import me.aurium.beetle.branch.nodes.results.SearchInput;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
-import me.aurium.beetle.branch.fallback.permission.Permission;
-import me.aurium.beetle.branch.nodes.results.model.Result;
+import me.aurium.beetle.branch.fallback.permissions.Permission;
 
 /**
  * Base object
@@ -14,9 +12,8 @@ import me.aurium.beetle.branch.nodes.results.model.Result;
 public interface CommandNode<T> {
 
     SearchInfo<T> getSpecificNode(SearchInput path);
+    BranchHandler<T> getHandling();
 
-    ExecutionResult<T> getExecutionHandler();
-    SuggestionHandler<T> getSuggestionHandler();
 
     /**
      * Gets the permission required to execute and interact with this node. Depending on the base, this may cause the node to become locked, or just completely be ignored.
