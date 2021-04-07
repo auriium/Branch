@@ -6,8 +6,8 @@ import me.aurium.beetle.branch.block.StringBlock;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.nodes.SingleNode;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
-import me.aurium.beetle.branch.fallback.permission.Permission;
-import me.aurium.beetle.branch.fallback.permission.permissions.EmptyPermission;
+import me.aurium.beetle.branch.fallback.permissions.Permission;
+import me.aurium.beetle.branch.fallback.permissions.EmptyPermission;
 
 import java.util.Objects;
 

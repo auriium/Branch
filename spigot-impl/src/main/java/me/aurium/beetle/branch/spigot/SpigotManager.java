@@ -23,7 +23,7 @@ public class SpigotManager implements CentralizedManager<CommandSender, JavaPlug
 
     @Override
     public <C extends CommandSender> NodeBaseBuilder<C> newCommand(ManagerAdapter<CommandSender, C> adapter) {
-        return new NodeBaseBuilder<>(new SpigotContextProducer<>(adapter));
+        return new NodeBaseBuilder<>(new SpigotContextProvider<>(adapter));
     }
 
 

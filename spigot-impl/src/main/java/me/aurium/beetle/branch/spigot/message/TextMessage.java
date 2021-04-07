@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.spigot.message;
 
-import me.aurium.beetle.branch.fallback.message.Message;
+import me.aurium.beetle.branch.interfacing.message.Message;
 import org.bukkit.command.CommandSender;
 
 public class TextMessage<C extends CommandSender> implements Message<C> {

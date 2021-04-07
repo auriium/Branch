@@ -1,22 +1,32 @@
 package me.aurium.beetle.branch.spigot.message;
 
-import me.aurium.beetle.branch.fallback.message.CommonKeys;
-import me.aurium.beetle.branch.fallback.message.Message;
-import me.aurium.beetle.branch.fallback.message.MessageKey;
-import me.aurium.beetle.branch.fallback.message.MessageProvider;
+import me.aurium.beetle.branch.interfacing.CoreKeys;
+import me.aurium.beetle.branch.interfacing.message.Message;
+import me.aurium.beetle.branch.interfacing.message.Requirement;
+import me.aurium.beetle.branch.interfacing.message.model.MessageProvider;
 import org.bukkit.command.CommandSender;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class SpigotMessageProvider<C extends CommandSender> implements MessageProvider<C> {
 
-    public Map<MessageKey,Message<C>> make() {
-        Map<MessageKey,Message<C>> messMap = new HashMap<>();
+    private final Map<UUID, Requirement<C>> map = new HashMap<>();
 
-        messMap.put(CommonKeys.TOO_MANY_ARGS, new TextMessage<>("&7HI THERE IDIOT FACE! You provided %args% args!"));
+    public SpigotMessageProvider() {
+        map.put(CoreKeys.TOO_MANY_ARGS, new TextMessage<>("&7HI THERE IDIOT FACE! You provided %args% args!"));
+    }
 
-        return messMap;
+    public SpigotMessageProvider<C> with(UUID uuid, Requirement<C> requirement) {
+        this.map.put(uuid,requirement);
+
+        return this;
+    }
+
+
+    public final Map<UUID, Requirement<C>>make() {
+        return map;
     }
 
 }

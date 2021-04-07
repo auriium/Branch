@@ -1,8 +1,6 @@
 package me.aurium.beetle.branch.nodes.results.model;
 
-import me.aurium.beetle.branch.fallback.failure.Failure;
-
-import java.util.Optional;
+import me.aurium.beetle.branch.interfacing.responses.ExecutionResponse;
 
 public class SuccessfulResult<T> implements Result<T> {
 
@@ -13,12 +11,17 @@ public class SuccessfulResult<T> implements Result<T> {
     }
 
     @Override
-    public Optional<T> getSuccess() {
-        return Optional.of(sucessful);
+    public boolean isSuccessful() {
+        return true;
     }
 
     @Override
-    public Optional<Failure> getFailure() {
-        return Optional.empty();
+    public T getSuccess() {
+        return sucessful;
+    }
+
+    @Override
+    public ExecutionResponse getFailure() {
+        throw new IllegalStateException("Attempted to get failure of a successful result!");
     }
 }

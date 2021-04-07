@@ -1,23 +1,18 @@
 package me.aurium.beetle.branch.launchpoints.base;
 
-import me.aurium.beetle.branch.fallback.permission.strategies.CommonFallbackStrategy;
-import me.aurium.beetle.branch.handlers.context.ContextProducer;
-import me.aurium.beetle.branch.handlers.api.FallbackHandler;
+import me.aurium.beetle.branch.fallback.strategies.OneBackStrategy;
+import me.aurium.beetle.branch.handlers.context.ContextProvider;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
-import me.aurium.beetle.branch.fallback.permission.strategies.ExecutionFallbackStrategy;
-
-import java.util.Arrays;
-import java.util.Objects;
+import me.aurium.beetle.branch.fallback.strategies.FallbackSearchStrategy;
 
 public class NodeBaseBuilder<T> {
 
-    private final ContextProducer<T> producer;
+    private final ContextProvider<T> producer;
 
     private CommandNode<T> base;
-    private FallbackHandler<T> fallbackHandler = (shit) -> shit.messageSender("Error running command with arguments: " + Arrays.toString(shit.getArgs()));
-    private ExecutionFallbackStrategy<T> strategy = new CommonFallbackStrategy<>();
+    private FallbackSearchStrategy<T> strategy = new OneBackStrategy<>();
 
-    public <X> NodeBaseBuilder(ContextProducer<T> producer) {
+    public <X> NodeBaseBuilder(ContextProvider<T> producer) {
         this.producer = producer;
     }
 
@@ -27,25 +22,10 @@ public class NodeBaseBuilder<T> {
         return this;
     }
 
-    public NodeBaseBuilder<T> withFallback(FallbackHandler<T> fallback) {
-        this.fallbackHandler = fallback;
-
-        return this;
-    }
-
-    public NodeBaseBuilder<T> withStrategy(ExecutionFallbackStrategy<T> strategy) {
+    public NodeBaseBuilder<T> withStrategy(FallbackSearchStrategy<T> strategy) {
         this.strategy = strategy;
 
         return this;
     }
 
-    public NodeBase<T> build() {
-        Objects.requireNonNull(base);
-        Objects.requireNonNull(fallbackHandler);
-        Objects.requireNonNull(strategy);
-
-        return null;
-
-        //return new SimpleNodeBase<>(base,producer,fallbackHandler,strategy);
-    }
 }

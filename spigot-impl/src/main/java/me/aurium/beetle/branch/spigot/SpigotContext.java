@@ -18,7 +18,7 @@ public class SpigotContext<T extends CommandSender> extends AbstractNodeContext<
     }
 
     @Override
-    public void messageSender(String string) {
+    public void stringSender(String string) {
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&',string)); //TODO prettify (or just use ContextErrorMessage LMFAO)
     }
 }

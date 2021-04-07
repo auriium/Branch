@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.launchpoints.typeadapter;
 
-import java.util.function.Consumer;
+import me.aurium.beetle.branch.interfacing.responses.ExecutionResponse;
 
 public interface CommonAdapter<T> extends ManagerAdapter<T,T> {
 
@@ -15,7 +15,7 @@ public interface CommonAdapter<T> extends ManagerAdapter<T,T> {
     }
 
     @Override
-    default Consumer<T> failedAdaptAction() {
-        return (i) -> {}; //noops
+    default ExecutionResponse failedAdaptAction() {
+        throw new IllegalStateException("How did you get here (Since canAdapt is always true this should never occur?)");
     }
 }

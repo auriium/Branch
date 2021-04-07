@@ -3,12 +3,12 @@ package me.aurium.beetle.branch.nodes.builders;
 import me.aurium.beetle.branch.block.Block;
 import me.aurium.beetle.branch.block.EmptyBlock;
 import me.aurium.beetle.branch.block.StringBlock;
-import me.aurium.beetle.branch.fallback.permission.Permission;
-import me.aurium.beetle.branch.fallback.permission.permissions.EmptyPermission;
+import me.aurium.beetle.branch.fallback.permissions.Permission;
+import me.aurium.beetle.branch.fallback.permissions.EmptyPermission;
 import me.aurium.beetle.branch.nodes.BranchingNode;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.model.IdentifiableNode;
-import me.aurium.beetle.branch.util.PreStoredHashSet;
+import me.aurium.beetle.branch.fun.PreStoredHashSet;
 
 import java.util.HashSet;
 import java.util.Objects;
