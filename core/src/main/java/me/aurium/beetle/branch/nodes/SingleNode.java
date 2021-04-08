@@ -1,12 +1,11 @@
 package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.interfacing.responses.SendableResponse;
-import me.aurium.beetle.branch.interfacing.CoreKeys;
 import me.aurium.beetle.branch.handlers.api.BranchHandler;
 import me.aurium.beetle.branch.handlers.api.ExecutionHandler;
 import me.aurium.beetle.branch.handlers.api.Execution;
 import me.aurium.beetle.branch.handlers.context.NodeContext;
+import me.aurium.beetle.branch.interfacing.common.TooManyArgsResponse;
 import me.aurium.beetle.branch.nodes.model.EndpointNode;
 import me.aurium.beetle.branch.nodes.results.SearchInput;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
@@ -16,6 +15,10 @@ import me.aurium.beetle.branch.nodes.results.model.Result;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a node that can do one action and takes no arguments and has no tabcompletion
+ * @param <T> the type of executor
+ */
 public class SingleNode<T> implements EndpointNode<T> {
 
     private final Block identifier;
@@ -62,16 +65,18 @@ public class SingleNode<T> implements EndpointNode<T> {
         }
 
         @Override
-        public Result<Execution> getExecution(NodeContext<T> context) {
-            context.getResults().reducedPath().removeFirst();
+        public Result<Execution<T>> getExecution(NodeContext<T> context) {
+            SearchInfo<T> info = context.getResults();
 
-            if (context.getResults().hasMoreArguments()) {
-                return Result.fail(new TooManyArgumentsBlurb());
+            info.reducedPath().removeFirst();
+
+            if (info.hasMoreArguments()) {
+                return Result.fail(
+                        new TooManyArgsResponse(0,info.reducedPath().size()) //TODO change this so it actually reflects
+                );
             }
 
-            return Result.success(new Execution(() -> {
-                handler.handle(context);
-            }));
+            return Result.success(new Execution<>(handler,context));
         }
 
         @Override
@@ -81,13 +86,6 @@ public class SingleNode<T> implements EndpointNode<T> {
 
     }
 
-    public static class TooManyArgumentsBlurb extends SendableResponse {
-
-        public TooManyArgumentsBlurb() {
-            super(CoreKeys.TOO_MANY_ARGS);
-        }
-
-    }
 
 
 }

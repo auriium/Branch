@@ -1,16 +1,15 @@
 package me.aurium.beetle.branch.nodes;
 
 import me.aurium.beetle.branch.block.Block;
-import me.aurium.beetle.branch.interfacing.responses.SendableResponse;
-import me.aurium.beetle.branch.interfacing.CoreKeys;
 import me.aurium.beetle.branch.handlers.api.BranchHandler;
 import me.aurium.beetle.branch.handlers.api.Execution;
 import me.aurium.beetle.branch.handlers.context.NodeContext;
+import me.aurium.beetle.branch.interfacing.common.NoIntegratedArgsResponse;
 import me.aurium.beetle.branch.nodes.model.IdentifiableNode;
 import me.aurium.beetle.branch.nodes.results.*;
 import me.aurium.beetle.branch.fallback.permissions.Permission;
 import me.aurium.beetle.branch.nodes.results.model.Result;
-import me.aurium.beetle.branch.fun.PreStoredHashSet;
+import me.aurium.beetle.branch.utility.PreStoredHashSet;
 
 import java.util.Deque;
 import java.util.List;
@@ -80,9 +79,9 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
 
         @Override
-        public Result<Execution> getExecution(NodeContext<T> context) {
+        public Result<Execution<T>> getExecution(NodeContext<T> context) {
             if (nodeShit.getAlreadyStored() == null) {
-                return Result.fail(new NoIntegratedNoArgsBlurb());
+                return Result.fail(NoIntegratedArgsResponse.of(context));
             } else {
                 return nodeShit.getAlreadyStored().getHandling().getExecution(context);
             }
@@ -95,13 +94,6 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
             return nodeShit.getContents().stream().map(s -> s.getIdentifier().getIdentifier()).collect(Collectors.toList());
         }
 
-    }
-
-    public static final class NoIntegratedNoArgsBlurb extends SendableResponse {
-
-        public NoIntegratedNoArgsBlurb() {
-            super(CoreKeys.NO_INTEGRATED_NOARGS);
-        }
     }
 
 

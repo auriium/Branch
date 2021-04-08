@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.spigot.toPlayer;
 
-import me.aurium.beetle.branch.interfacing.responses.ExecutionResponse;
+import me.aurium.beetle.branch.interfacing.common.FailedAdaptingResponse;
 import me.aurium.beetle.branch.launchpoints.typeadapter.ManagerAdapter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -18,8 +18,9 @@ public class PlayerAdapter implements ManagerAdapter<CommandSender, Player> {
     }
 
     @Override
-    public ExecutionResponse failedAdaptAction() {
-        return new FailedAdaptingResponse(null);
+    public FailedAdaptingResponse failedParseResponse(CommandSender sender) {
+        return new FailedAdaptingResponse(Player.class, CommandSender.class);
     }
+
 
 }

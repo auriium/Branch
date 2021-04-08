@@ -22,7 +22,7 @@
         <dependency>
             <groupId>me.aurium</groupId>
             <artifactId>beetle-core</artifactId>
-            <version>0.4.1</version>
+            <version>1.1.1</version>
         </dependency>
     </dependencies>
 

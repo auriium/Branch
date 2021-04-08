@@ -1,8 +1,7 @@
 package me.aurium.beetle.branch.handlers.context;
 
-import me.aurium.beetle.branch.interfacing.responses.ExecutionResponse;
-import me.aurium.beetle.branch.fallback.message.BaseContext;
-import me.aurium.beetle.branch.interfacing.message.Message;
+import me.aurium.beetle.branch.interfacing.model.Message;
+import me.aurium.beetle.branch.interfacing.model.Response;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
 
@@ -14,7 +13,6 @@ public interface NodeContext<T> {
     String[] getArgs();
     CommandNode<T> getBaseExecutedNode();
     SearchInfo<T> getResults();
-    BaseContext<T> getBaseContext();
 
     /**
      * Sends an ugly string to the player using the platform's message handler. Whatever floats your boat!
@@ -26,13 +24,13 @@ public interface NodeContext<T> {
      * Sends a fancy formatted message to a player using the bound platform's message-handler
      * @param message message
      */
-    void messageSender(Message<? extends T> message);
+    void messageSender(Message<T> message);
 
     /**
-     * Sends a fancy formatted failure to a player that is bound to a Message using the platform's message-handler
-     * @param failure the failure
+     * Sends a formatted response to a player coded to a key
+     * @param failure the response
      */
-    void failureSender(ExecutionResponse failure);
+    void response(Response failure);
 
 
 }

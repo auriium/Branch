@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BranchHandler<T> {
 
-    Result<Execution> getExecution(NodeContext<T> context);
+    Result<Execution<T>> getExecution(NodeContext<T> context);
     List<String> getSuggestions(NodeContext<T> context);
 
 }

@@ -1,18 +1,23 @@
 package me.aurium.beetle.branch.spigot.message;
 
-import me.aurium.beetle.branch.interfacing.message.Message;
+import me.aurium.beetle.branch.interfacing.model.Message;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class TextMessage<C extends CommandSender> implements Message<C> {
 
-    private final String coloredStringToSend;
+    private final String[] coloredStringToSend;
 
-    public TextMessage(String coloredStringToSend) {
+    public TextMessage(String... coloredStringToSend) {
         this.coloredStringToSend = coloredStringToSend;
     }
 
     @Override
-    public void accept(C sender, Object... info) {
-        sender.sendMessage(String.format(coloredStringToSend,info));
+    public void accept(C sender) {
+
+        for (String string : coloredStringToSend) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&',string));
+        }
+
     }
 }

@@ -7,14 +7,10 @@ import me.aurium.beetle.branch.fallback.strategies.FallbackSearchStrategy;
 
 public class NodeBaseBuilder<T> {
 
-    private final ContextProvider<T> producer;
+    private ContextProvider<T> producer;
 
     private CommandNode<T> base;
     private FallbackSearchStrategy<T> strategy = new OneBackStrategy<>();
-
-    public <X> NodeBaseBuilder(ContextProvider<T> producer) {
-        this.producer = producer;
-    }
 
     public NodeBaseBuilder<T> withBaseNode(CommandNode<T> node) {
         this.base = node;

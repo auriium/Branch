@@ -1,7 +1,9 @@
 package me.aurium.beetle.branch.launchpoints.base;
 
+import me.aurium.beetle.branch.handlers.api.Execution;
 import me.aurium.beetle.branch.handlers.context.ContextProvider;
-import me.aurium.beetle.branch.interfacing.message.model.InterfacingHandler;
+import me.aurium.beetle.branch.handlers.context.NodeContext;
+import me.aurium.beetle.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.fallback.strategies.FallbackSearchStrategy;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
@@ -33,20 +35,21 @@ public class SyncNodeBase<C> implements NodeBase<C> {
         Result<SearchInfo<C>> result = strategy.attemptPreprocess(executor,alias,args,baseNode);
 
         if (!result.isSuccessful()) {
-
             handler.sendMessage(executor, result.getFailure());
-
-            ha
             return;
         }
 
+        SearchInfo<C> info = result.getSuccess();
+        NodeContext<C> produced = provider.produce(executor,alias,args,baseNode,info);
 
+        Result<Execution<C>> execution = info.resultingNode().getHandling().getExecution(produced);
 
-                .ifPresentOrElse(
-                result -> strategy.attemptExecution(executor,alias,args,baseNode,result,baseContext, provider),
-                //else
-                () -> baseContext.getFallback().handle(provider.produce(executor, alias, args))
-        );
+        if (!execution.isSuccessful()) {
+            handler.sendMessage(executor, execution.getFailure());
+            return;
+        }
+
+        execution.getSuccess().run();
     }
 
     @Override
