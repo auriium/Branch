@@ -1,12 +1,16 @@
 package me.aurium.beetle.branch.nodes.results.model;
 
-import me.aurium.beetle.branch.interfacing.responses.ExecutionResponse;
+import me.aurium.beetle.branch.interfacing.model.Response;
 
+/**
+ * A result that has failed
+ * @param <T> the response
+ */
 public class FailingResult<T> implements Result<T> {
 
-    private final ExecutionResponse failure;
+    private final Response failure;
 
-    public FailingResult(ExecutionResponse failure) {
+    public FailingResult(Response failure) {
         this.failure = failure;
     }
 
@@ -21,7 +25,8 @@ public class FailingResult<T> implements Result<T> {
     }
 
     @Override
-    public ExecutionResponse getFailure() {
+    public Response getFailure() {
         return failure;
     }
+
 }

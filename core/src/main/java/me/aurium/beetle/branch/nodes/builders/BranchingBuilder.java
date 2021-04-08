@@ -8,7 +8,7 @@ import me.aurium.beetle.branch.fallback.permissions.EmptyPermission;
 import me.aurium.beetle.branch.nodes.BranchingNode;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.model.IdentifiableNode;
-import me.aurium.beetle.branch.fun.PreStoredHashSet;
+import me.aurium.beetle.branch.utility.PreStoredHashSet;
 
 import java.util.HashSet;
 import java.util.Objects;

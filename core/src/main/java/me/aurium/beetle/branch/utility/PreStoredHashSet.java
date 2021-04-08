@@ -1,7 +1,6 @@
-package me.aurium.beetle.branch.fun;
+package me.aurium.beetle.branch.utility;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 /**

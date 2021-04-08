@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.nodes.results.model;
 
-import me.aurium.beetle.branch.interfacing.responses.ExecutionResponse;
+import me.aurium.beetle.branch.interfacing.model.Response;
 
 public class SuccessfulResult<T> implements Result<T> {
 
@@ -21,7 +21,7 @@ public class SuccessfulResult<T> implements Result<T> {
     }
 
     @Override
-    public ExecutionResponse getFailure() {
+    public Response getFailure() {
         throw new IllegalStateException("Attempted to get failure of a successful result!");
     }
 }

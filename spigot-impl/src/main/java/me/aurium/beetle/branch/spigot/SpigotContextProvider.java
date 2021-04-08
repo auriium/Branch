@@ -1,9 +1,9 @@
 package me.aurium.beetle.branch.spigot;
 
-import me.aurium.beetle.branch.fallback.message.BaseContext;
+
 import me.aurium.beetle.branch.handlers.context.ContextProvider;
 import me.aurium.beetle.branch.handlers.context.NodeContext;
-import me.aurium.beetle.branch.launchpoints.IllegalSenderException;
+import me.aurium.beetle.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.beetle.branch.launchpoints.typeadapter.ManagerAdapter;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
@@ -12,27 +12,21 @@ import org.bukkit.command.CommandSender;
 public class SpigotContextProvider<C extends CommandSender> implements ContextProvider<C> {
 
     private final ManagerAdapter<CommandSender,C> adapter;
+    private final InterfacingHandler<C> handler;
 
-    public <T> SpigotContextProvider(ManagerAdapter<CommandSender,C> adapter) {
+    public <T> SpigotContextProvider(ManagerAdapter<CommandSender, C> adapter, InterfacingHandler<C> handler) {
         this.adapter = adapter;
+        this.handler = handler;
     }
 
 
     @Override
-    public NodeContext<C> produce(C sender, String alias, String[] strings, CommandNode<C> baseNode, SearchInfo<C> search, BaseContext<C> baseContext) {
+    public NodeContext<C> produce(C sender, String alias, String[] strings, CommandNode<C> baseNode, SearchInfo<C> search) {
         if (!adapter.canAdapt(sender)) {
-            adapter.failedAdaptAction();
-
-            //delegate to baseContext's stuff
-
-            throw new IllegalSenderException("Sender is not instance of correct type!"); //TODO more fallback bullshit :)
+            r
         }
 
-        return new SpigotContext<>(adapter.adapt(sender),alias,strings,baseNode,search,baseContext);
-    }
 
-    @Override
-    public Context<C> produce(C sender, String alias, String[] strings) {
-        return produce(sender, alias, strings,null,null,null);
+        return new SpigotContext<>(sender,alias,strings,baseNode,search, handler);
     }
 }

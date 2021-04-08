@@ -1,6 +1,6 @@
 package me.aurium.beetle.branch.handlers.context;
 
-import me.aurium.beetle.branch.fallback.message.BaseContext;
+
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
 
@@ -12,14 +12,12 @@ public abstract class AbstractNodeContext<T> implements NodeContext<T> {
 
     private final CommandNode<T> baseNode;
     private final SearchInfo<T> searchInfo;
-    private final BaseContext<T> baseContext;
 
-    protected AbstractNodeContext(T t, String sender, String[] args, CommandNode<T> baseNode, SearchInfo<T> result, BaseContext<T> baseContext) {
-        this.sender = t;
-        this.alias = sender;
+    protected AbstractNodeContext(T sender, String alias, String[] args, CommandNode<T> baseNode, SearchInfo<T> result) {
+        this.sender = sender;
+        this.alias = alias;
         this.args = args;
 
-        this.baseContext = baseContext;
         this.searchInfo = result;
         this.baseNode = baseNode;
     }
@@ -49,8 +47,4 @@ public abstract class AbstractNodeContext<T> implements NodeContext<T> {
         return searchInfo;
     }
 
-    @Override
-    public BaseContext<T> getBaseContext() {
-        return baseContext;
-    }
 }

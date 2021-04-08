@@ -1,5 +1,7 @@
 package me.aurium.beetle.branch.spigot;
 
+import me.aurium.beetle.branch.interfacing.handlers.CommonInterfacingHandler;
+import me.aurium.beetle.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.beetle.branch.launchpoints.CentralizedManager;
 import me.aurium.beetle.branch.launchpoints.CentralizedManagerBinder;
 import me.aurium.beetle.branch.launchpoints.typeadapter.ManagerAdapter;
@@ -23,7 +25,7 @@ public class SpigotManager implements CentralizedManager<CommandSender, JavaPlug
 
     @Override
     public <C extends CommandSender> NodeBaseBuilder<C> newCommand(ManagerAdapter<CommandSender, C> adapter) {
-        return new NodeBaseBuilder<>(new SpigotContextProvider<>(adapter));
+        return new NodeBaseBuilder<>(new SpigotContextProvider<>(adapter, new CommonInterfacingHandler<>()));
     }
 
 

@@ -1,15 +1,32 @@
 package me.aurium.beetle.branch.fallback.strategies;
 
-import me.aurium.beetle.branch.interfacing.responses.common.NoPermissionResponse;
-import me.aurium.beetle.branch.fallback.message.BaseContext;
-import me.aurium.beetle.branch.handlers.api.Execution;
-import me.aurium.beetle.branch.handlers.context.ContextProvider;
-import me.aurium.beetle.branch.handlers.context.NodeContext;
+import me.aurium.beetle.branch.interfacing.common.NoPermissionResponse;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInput;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
 import me.aurium.beetle.branch.nodes.results.model.Result;
 
+/**
+ * Fallback and processing strategy that does the following actions:
+ *
+ * Attempts to get a node via arguments search. It then checks if the user has permission to access the node.
+ * If they do not, it falls back a single node and checks again. This repeats until the user has permission or
+ * until the search reaches the base node, in which case a response is fired as a failure.
+ *
+ * In practice:
+ *
+ * Node tree looks like
+ *
+ * /kitpvp moderation ban
+ * /kitpvp moderation kick
+ *
+ * User has permissions for kitpvp.moderation but not kitpvp.moderation.ban and tries to execute kitpvp moderation ban
+ *
+ * Searcher sees no permissions for ban command and so it falls back to the no-args of /kitpvp moderation which is
+ * then executed.
+ *
+ * @param <T>
+ */
 public class OneBackStrategy<T> implements FallbackSearchStrategy<T> {
 
     @Override
@@ -25,7 +42,7 @@ public class OneBackStrategy<T> implements FallbackSearchStrategy<T> {
             //something is wrong with the execution (e.g. wrong args or you did something bad), pass above one.
 
             if (toBeExecuted.resultingNode().equals(baseNode)) {
-                return Result.fail(new NoPermissionResponse(baseNode));
+                return Result.fail(new NoPermissionResponse(baseNode.getPermission().easyName()));
 
             } else {
                 toBeExecuted = baseNode.getSpecificNode(input.withoutTop()); //regress backwards a node
@@ -35,19 +52,6 @@ public class OneBackStrategy<T> implements FallbackSearchStrategy<T> {
         return Result.success(toBeExecuted);
     }
 
-
-    @Override
-    public Result<Execution> attemptExecution(T sender, String alias, String[] args, CommandNode<T> baseNode, SearchInfo<T> result, BaseContext<T> baseContext, ContextProvider<T> producer) {
-        NodeContext<T> produced = producer.produce(sender,alias,args,baseNode, result, baseContext);
-
-        Result<Execution> info = result.resultingNode().getHandling().getExecution(produced);
-
-        if (!info.isSuccessful()) {
-            return info;
-        }
-
-        result.resultingNode().getHandling().getExecutionHandler().getExecution().orElseThrow().handle(produced); //this should never be null thanks to the preprocess
-    }
 
 
     //TODO old code - refer to it if you need to
