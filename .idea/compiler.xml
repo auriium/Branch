@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spigot-impl" />
+        <module name="core-tests" />
         <module name="tests" />
         <module name="branch-core" />
+        <module name="spigot-impl" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
