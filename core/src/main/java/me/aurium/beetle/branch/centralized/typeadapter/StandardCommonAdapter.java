@@ -19,8 +19,7 @@
  *
  */
 
-package me.aurium.beetle.branch.interfacing.model;
+package me.aurium.beetle.branch.centralized.typeadapter;
 
-public interface Response {
-
+public class StandardCommonAdapter implements CommonAdapter<Object> {
 }

@@ -22,7 +22,7 @@
 package me.aurium.beetle.branch.interfacing.responses;
 
 import me.aurium.beetle.branch.execution.context.NodeContext;
-import me.aurium.beetle.branch.interfacing.model.Response;
+import me.aurium.beetle.branch.interfacing.Response;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -21,61 +21,64 @@
 
 package me.aurium.beetle.branch.centralized.base;
 
+import me.aurium.beetle.branch.centralized.typeadapter.ManagerAdapter;
 import me.aurium.beetle.branch.execution.api.Execution;
 import me.aurium.beetle.branch.execution.context.ContextProvider;
 import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.fallback.strategies.FallbackSearchStrategy;
 import me.aurium.beetle.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
-import me.aurium.beetle.branch.fallback.strategies.FallbackSearchStrategy;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
 import me.aurium.beetle.branch.nodes.results.model.Result;
 
 import java.util.List;
 
-/**
- * Represents a nodebase that will search for executions synchronously
- * it will also search for suggestions synchronously
- * @param <C>
- */
-public class SyncNodeBase<C> implements NodeBase<C> {
+public class AdaptingNodeBase<T,C extends T> implements NodeBase<T> {
+
+    private final ManagerAdapter<T,C> adapter;
 
     private final CommandNode<C> baseNode;
     private final FallbackSearchStrategy<C> strategy;
-
     private final ContextProvider<C> provider;
-    private final InterfacingHandler<C> handler;
+    private final InterfacingHandler<T> handler;
 
-    public SyncNodeBase(CommandNode<C> baseNode, FallbackSearchStrategy<C> strategy, ContextProvider<C> provider, InterfacingHandler<C> handler) {
+    public AdaptingNodeBase(ManagerAdapter<T, C> adapter, CommandNode<C> baseNode, FallbackSearchStrategy<C> strategy, ContextProvider<C> provider, InterfacingHandler<T> handler) {
+        this.adapter = adapter;
         this.baseNode = baseNode;
-        this.provider = provider;
         this.strategy = strategy;
+        this.provider = provider;
         this.handler = handler;
     }
 
-    @Override
-    public void execute(C executor, String alias, String[] args) {
-        Result<SearchInfo<C>> result = strategy.attemptPreprocess(executor,alias,args,baseNode);
+    public void execute(T t, String alias, String[] args) {
+        if (!adapter.canAdapt(t)) {
+            handler.sendMessage(t,adapter.failedParseResponse(t));
+            return;
+        }
+
+        C adaptedSender = adapter.adapt(t);
+
+        Result<SearchInfo<C>> result = strategy.attemptPreprocess(adaptedSender,alias,args,baseNode);
 
         if (!result.isSuccessful()) {
-            handler.sendMessage(executor, result.getFailure());
+            handler.sendMessage(adaptedSender, result.getFailure());
             return;
         }
 
         SearchInfo<C> info = result.getSuccess();
-        NodeContext<C> produced = provider.produce(executor,alias,args,baseNode,info);
+        NodeContext<C> produced = provider.produce(adaptedSender,alias,args,baseNode,info);
 
         Result<Execution<C>> execution = info.resultingNode().getHandling().getExecution(produced);
 
         if (!execution.isSuccessful()) {
-            handler.sendMessage(executor, execution.getFailure());
+            handler.sendMessage(adaptedSender, execution.getFailure());
             return;
         }
 
         execution.getSuccess().run();
     }
 
-    @Override
-    public List<String> suggest(C c, String alias, String[] args) {
-        return null;
+    public List<String> suggest(T t, String alias, String[] args) {
+        return null; //TODO
     }
 }

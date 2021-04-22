@@ -21,8 +21,8 @@
 
 package me.aurium.beetle.branch.interfacing.handlers;
 
-import me.aurium.beetle.branch.interfacing.model.Message;
-import me.aurium.beetle.branch.interfacing.model.Response;
+import me.aurium.beetle.branch.interfacing.Message;
+import me.aurium.beetle.branch.interfacing.Response;
 
 /**
  * Represents a centralized source for message providing as well as context creation. I am aware i spelled recipient wrong.

@@ -21,8 +21,32 @@
 
 package me.aurium.beetle.branch.spigot;
 
-import me.aurium.beetle.branch.centralized.typeadapter.CommonAdapter;
+import me.aurium.beetle.branch.centralized.base.NodeBase;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
-public class SenderAdapter implements CommonAdapter<CommandSender> {
+import java.util.List;
+
+public class CommandWrapper extends Command {
+
+    private final NodeBase<CommandSender> base;
+
+    public CommandWrapper(NodeBase<CommandSender> base) {
+        super(null); //TODO description of base node, etc etc etc etc etc
+
+        this.base = base;
+    }
+
+    @Override
+    public boolean execute(@NotNull CommandSender commandSender, @NotNull String s, String[] strings) {
+        base.execute(commandSender, s, strings);
+
+        return true;
+    }
+
+    @Override
+    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args) throws IllegalArgumentException {
+        return base.suggest(sender, alias, args);
+    }
 }

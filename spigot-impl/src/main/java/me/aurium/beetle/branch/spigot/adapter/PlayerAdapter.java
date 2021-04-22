@@ -19,7 +19,7 @@
  *
  */
 
-package me.aurium.beetle.branch.spigot.toPlayer;
+package me.aurium.beetle.branch.spigot.adapter;
 
 import me.aurium.beetle.branch.interfacing.responses.FailedAdaptingResponse;
 import me.aurium.beetle.branch.centralized.typeadapter.ManagerAdapter;

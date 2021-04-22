@@ -21,6 +21,7 @@
 
 package me.aurium.beetle.branch.centralized;
 
+import me.aurium.beetle.branch.centralized.base.NodeBase;
 import me.aurium.beetle.branch.centralized.base.NodeBaseBuilder;
 import me.aurium.beetle.branch.centralized.typeadapter.ManagerAdapter;
 
@@ -33,8 +34,10 @@ public interface CentralizedManager<T,V> {
 
     CentralizedManagerBinder getBinder(V platform);
 
-    NodeBaseBuilder<T> newCommand();
-    <C extends T> NodeBaseBuilder<C> newCommand(ManagerAdapter<T,C> adapter);
+    NodeBaseBuilder<T,T> newCommand();
+    <C extends T> NodeBaseBuilder<T,C> newCommand(ManagerAdapter<T,C> adapter);
+
+    void injectCommand(NodeBase<T> base);
 
 
 }

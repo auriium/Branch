@@ -26,7 +26,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ExampleBinding extends JavaPlugin {
 
 
-    private static final SpigotManager manager = new SpigotManager();
+    private static final SpigotManager manager = new SpigotManager(defaultResponser);
 
     @Override
     public void onEnable() {

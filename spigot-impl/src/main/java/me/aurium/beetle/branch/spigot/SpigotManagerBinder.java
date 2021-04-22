@@ -22,18 +22,28 @@
 package me.aurium.beetle.branch.spigot;
 
 import me.aurium.beetle.branch.centralized.CentralizedManagerBinder;
-import org.bukkit.plugin.java.JavaPlugin;
+import me.aurium.beetle.branch.centralized.base.NodeBase;
+import org.bukkit.command.CommandMap;
+import org.bukkit.command.CommandSender;
+
+import java.util.Set;
 
 public class SpigotManagerBinder implements CentralizedManagerBinder {
 
-    private final JavaPlugin plugin;
+    private final String pluginName;
+    private final CommandMap map;
+    private final Set<NodeBase<CommandSender>> senders;
 
-    public SpigotManagerBinder(JavaPlugin plugin) {
-        this.plugin = plugin;
+    public SpigotManagerBinder(String pluginName, CommandMap map, Set<NodeBase<CommandSender>> senders) {
+        this.pluginName = pluginName;
+        this.map = map;
+        this.senders = senders;
     }
 
     @Override
     public void bind() { //TODO implement
-        plugin.getServer().getPluginManager();
+        for (NodeBase<CommandSender> node : senders) {
+            map.register(pluginName,new CommandWrapper(node));
+        }
     }
 }

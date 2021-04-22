@@ -21,8 +21,8 @@
 
 package me.aurium.beetle.branch.interfacing.handlers;
 
-import me.aurium.beetle.branch.interfacing.model.Response;
-import me.aurium.beetle.branch.interfacing.model.ResponseAction;
+import me.aurium.beetle.branch.interfacing.Response;
+import me.aurium.beetle.branch.interfacing.ResponseAction;
 
 import java.util.HashMap;
 import java.util.Map;

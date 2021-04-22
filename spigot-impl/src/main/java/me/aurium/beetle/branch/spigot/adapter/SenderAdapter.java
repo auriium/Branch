@@ -19,12 +19,10 @@
  *
  */
 
-package me.aurium.beetle.branch.interfacing.model;
+package me.aurium.beetle.branch.spigot.adapter;
 
-import me.aurium.beetle.branch.interfacing.model.Message;
+import me.aurium.beetle.branch.centralized.typeadapter.CommonAdapter;
+import org.bukkit.command.CommandSender;
 
-public interface ResponseAction<T,C extends Response> {
-
-    Message<T> consume(C response);
-
+public class SenderAdapter implements CommonAdapter<CommandSender> {
 }

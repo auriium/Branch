@@ -21,7 +21,7 @@
 
 package me.aurium.beetle.branch.interfacing.responses;
 
-import me.aurium.beetle.branch.interfacing.model.Response;
+import me.aurium.beetle.branch.interfacing.Response;
 
 public class TooManyArgsResponse implements Response {
 

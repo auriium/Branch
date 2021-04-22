@@ -21,7 +21,7 @@
 
 package me.aurium.beetle.branch.spigot.message;
 
-import me.aurium.beetle.branch.interfacing.model.Message;
+import me.aurium.beetle.branch.interfacing.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 

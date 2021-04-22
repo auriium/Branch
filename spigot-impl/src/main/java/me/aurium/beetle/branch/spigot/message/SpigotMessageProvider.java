@@ -37,4 +37,8 @@ public class SpigotMessageProvider<C extends CommandSender>{
         map.add(FailedAdaptingResponse.class, response -> new TextMessage<>());
     }
 
+    public CommonMessageMap<C> build() {
+        return map;
+    }
+
 }

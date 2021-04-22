@@ -21,7 +21,7 @@
 
 package me.aurium.beetle.branch.nodes.results.model;
 
-import me.aurium.beetle.branch.interfacing.model.Response;
+import me.aurium.beetle.branch.interfacing.Response;
 
 /**
  * A result that has failed
