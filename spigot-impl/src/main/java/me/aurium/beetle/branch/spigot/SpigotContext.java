@@ -34,9 +34,9 @@ import org.bukkit.command.CommandSender;
 public class SpigotContext<T extends CommandSender> extends AbstractNodeContext<T> {
 
     private final T sender;
-    private final InterfacingHandler<T> handler;
+    private final InterfacingHandler<CommandSender> handler;
 
-    protected SpigotContext(T sender, String alias, String[] args, CommandNode<T> baseNode, SearchInfo<T> result, InterfacingHandler<T> handler) {
+    protected SpigotContext(T sender, String alias, String[] args, CommandNode<T> baseNode, SearchInfo<T> result, InterfacingHandler<CommandSender> handler) {
         super(sender, alias, args, baseNode, result);
 
         this.sender = sender;
@@ -46,11 +46,6 @@ public class SpigotContext<T extends CommandSender> extends AbstractNodeContext<
     @Override
     public void stringSender(String string) {
         this.sender.sendMessage(ChatColor.translateAlternateColorCodes('&',string));
-    }
-
-    @Override
-    public void messageSender(Message<T> message) {
-        handler.sendMessage(sender,message);
     }
 
     @Override
