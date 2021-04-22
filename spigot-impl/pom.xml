@@ -41,7 +41,6 @@
         <dependency>
             <groupId>me.aurium</groupId>
             <artifactId>branch-core</artifactId>
-            <version>0.1.1</version>
         </dependency>
         <dependency>
             <groupId>com.destroystokyo.paper</groupId>

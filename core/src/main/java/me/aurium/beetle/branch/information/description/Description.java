@@ -19,7 +19,7 @@
  *
  */
 
-package me.aurium.beetle.branch.information.suggestion;
+package me.aurium.beetle.branch.information.description;
 
-public class Suggestion {
+public class Description {
 }
