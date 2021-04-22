@@ -31,9 +31,9 @@ import org.bukkit.command.CommandSender;
 
 public class SpigotContextProvider<C extends CommandSender> implements ContextProvider<C> {
 
-    private final InterfacingHandler<C> handler;
+    private final InterfacingHandler<CommandSender> handler;
 
-    public SpigotContextProvider(InterfacingHandler<C> handler) {
+    public SpigotContextProvider(InterfacingHandler<CommandSender> handler) {
         this.handler = handler;
     }
 

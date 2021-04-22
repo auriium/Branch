@@ -42,12 +42,6 @@ public interface NodeContext<T> {
     void stringSender(String string);
 
     /**
-     * Sends a fancy formatted message to a player using the bound platform's message-handler
-     * @param message message
-     */
-    void messageSender(Message<T> message);
-
-    /**
      * Sends a formatted response to a player coded to a key
      * @param failure the response
      */

@@ -61,7 +61,7 @@ public class AdaptingNodeBase<T,C extends T> implements NodeBase<T> {
         Result<SearchInfo<C>> result = strategy.attemptPreprocess(adaptedSender,alias,args,baseNode);
 
         if (!result.isSuccessful()) {
-            handler.sendMessage(adaptedSender, result.getFailure());
+            handler.sendMessage(t, result.getFailure());
             return;
         }
 
@@ -71,7 +71,7 @@ public class AdaptingNodeBase<T,C extends T> implements NodeBase<T> {
         Result<Execution<C>> execution = info.resultingNode().getHandling().getExecution(produced);
 
         if (!execution.isSuccessful()) {
-            handler.sendMessage(adaptedSender, execution.getFailure());
+            handler.sendMessage(t, execution.getFailure());
             return;
         }
 

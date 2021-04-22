@@ -61,7 +61,7 @@ public class SpigotManager implements CentralizedManager<CommandSender, JavaPlug
 
     @Override
     public <C extends CommandSender> NodeBaseBuilder<CommandSender, C> newCommand(ManagerAdapter<CommandSender, C> adapter) {
-        return new NodeBaseBuilder<>(this,adapter, new OneBackStrategy<>(), new SpigotContextProvider<>(null), defaultInterfacing);
+        return new NodeBaseBuilder<>(this,adapter, new OneBackStrategy<>(), new SpigotContextProvider<>(defaultInterfacing), defaultInterfacing);
     }
 
     @Override
