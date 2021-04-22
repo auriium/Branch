@@ -19,10 +19,10 @@
  *
  */
 
-package me.aurium.beetle.branch.interfacing.model;
+package me.aurium.beetle.branch.interfacing;
 
-public interface Message<C> {
+public interface ResponseAction<T,C extends Response> {
 
-    void accept(C sender);
+    Message<T> consume(C response);
 
 }

@@ -21,8 +21,8 @@
 
 package me.aurium.beetle.branch.execution.context;
 
-import me.aurium.beetle.branch.interfacing.model.Message;
-import me.aurium.beetle.branch.interfacing.model.Response;
+import me.aurium.beetle.branch.interfacing.Message;
+import me.aurium.beetle.branch.interfacing.Response;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
 

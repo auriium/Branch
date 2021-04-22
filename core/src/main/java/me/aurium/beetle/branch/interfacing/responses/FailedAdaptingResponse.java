@@ -21,7 +21,7 @@
 
 package me.aurium.beetle.branch.interfacing.responses;
 
-import me.aurium.beetle.branch.interfacing.model.Response;
+import me.aurium.beetle.branch.interfacing.Response;
 
 /**
  * Represents a response to the scenario in which a certain object was attempted to be adapted to an extending type

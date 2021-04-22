@@ -19,12 +19,10 @@
  *
  */
 
-package me.aurium.beetle.branch.spigot.message;
+package me.aurium.beetle.branch.interfacing;
 
-import java.util.UUID;
+public interface Message<C> {
 
-public class SpigotKeys {
-
-
+    void accept(C sender);
 
 }

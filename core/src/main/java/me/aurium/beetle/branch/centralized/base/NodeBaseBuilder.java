@@ -21,28 +21,70 @@
 
 package me.aurium.beetle.branch.centralized.base;
 
-import me.aurium.beetle.branch.fallback.strategies.OneBackStrategy;
+import me.aurium.beetle.branch.centralized.CentralizedManager;
+import me.aurium.beetle.branch.centralized.typeadapter.ManagerAdapter;
 import me.aurium.beetle.branch.execution.context.ContextProvider;
-import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.fallback.strategies.FallbackSearchStrategy;
+import me.aurium.beetle.branch.fallback.strategies.OneBackStrategy;
+import me.aurium.beetle.branch.interfacing.handlers.InterfacingHandler;
+import me.aurium.beetle.branch.nodes.model.CommandNode;
 
-public class NodeBaseBuilder<T> {
+import java.util.Objects;
 
-    private ContextProvider<T> producer;
+public class NodeBaseBuilder<T,C extends T> {
 
-    private CommandNode<T> base;
-    private FallbackSearchStrategy<T> strategy = new OneBackStrategy<>();
+    private final CentralizedManager<T,?> manager;
+    private final ManagerAdapter<T,C> adapter;
 
-    public NodeBaseBuilder<T> withBaseNode(CommandNode<T> node) {
-        this.base = node;
+    private CommandNode<C> node;
+    private FallbackSearchStrategy<C> strategy;
+    private ContextProvider<C> provider;
+    private InterfacingHandler<T> handler;
+
+
+    public NodeBaseBuilder(CentralizedManager<T, ?> manager, ManagerAdapter<T, C> adapter) {
+        this.manager = manager;
+        this.adapter = adapter;
+    }
+
+    public NodeBaseBuilder(CentralizedManager<T, ?> manager, ManagerAdapter<T, C> adapter, FallbackSearchStrategy<C> strategy, ContextProvider<C> provider, InterfacingHandler<T> handler) {
+        this.manager = manager;
+        this.adapter = adapter;
+        this.strategy = strategy;
+        this.provider = provider;
+        this.handler = handler;
+    }
+
+    public NodeBaseBuilder<T,C> setNode(CommandNode<C> node) {
+        this.node = node;
 
         return this;
     }
 
-    public NodeBaseBuilder<T> withStrategy(FallbackSearchStrategy<T> strategy) {
+    public NodeBaseBuilder<T,C> setStrategy(FallbackSearchStrategy<C> strategy) {
         this.strategy = strategy;
 
         return this;
     }
 
+    public NodeBaseBuilder<T,C> setProvider(ContextProvider<C> provider) {
+        this.provider = provider;
+
+        return this;
+    }
+
+    public NodeBaseBuilder<T,C> setHandler(InterfacingHandler<T> handler) {
+        this.handler = handler;
+
+        return this;
+    }
+
+    public void inject() {
+        Objects.requireNonNull(node);
+        Objects.requireNonNull(strategy);
+        Objects.requireNonNull(provider);
+        Objects.requireNonNull(handler);
+
+        manager.injectCommand(new AdaptingNodeBase<>(adapter,node,strategy,provider,handler));
+    }
 }
