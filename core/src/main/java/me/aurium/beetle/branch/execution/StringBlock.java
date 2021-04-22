@@ -19,8 +19,11 @@
  *
  */
 
-package me.aurium.beetle.branch.execution.block;
+package me.aurium.beetle.branch.execution;
 
+/**
+ * Represents a block that contains a string
+ */
 public class StringBlock implements Block {
 
     private final String identifier;

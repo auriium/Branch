@@ -26,9 +26,9 @@ import me.aurium.beetle.branch.centralized.base.NodeBaseBuilder;
 import me.aurium.beetle.branch.centralized.typeadapter.ManagerAdapter;
 
 /**
- * Represents the utmost base part of a command
+ * Represents the utmost base part of the command framework which has the ability to bind any injected commands to a platform
  * @param <T> the input type, does not need to be of same type as the node bases it utilizes
- * @param <V> the platform, void if there is none (how?)
+ * @param <V> the platform
  */
 public interface CentralizedManager<T,V> {
 

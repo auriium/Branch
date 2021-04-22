@@ -21,8 +21,13 @@
 
 package me.aurium.beetle.branch.execution.api;
 
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.NodeContext;
 
+/**
+ * Functional interface typically used in simple nodes that only need to do one action
+ * @param <T>
+ */
+@FunctionalInterface
 public interface ExecutionHandler<T> {
 
     void handle(NodeContext<T> context);

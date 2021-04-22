@@ -19,16 +19,38 @@
  *
  */
 
-package me.aurium.beetle.branch.execution.context;
+package me.aurium.beetle.branch.execution;
 
+import me.aurium.beetle.branch.interfacing.Message;
+import me.aurium.beetle.branch.interfacing.Response;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
 
-/**
- * Produces context adapters, like the stock ContextSource for contexts.
- */
-public interface ContextProvider<T> {
 
-    NodeContext<T> produce(T sender, String alias, String[] strings, CommandNode<T> baseNode, SearchInfo<T> search);
+/**
+ * Represents the in-context of an executed command -> Basically, all the important information gleaned from the execution of a command
+ * such as the sender, arguments as string, and all nodes involved.
+ * @param <T> the sender
+ */
+public interface NodeContext<T> {
+
+    T getSender();
+    String getAlias();
+    String[] getArgs();
+    CommandNode<T> getBaseExecutedNode();
+    SearchInfo<T> getResults();
+
+    /**
+     * Sends an ugly string to the player using the platform's message handler. Whatever floats your boat!
+     * @param string string
+     */
+    void stringSender(String string);
+
+    /**
+     * Sends a formatted response to a player coded to a key
+     * @param failure the response
+     */
+    void response(Response failure);
+
 
 }

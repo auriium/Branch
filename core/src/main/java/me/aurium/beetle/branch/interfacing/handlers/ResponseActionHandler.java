@@ -25,6 +25,10 @@ import me.aurium.beetle.branch.interfacing.Message;
 import me.aurium.beetle.branch.interfacing.Response;
 import me.aurium.beetle.branch.interfacing.ResponseAction;
 
+/**
+ * Something that consumes Responses and produces messages for interfacing with the player
+ * @param <T>
+ */
 public interface ResponseActionHandler<T> {
 
     <C extends Response> ResponseAction<T, C> get(Class<C> clazz);

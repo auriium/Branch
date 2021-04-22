@@ -21,7 +21,7 @@
 
 package me.aurium.beetle.branch.nodes.argument;
 
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.NodeContext;
 
 public interface ArgumentContext<T> extends NodeContext<T> {
 

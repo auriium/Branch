@@ -21,6 +21,9 @@
 
 package me.aurium.beetle.branch.centralized;
 
+/**
+ * Represents a carrier vessel which is typically attached to the instance of a centralizedManagerBinder's platform
+ */
 public interface CentralizedManagerBinder {
 
     /**

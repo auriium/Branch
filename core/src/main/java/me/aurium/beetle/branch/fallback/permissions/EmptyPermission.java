@@ -21,6 +21,10 @@
 
 package me.aurium.beetle.branch.fallback.permissions;
 
+/**
+ * Represents a permission that is always true
+ * @param <T> sender
+ */
 public class EmptyPermission<T> implements Permission<T> {
 
     @Override

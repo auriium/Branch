@@ -24,7 +24,7 @@ package me.aurium.beetle.branch.annotate.parsers;
 import me.aurium.beetle.branch.annotate.AnnotatedCommand;
 import me.aurium.beetle.branch.annotate.UncheckedInvocationException;
 import me.aurium.beetle.branch.annotate.marker.SingleNode;
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.NodeContext;
 import me.aurium.beetle.branch.execution.api.ExecutionHandler;
 
 import java.lang.reflect.InvocationTargetException;

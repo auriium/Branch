@@ -21,8 +21,8 @@
 
 package me.aurium.beetle.branch.nodes.argument;
 
-import me.aurium.beetle.branch.execution.block.Block;
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.Block;
+import me.aurium.beetle.branch.execution.NodeContext;
 
 import java.util.List;
 import java.util.Optional;

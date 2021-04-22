@@ -23,6 +23,10 @@ package me.aurium.beetle.branch.centralized.base;
 
 import java.util.List;
 
+/**
+ * Represents a single command tree as a command
+ * @param <T> type of input sender
+ */
 public interface NodeBase<T> {
 
     void execute(T t, String alias, String[] args); //may execute instantly or take some time

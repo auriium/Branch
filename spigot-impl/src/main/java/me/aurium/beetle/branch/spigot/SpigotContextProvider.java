@@ -22,8 +22,8 @@
 package me.aurium.beetle.branch.spigot;
 
 
-import me.aurium.beetle.branch.execution.context.ContextProvider;
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.ContextProvider;
+import me.aurium.beetle.branch.execution.NodeContext;
 import me.aurium.beetle.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;

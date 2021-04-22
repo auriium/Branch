@@ -21,11 +21,11 @@
 
 package me.aurium.beetle.branch.nodes;
 
-import me.aurium.beetle.branch.execution.block.Block;
+import me.aurium.beetle.branch.execution.Block;
 import me.aurium.beetle.branch.execution.api.BranchHandler;
 import me.aurium.beetle.branch.execution.api.ExecutionHandler;
 import me.aurium.beetle.branch.execution.api.Execution;
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.NodeContext;
 import me.aurium.beetle.branch.interfacing.responses.TooManyArgsResponse;
 import me.aurium.beetle.branch.nodes.model.EndpointNode;
 import me.aurium.beetle.branch.nodes.results.SearchInput;

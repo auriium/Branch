@@ -21,6 +21,10 @@
 
 package me.aurium.beetle.branch.interfacing;
 
+/**
+ * Represents the final stage of something that occur after a response has been consumed
+ * @param <C> t
+ */
 public interface Message<C> {
 
     void accept(C sender);

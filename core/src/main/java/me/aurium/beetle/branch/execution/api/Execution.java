@@ -21,8 +21,12 @@
 
 package me.aurium.beetle.branch.execution.api;
 
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.NodeContext;
 
+/**
+ * Standin class for something more sophisticated - basically allows the controlled execution of the node to be submitted as a runnable
+ * @param <T> the type
+ */
 public class Execution<T> implements Runnable {
 
     private final ExecutionHandler<T> handler;

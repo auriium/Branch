@@ -19,12 +19,16 @@
  *
  */
 
-package me.aurium.beetle.branch.execution.context;
+package me.aurium.beetle.branch.execution;
 
 /**
- * easy to use interface that lets me give it a title, some strings, and let it be converted
- *
- * e.g. to prettified chatcolor output or to discord embed on discord-impl.
+ * Represents an unparsed component of a command argument input structure
  */
-public interface ContextErrorMessage {
+public interface Block {
+
+    String getIdentifier();
+
+    boolean equals(Object object);
+    boolean isEmpty();
+
 }

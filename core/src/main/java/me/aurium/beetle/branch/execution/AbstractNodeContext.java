@@ -19,12 +19,16 @@
  *
  */
 
-package me.aurium.beetle.branch.execution.context;
+package me.aurium.beetle.branch.execution;
 
 
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
 
+/**
+ * Abstract implementation of a node context
+ * @param <T> type
+ */
 public abstract class AbstractNodeContext<T> implements NodeContext<T> {
 
     private final T sender;

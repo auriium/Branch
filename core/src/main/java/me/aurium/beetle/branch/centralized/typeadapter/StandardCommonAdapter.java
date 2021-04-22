@@ -21,5 +21,8 @@
 
 package me.aurium.beetle.branch.centralized.typeadapter;
 
+/**
+ * Simple implementation""
+ */
 public class StandardCommonAdapter implements CommonAdapter<Object> {
 }

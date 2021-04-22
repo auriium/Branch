@@ -21,9 +21,9 @@
 
 package me.aurium.beetle.branch.nodes.builders;
 
-import me.aurium.beetle.branch.execution.block.Block;
-import me.aurium.beetle.branch.execution.block.EmptyBlock;
-import me.aurium.beetle.branch.execution.block.StringBlock;
+import me.aurium.beetle.branch.execution.Block;
+import me.aurium.beetle.branch.execution.EmptyBlock;
+import me.aurium.beetle.branch.execution.StringBlock;
 import me.aurium.beetle.branch.fallback.permissions.Permission;
 import me.aurium.beetle.branch.fallback.permissions.EmptyPermission;
 import me.aurium.beetle.branch.nodes.BranchingNode;

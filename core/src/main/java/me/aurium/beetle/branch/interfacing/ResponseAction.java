@@ -21,6 +21,11 @@
 
 package me.aurium.beetle.branch.interfacing;
 
+/**
+ * Represents an action that is fired when a response is received
+ * @param <T> t
+ * @param <C>c
+ */
 public interface ResponseAction<T,C extends Response> {
 
     Message<T> consume(C response);

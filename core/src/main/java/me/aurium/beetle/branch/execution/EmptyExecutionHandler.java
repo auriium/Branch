@@ -21,7 +21,6 @@
 
 package me.aurium.beetle.branch.execution;
 
-import me.aurium.beetle.branch.execution.context.NodeContext;
 import me.aurium.beetle.branch.execution.api.ExecutionHandler;
 
 public class EmptyExecutionHandler<T> implements ExecutionHandler<T> {

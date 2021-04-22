@@ -21,8 +21,6 @@
 
 package me.aurium.beetle.branch.execution;
 
-import me.aurium.beetle.branch.execution.block.Block;
-import me.aurium.beetle.branch.execution.context.NodeContext;
 import me.aurium.beetle.branch.execution.api.SuggestionHandler;
 
 import java.util.ArrayList;

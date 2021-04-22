@@ -23,6 +23,10 @@ package me.aurium.beetle.branch.fallback.permissions;
 
 import java.util.function.Predicate;
 
+/**
+ * Permission that delegates to a predicate
+ * @param <T> t
+ */
 public class PredicatePermission<T> implements Permission<T> {
 
     private final String easyName;

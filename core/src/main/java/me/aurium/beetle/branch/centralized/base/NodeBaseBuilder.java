@@ -23,14 +23,18 @@ package me.aurium.beetle.branch.centralized.base;
 
 import me.aurium.beetle.branch.centralized.CentralizedManager;
 import me.aurium.beetle.branch.centralized.typeadapter.ManagerAdapter;
-import me.aurium.beetle.branch.execution.context.ContextProvider;
+import me.aurium.beetle.branch.execution.ContextProvider;
 import me.aurium.beetle.branch.fallback.strategies.FallbackSearchStrategy;
-import me.aurium.beetle.branch.fallback.strategies.OneBackStrategy;
 import me.aurium.beetle.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 
 import java.util.Objects;
 
+/**
+ * Class that produces adaptingNodeBases
+ * @param <T> Input type
+ * @param <C> Adapted type
+ */
 public class NodeBaseBuilder<T,C extends T> {
 
     private final CentralizedManager<T,?> manager;

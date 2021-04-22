@@ -23,8 +23,8 @@ package me.aurium.beetle.branch.centralized.base;
 
 import me.aurium.beetle.branch.centralized.typeadapter.ManagerAdapter;
 import me.aurium.beetle.branch.execution.api.Execution;
-import me.aurium.beetle.branch.execution.context.ContextProvider;
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.ContextProvider;
+import me.aurium.beetle.branch.execution.NodeContext;
 import me.aurium.beetle.branch.fallback.strategies.FallbackSearchStrategy;
 import me.aurium.beetle.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
@@ -33,6 +33,11 @@ import me.aurium.beetle.branch.nodes.results.model.Result;
 
 import java.util.List;
 
+/**
+ * Represents a node base that has the ability to convert it's input sender to a sender of type C or fail with a result.
+ * @param <T> the input type of nodebase
+ * @param <C> the adapted adjusted type desired, based on a similar adapter.
+ */
 public class AdaptingNodeBase<T,C extends T> implements NodeBase<T> {
 
     private final ManagerAdapter<T,C> adapter;

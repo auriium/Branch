@@ -22,7 +22,7 @@
 package me.aurium.beetle.branch.fallback.permissions;
 
 /**
- *
+ * Represents the accessibility predicate of a command -> whether a command can be executed or not
  */
 public interface Permission<T> {
 

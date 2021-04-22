@@ -21,10 +21,10 @@
 
 package me.aurium.beetle.branch.nodes;
 
-import me.aurium.beetle.branch.execution.block.Block;
+import me.aurium.beetle.branch.execution.Block;
 import me.aurium.beetle.branch.execution.api.BranchHandler;
 import me.aurium.beetle.branch.execution.api.Execution;
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.NodeContext;
 import me.aurium.beetle.branch.interfacing.responses.NoIntegratedArgsResponse;
 import me.aurium.beetle.branch.nodes.model.IdentifiableNode;
 import me.aurium.beetle.branch.nodes.results.*;

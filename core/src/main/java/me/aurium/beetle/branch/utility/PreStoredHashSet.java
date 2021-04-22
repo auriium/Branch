@@ -33,8 +33,6 @@ public class PreStoredHashSet<T> {
     private final Set<T> otherThingsInTheSet;
     private final boolean linked;
 
-    //fuck code in the constructor rules
-    //i don't care
     public PreStoredHashSet(T alreadyStored, boolean linked) {
         this.alreadyStored = alreadyStored;
         this.otherThingsInTheSet = new HashSet<>();

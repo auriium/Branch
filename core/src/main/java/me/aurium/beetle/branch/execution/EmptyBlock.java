@@ -19,12 +19,26 @@
  *
  */
 
-package me.aurium.beetle.branch.centralized;
+package me.aurium.beetle.branch.execution;
 
-public class IllegalSenderException extends RuntimeException{
+/**
+ * Represents a block with no content
+ */
+public class EmptyBlock implements Block{
 
-    public IllegalSenderException(String lmao) {
-        super(lmao);
+    @Override
+    public String getIdentifier() {
+        throw new UnsupportedOperationException("Empty block should not exist in path!");
     }
+
+    @Override
+    public boolean isEmpty() {
+        return true;
+    }
+
+    public static EmptyBlock of() {
+        return new EmptyBlock();
+    }
+
 
 }

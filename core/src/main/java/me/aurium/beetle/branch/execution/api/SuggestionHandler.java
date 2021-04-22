@@ -21,11 +21,16 @@
 
 package me.aurium.beetle.branch.execution.api;
 
-import me.aurium.beetle.branch.execution.block.Block;
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.Block;
+import me.aurium.beetle.branch.execution.NodeContext;
 
 import java.util.List;
 
+/**
+ * Simple functional interface that returns a string
+ * @param <T> sender
+ */
+@FunctionalInterface
 public interface SuggestionHandler<T> {
 
     List<Block> handle(NodeContext<T> context);

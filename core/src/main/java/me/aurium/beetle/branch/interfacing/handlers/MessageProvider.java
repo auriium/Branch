@@ -21,6 +21,10 @@
 
 package me.aurium.beetle.branch.interfacing.handlers;
 
+/**
+ * Represents something that generates a response action handler from it's internals
+ * @param <T>
+ */
 public interface MessageProvider<T> {
 
     ResponseActionHandler<T> make();

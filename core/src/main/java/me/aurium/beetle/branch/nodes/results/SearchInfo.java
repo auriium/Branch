@@ -21,7 +21,7 @@
 
 package me.aurium.beetle.branch.nodes.results;
 
-import me.aurium.beetle.branch.execution.block.Block;
+import me.aurium.beetle.branch.execution.Block;
 import me.aurium.beetle.branch.nodes.model.CommandNode;
 
 import java.util.Deque;

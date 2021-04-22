@@ -25,6 +25,13 @@ import me.aurium.beetle.branch.nodes.model.CommandNode;
 import me.aurium.beetle.branch.nodes.results.SearchInfo;
 import me.aurium.beetle.branch.nodes.results.model.Result;
 
+/**
+ * A strategy to define
+ * - what happens if the user has no permission to execute a node
+ * - what happens if a node is inaccessible
+ * - what happens if a node is unusable
+ * @param <T>
+ */
 public interface FallbackSearchStrategy<T> {
 
 

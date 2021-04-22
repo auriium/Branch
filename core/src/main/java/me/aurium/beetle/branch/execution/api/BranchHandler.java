@@ -21,11 +21,15 @@
 
 package me.aurium.beetle.branch.execution.api;
 
-import me.aurium.beetle.branch.execution.context.NodeContext;
+import me.aurium.beetle.branch.execution.NodeContext;
 import me.aurium.beetle.branch.nodes.results.model.Result;
 
 import java.util.List;
 
+/**
+ * Represents the actable behavior of a node once the node has been found - e.g. after the node's search logic is complete
+ * @param <T> sender
+ */
 public interface BranchHandler<T> {
 
     Result<Execution<T>> getExecution(NodeContext<T> context);
