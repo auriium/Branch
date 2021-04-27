@@ -28,10 +28,10 @@ import java.util.List;
 
 public class EmptySuggestionHandler<T> implements SuggestionHandler<T> {
 
-    private final List<String> emptyList = new ArrayList<>();
+    private static final List<Block> empty = new ArrayList<>();
 
     @Override
     public List<Block> handle(NodeContext<T> adapter) {
-        return List.of();
+        return empty;
     }
 }
