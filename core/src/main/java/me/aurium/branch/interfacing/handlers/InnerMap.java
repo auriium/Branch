@@ -27,17 +27,19 @@ import me.aurium.branch.interfacing.ResponseAction;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonMessageMap<T> implements MessageMap<T>, MessageProvider<T> {
+public class InnerMap<T> implements MessageMap<T> {
 
     private final Map<Class<? extends Response>,ResponseAction<T,? extends Response>> map = new HashMap<>();
 
     @Override
-    public <F extends Response> void add(Class<F> key, ResponseAction<T, F> action) {
-        map.put(key,action); //TODO checks
+    public <F extends Response> InnerMap<T> add(Class<F> key, ResponseAction<T, F> action) {
+        this.map.put(key,action);
+
+        return this;
     }
 
     @Override
-    public ResponseActionHandler<T> make() {
-        return new CommonResponseActionHandler<>(Map.copyOf(map));
+    public InterfacingHandler<T> make() {
+        return new CommonInterfacingHandler<>(map);
     }
 }

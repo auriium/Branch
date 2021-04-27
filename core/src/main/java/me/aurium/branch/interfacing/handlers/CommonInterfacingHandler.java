@@ -23,13 +23,16 @@ package me.aurium.branch.interfacing.handlers;
 
 import me.aurium.branch.interfacing.Message;
 import me.aurium.branch.interfacing.Response;
+import me.aurium.branch.interfacing.ResponseAction;
+
+import java.util.Map;
 
 public class CommonInterfacingHandler<T> implements InterfacingHandler<T> {
 
-    private final ResponseActionHandler<T> handler;
+    private final Map<Class<? extends Response>, ResponseAction<T,? extends Response>> map;
 
-    public CommonInterfacingHandler(ResponseActionHandler<T> provider) {
-        this.handler = provider;
+    CommonInterfacingHandler(Map<Class<? extends Response>, ResponseAction<T, ? extends Response>> map) {
+        this.map = map;
     }
 
     @Override
@@ -39,7 +42,20 @@ public class CommonInterfacingHandler<T> implements InterfacingHandler<T> {
 
     @Override
     public void sendMessage(T recipent, Response response) {
-        handler.getMessage(response).accept(recipent);
+        getMessage(response).accept(recipent);
     }
 
+    @SuppressWarnings("unchecked")
+    private <C extends Response> ResponseAction<T, C> get(Class<C> clazz) {
+        ResponseAction<T,C> action = (ResponseAction<T, C>) map.get(clazz);
+
+        if (action == null) throw new IllegalStateException("A response was requested but internal map had no binding!");
+
+        return action;
+    }
+
+    @SuppressWarnings("unchecked")
+    private  <C extends Response> Message<T> getMessage(C response) {
+        return get((Class<C>) response.getClass()).consume(response);
+    }
 }

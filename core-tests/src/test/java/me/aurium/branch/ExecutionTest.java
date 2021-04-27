@@ -21,14 +21,14 @@
 
 package me.aurium.branch;
 
-import me.aurium.branch.nodes.BranchingNode;
-import me.aurium.branch.nodes.builders.BranchingBuilder;
-import me.aurium.branch.nodes.builders.SingleBuilder;
+import me.aurium.branch.tests.StringManager;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 
 public class ExecutionTest {
 
     private final static Logger logger = LoggerFactory.getLogger(ExecutionTest.class);
+
+    private final StringManager manager = new StringManager();
 
 }

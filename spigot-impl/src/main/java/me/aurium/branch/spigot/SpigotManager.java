@@ -27,9 +27,10 @@ import me.aurium.branch.centralized.base.NodeBase;
 import me.aurium.branch.centralized.typeadapter.ManagerAdapter;
 import me.aurium.branch.centralized.base.NodeBaseBuilder;
 import me.aurium.branch.fallback.strategies.OneBackStrategy;
-import me.aurium.branch.interfacing.handlers.CommonInterfacingHandler;
-import me.aurium.branch.interfacing.handlers.ResponseActionHandler;
+import me.aurium.branch.interfacing.handlers.InterfacingHandler;
+import me.aurium.branch.interfacing.handlers.MessageMap;
 import me.aurium.branch.spigot.adapter.SenderAdapter;
+import me.aurium.branch.spigot.message.SpigotMessageMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -38,14 +39,20 @@ import java.util.Set;
 
 public class SpigotManager implements CentralizedManager<CommandSender, JavaPlugin> {
 
-    private final static SenderAdapter senderAdapter = new SenderAdapter();
+    private final static SenderAdapter defaultAdapter = new SenderAdapter();
 
-    private final CommonInterfacingHandler<CommandSender> defaultInterfacing;
-    private final Set<NodeBase<CommandSender>> senders;
+    private final InterfacingHandler<CommandSender> defaultInterfacing;
+    private final Set<NodeBase<CommandSender>> senders = new HashSet<>();
 
-    public SpigotManager(ResponseActionHandler<CommandSender> defaultResponser) {
-        this.defaultInterfacing = new CommonInterfacingHandler<>(defaultResponser);
-        this.senders = new HashSet<>();
+    //fuck code in the constructor rules
+    // (This can be easily fixed if you give a shit but i happen to not care - make a pr if you do!)
+
+    public SpigotManager(MessageMap<CommandSender> defaultResponser) {
+        this.defaultInterfacing = defaultResponser.make();
+    }
+
+    public SpigotManager() {
+        this.defaultInterfacing = new SpigotMessageMap<>().make();
     }
 
     @Override
@@ -55,7 +62,7 @@ public class SpigotManager implements CentralizedManager<CommandSender, JavaPlug
 
     @Override
     public NodeBaseBuilder<CommandSender, CommandSender> newCommand() {
-        return new NodeBaseBuilder<>(this, senderAdapter, new OneBackStrategy<>(), new SpigotContextProvider<>(defaultInterfacing), defaultInterfacing);
+        return new NodeBaseBuilder<>(this, defaultAdapter, new OneBackStrategy<>(), new SpigotContextProvider<>(defaultInterfacing), defaultInterfacing);
     }
 
     @Override

@@ -19,20 +19,19 @@
  *
  */
 
-package me.aurium.branch.interfacing.handlers;
+package me.aurium.branch.spigot.message;
 
 import me.aurium.branch.interfacing.Message;
-import me.aurium.branch.interfacing.Response;
-import me.aurium.branch.interfacing.ResponseAction;
+import org.bukkit.command.CommandSender;
 
-/**
- * Something that consumes Responses and produces messages for interfacing with the player
- * @param <T>
- */
-public interface ResponseActionHandler<T> {
+public abstract class FormattedMessage<C extends CommandSender> implements Message<C> {
 
-    <C extends Response> ResponseAction<T, C> get(Class<C> clazz);
-    <C extends Response> Message<T> getMessage(C response);
+    //TODO private final Formatter formatter;
 
+    protected abstract void accept(C sender, String postFormatted);
 
+    @Override
+    public void accept(C sender) {
+
+    }
 }

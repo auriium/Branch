@@ -19,26 +19,9 @@
  *
  */
 
-package me.aurium.branch.spigot.message;
+package me.aurium.branch.tests;
 
-import me.aurium.branch.interfacing.handlers.CommonMessageMap;
-import me.aurium.branch.interfacing.responses.FailedAdaptingResponse;
-import org.bukkit.command.CommandSender;
+import me.aurium.branch.centralized.typeadapter.CommonAdapter;
 
-public class SpigotMessageProvider<C extends CommandSender>{
-
-    private final CommonMessageMap<C> map = new CommonMessageMap<>();
-
-    public SpigotMessageProvider() {
-        map.add(FailedAdaptingResponse.class, response -> new TextMessage<>(
-                "Expected class: " + response.getExpectedClass().getName() + "Got class: " + response.getReceivedClass()
-        ));
-
-        map.add(FailedAdaptingResponse.class, response -> new TextMessage<>());
-    }
-
-    public CommonMessageMap<C> build() {
-        return map;
-    }
-
+public class StringAdapter implements CommonAdapter<String> {
 }

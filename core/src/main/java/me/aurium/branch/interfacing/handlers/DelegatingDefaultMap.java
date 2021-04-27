@@ -21,33 +21,23 @@
 
 package me.aurium.branch.interfacing.handlers;
 
-import me.aurium.branch.interfacing.Message;
 import me.aurium.branch.interfacing.Response;
 import me.aurium.branch.interfacing.ResponseAction;
 
-import java.util.Map;
+public abstract class DelegatingDefaultMap<T> implements MessageMap<T> {
 
-public class CommonResponseActionHandler<T> implements ResponseActionHandler<T> {
+    private final InnerMap<T> delegate = defaultMap();
+    protected abstract InnerMap<T> defaultMap();
 
-    private final Map<Class<? extends Response>, ResponseAction<T,? extends Response>> map;
+    @Override
+    public <F extends Response> DelegatingDefaultMap<T> add(Class<F> key, ResponseAction<T, F> action) {
+        delegate.add(key,action);
 
-    CommonResponseActionHandler(Map<Class<? extends Response>, ResponseAction<T,? extends Response>> map) {
-        this.map = map;
+        return this;
     }
 
-    @SuppressWarnings("unchecked")
-    public <C extends Response> ResponseAction<T, C> get(Class<C> clazz) {
-        ResponseAction<T,C> action = (ResponseAction<T, C>) map.get(clazz);
-
-        if (action == null) throw new IllegalStateException("A response was requested but internal map had no binding!");
-
-        return action;
+    @Override
+    public InterfacingHandler<T> make() {
+        return delegate.make();
     }
-
-    @SuppressWarnings("unchecked")
-    public <C extends Response> Message<T> getMessage(C response) {
-        return get((Class<C>) response.getClass()).consume(response);
-    }
-
-
 }

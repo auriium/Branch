@@ -21,11 +21,14 @@
 
 package me.aurium.branch.interfacing.handlers;
 
+import me.aurium.branch.interfacing.Message;
 import me.aurium.branch.interfacing.Response;
 import me.aurium.branch.interfacing.ResponseAction;
 
 public interface MessageMap<T> {
 
-    <F extends Response> void add(Class<F> key, ResponseAction<T,F> action);
+    <F extends Response> MessageMap<T> add(Class<F> key, ResponseAction<T,F> action);
+
+    InterfacingHandler<T> make();
 
 }
