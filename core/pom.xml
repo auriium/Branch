@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~
+  ~  Branch
+  ~  Copyright © 2021 Aurium
+  ~
+  ~  Branch is free software: you can redistribute it and/or modify
+  ~  It under the terms of the GNU Affero General Public License as
+  ~  published by the Free Software Foundation, either version 3 of the
+  ~  License, or (at your option) any later version.
+  ~
+  ~  Branch is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~  GNU Affero General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU Affero General Public License
+  ~  along with Branch. If not, see <https://www.gnu.org/licenses/>
+  ~  and navigate to version 3 of the GNU Affero General Public License.
+  ~
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -11,20 +32,10 @@
 
     <artifactId>branch-core</artifactId>
 
-    <version>0.1.1</version>
-
     <properties>
         <maven.compiler.source>${compiler.version}</maven.compiler.source>
         <maven.compiler.target>${compiler.version}</maven.compiler.target>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>me.aurium</groupId>
-            <artifactId>beetle-core</artifactId>
-            <version>0.4.1</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
@@ -38,6 +49,8 @@
             </plugin>
         </plugins>
     </build>
+
+
 
 
 </project>
