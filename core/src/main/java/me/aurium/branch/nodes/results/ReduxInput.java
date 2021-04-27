@@ -19,17 +19,7 @@
  *
  */
 
-package me.aurium.branch.annotate.marker;
+package me.aurium.branch.nodes.results;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface SingleNode {
-
-    String identifier();
-
+public class ReduxInput {
 }

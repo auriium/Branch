@@ -40,18 +40,10 @@ public class SearchInput {
     public Deque<Block> getInitialPath() {
         return initialPath;
     }
-
     public Deque<Block> getReducablePath() {
         return reducablePath;
     }
 
-    /**
-     * TODO: remove or fix this: i'd preferably like the internal ""initial"" deque to be sealed and immutable
-     *  It would be nice to enforce immutability on reducablePath except the fact is the reducable path exists
-     *  to be immutable and edited, so maybe not? Please advise.
-     *
-     * @return new input
-     */
     public SearchInput withoutTop() {
         Deque<Block> newBase = new ArrayDeque<>(initialPath);
 
