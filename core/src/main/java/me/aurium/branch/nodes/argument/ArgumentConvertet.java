@@ -21,5 +21,5 @@
 
 package me.aurium.branch.nodes.argument;
 
-public interface ArgumentConvertet {
+public interface ArgumentConverter {
 }
