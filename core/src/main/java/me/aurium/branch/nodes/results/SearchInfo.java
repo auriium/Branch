@@ -22,7 +22,7 @@
 package me.aurium.branch.nodes.results;
 
 import me.aurium.branch.execution.Block;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.nodes.CommandNode;
 
 import java.util.List;
 

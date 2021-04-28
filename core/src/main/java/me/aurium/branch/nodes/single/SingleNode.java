@@ -19,15 +19,13 @@
  *
  */
 
-package me.aurium.branch.nodes;
+package me.aurium.branch.nodes.single;
 
 import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.api.BranchHandler;
 import me.aurium.branch.execution.api.ExecutionHandler;
 import me.aurium.branch.execution.api.Execution;
 import me.aurium.branch.execution.NodeContext;
-import me.aurium.branch.interfacing.responses.TooManyArgsResponse;
-import me.aurium.branch.nodes.model.EndpointNode;
 import me.aurium.branch.nodes.results.SearchInput;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.fallback.permissions.Permission;
@@ -40,7 +38,7 @@ import java.util.List;
  * Represents a node that can do one action and takes no arguments and has no tabcompletion
  * @param <T> the type of executor
  */
-public class SingleNode<T> implements EndpointNode<T> {
+public class SingleNode<T> extends EndpointNode<T> {
 
     private final Block identifier;
     private final Permission<T> permission;
@@ -60,15 +58,9 @@ public class SingleNode<T> implements EndpointNode<T> {
     }
 
     @Override
-    public SearchInfo<T> getSpecificNode(SearchInput input) {
-        return new SearchInfo<>(this,input);
-    }
-
-    @Override
     public BranchHandler<T> getHandling() {
         return handler;
     }
-
 
     @Override
     public Permission<T> getPermission() {

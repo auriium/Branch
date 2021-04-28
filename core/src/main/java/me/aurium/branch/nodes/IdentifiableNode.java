@@ -19,26 +19,12 @@
  *
  */
 
-package me.aurium.branch.nodes.model;
+package me.aurium.branch.nodes;
 
-import me.aurium.branch.execution.api.BranchHandler;
-import me.aurium.branch.nodes.results.SearchInput;
-import me.aurium.branch.nodes.results.SearchInfo;
-import me.aurium.branch.fallback.permissions.Permission;
+import me.aurium.branch.execution.Block;
 
-/**
- * Base object
- * @param <T> fuck
- */
-public interface CommandNode<T> {
+public interface IdentifiableNode<T> extends CommandNode<T> {
 
-    SearchInfo<T> getSpecificNode(SearchInput path);
-    BranchHandler<T> getHandling();
+    Block getIdentifier();
 
-
-    /**
-     * Gets the permission required to execute and interact with this node. Depending on the base, this may cause the node to become locked, or just completely be ignored.
-     * @return the permission binding
-     */
-    Permission<T> getPermission();
 }

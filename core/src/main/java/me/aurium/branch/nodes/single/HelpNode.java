@@ -19,11 +19,29 @@
  *
  */
 
-package me.aurium.branch.nodes.builders;
+package me.aurium.branch.nodes.single;
+
+import me.aurium.branch.execution.Block;
+import me.aurium.branch.execution.api.BranchHandler;
+import me.aurium.branch.fallback.permissions.Permission;
+import me.aurium.branch.nodes.single.EndpointNode;
 
 /**
- * yet another marker interface
- * @param <C>
+ * Represents a node that pregenerates help entries based on the message context
  */
-public interface AloneBuilder<C> extends Builder<C> {
+public class HelpNode<T> extends EndpointNode<T> {
+    @Override
+    public BranchHandler<T> getHandling() {
+        return null;
+    }
+
+    @Override
+    public Permission<T> getPermission() {
+        return null;
+    }
+
+    @Override
+    public Block getIdentifier() {
+        return null;
+    }
 }

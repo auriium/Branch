@@ -19,10 +19,20 @@
  *
  */
 
-package me.aurium.branch.nodes;
+package me.aurium.branch.nodes.single;
+
+import me.aurium.branch.nodes.IdentifiableNode;
+import me.aurium.branch.nodes.results.SearchInfo;
+import me.aurium.branch.nodes.results.SearchInput;
 
 /**
- * MORE FUCKING WRAPPERS
+ * A node that cannot point to any node other than itself (and therefore ends the branching of a node-path)
  */
-public class ValueContext {
+public abstract class EndpointNode<T> implements IdentifiableNode<T> {
+
+    @Override
+    public final SearchInfo<T> getSpecificNode(SearchInput input) {
+        return new SearchInfo<>(this,input);
+    }
+
 }

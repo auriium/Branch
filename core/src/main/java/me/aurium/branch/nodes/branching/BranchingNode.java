@@ -19,17 +19,16 @@
  *
  */
 
-package me.aurium.branch.nodes;
+package me.aurium.branch.nodes.branching;
 
 import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.api.BranchHandler;
 import me.aurium.branch.execution.api.Execution;
 import me.aurium.branch.execution.NodeContext;
 import me.aurium.branch.interfacing.responses.NoIntegratedArgsResponse;
-import me.aurium.branch.nodes.model.IdentifiableNode;
+import me.aurium.branch.nodes.IdentifiableNode;
 import me.aurium.branch.fallback.permissions.Permission;
 import me.aurium.branch.nodes.results.model.Result;
-import me.aurium.branch.utility.PreStoredHashSet;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.nodes.results.SearchInput;
 
@@ -37,21 +36,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * TODO: missing a Node for noargs will cause it to rely on fallback rather than throwning exceptions and being bad (DONE - ish)
- *
  * Nodes should always assume that the first block in the blockpath is theirs to consume
  *
  * @param <T>
  */
 public class BranchingNode<T> implements IdentifiableNode<T> {
 
-    private final PreStoredHashSet<IdentifiableNode<T>> nodes;
+    private final PrestoredSet<T> nodes;
     private final Block path;
     private final BranchHandler<T> handler;
 
     private final Permission<T> permission;
 
-    public BranchingNode(PreStoredHashSet<IdentifiableNode<T>> nodes, Block path, Permission<T> permission) {
+    public BranchingNode(PrestoredSet<T> nodes, Block path, Permission<T> permission) {
         this.nodes = nodes;
         this.path = path;
         this.permission = permission;
@@ -97,19 +94,19 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
     public static final class BranchingHandler<T> implements BranchHandler<T> {
 
-        private final PreStoredHashSet<IdentifiableNode<T>> nodeShit;
+        private final PrestoredSet<T> nodeShit;
 
-        public BranchingHandler(PreStoredHashSet<IdentifiableNode<T>> nodeShit) {
+        public BranchingHandler(PrestoredSet<T> nodeShit) {
             this.nodeShit = nodeShit;
         }
 
 
         @Override
         public Result<Execution<T>> getExecution(NodeContext<T> context) {
-            if (nodeShit.getAlreadyStored() == null) {
+            if (nodeShit.getSideNode() == null) {
                 return Result.fail(NoIntegratedArgsResponse.of(context));
             } else {
-                return nodeShit.getAlreadyStored().getHandling().getExecution(context);
+                return nodeShit.getSideNode().getHandling().getExecution(context);
             }
         }
 

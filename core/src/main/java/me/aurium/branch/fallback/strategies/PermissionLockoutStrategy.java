@@ -22,7 +22,7 @@
 package me.aurium.branch.fallback.strategies;
 
 import me.aurium.branch.interfacing.responses.NoPermissionResponse;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.nodes.CommandNode;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.nodes.results.SearchInput;
 import me.aurium.branch.nodes.results.model.Result;

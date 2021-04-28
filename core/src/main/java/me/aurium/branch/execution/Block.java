@@ -29,6 +29,6 @@ public interface Block {
     String getIdentifier();
 
     boolean equals(Object object);
-    boolean isEmpty();
+    boolean isVisual();
 
 }

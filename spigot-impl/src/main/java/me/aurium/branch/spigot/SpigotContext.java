@@ -25,7 +25,7 @@ package me.aurium.branch.spigot;
 import me.aurium.branch.execution.AbstractNodeContext;
 import me.aurium.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.branch.interfacing.Response;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.nodes.CommandNode;
 import me.aurium.branch.nodes.results.SearchInfo;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

@@ -26,7 +26,7 @@ import me.aurium.branch.centralized.typeadapter.ManagerAdapter;
 import me.aurium.branch.execution.ContextProvider;
 import me.aurium.branch.fallback.strategies.FallbackSearchStrategy;
 import me.aurium.branch.interfacing.handlers.InterfacingHandler;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.nodes.CommandNode;
 
 import java.util.Objects;
 

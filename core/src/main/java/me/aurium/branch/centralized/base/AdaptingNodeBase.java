@@ -27,7 +27,7 @@ import me.aurium.branch.execution.ContextProvider;
 import me.aurium.branch.execution.NodeContext;
 import me.aurium.branch.fallback.strategies.FallbackSearchStrategy;
 import me.aurium.branch.interfacing.handlers.InterfacingHandler;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.nodes.CommandNode;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.nodes.results.model.Result;
 
