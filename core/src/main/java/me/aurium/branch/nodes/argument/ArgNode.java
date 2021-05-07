@@ -57,7 +57,7 @@ public class ArgNode<T> extends EndpointNode<T> {
         }
 
         @Override
-        public Result<Execution<T>> getExecution(NodeContext<T> context) {
+        public Execution<T> getExecution(NodeContext<T> context) {
 
             Deque<Block> subdeque = new ArrayDeque<>(context.getResults().reducedPath());
 
