@@ -33,8 +33,7 @@ public class CommandWrapper extends Command {
     private final NodeBase<CommandSender> base;
 
     public CommandWrapper(NodeBase<CommandSender> base) {
-        super(null); //TODO description of base node, etc etc etc etc etc
-
+        super(base.getIdentifier(),base.getDescription().getTextDescription(), base.getDescription().getTextDescription(), base.getAliases());
         this.base = base;
     }
 

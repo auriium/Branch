@@ -28,6 +28,10 @@ import org.bukkit.entity.Player;
 
 public class PlayerAdapter implements ManagerAdapter<CommandSender, Player> {
 
+    public static PlayerAdapter INSTANCE = new PlayerAdapter();
+
+    PlayerAdapter(){}
+
     @Override
     public Player adapt(CommandSender sender) {
         return (Player) sender;

@@ -36,6 +36,11 @@ public class StringManager implements CentralizedManager<String,Void> {
     }
 
     @Override
+    public NodeSource<String> getSource() {
+        return null;
+    }
+
+    @Override
     public NodeBaseBuilder<String, String> newCommand() {
         return new NodeBaseBuilder<>(this,defaultAdapter);
     }

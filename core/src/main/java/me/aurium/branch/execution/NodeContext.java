@@ -22,7 +22,7 @@
 package me.aurium.branch.execution;
 
 import me.aurium.branch.interfacing.Response;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.nodes.CommandNode;
 import me.aurium.branch.nodes.results.SearchInfo;
 
 

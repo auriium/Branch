@@ -19,41 +19,41 @@
  *
  */
 
-package me.aurium.branch.nodes;
+package me.aurium.branch.nodes.branching;
 
 import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.api.BranchHandler;
 import me.aurium.branch.execution.api.Execution;
 import me.aurium.branch.execution.NodeContext;
+import me.aurium.branch.information.description.Description;
 import me.aurium.branch.interfacing.responses.NoIntegratedArgsResponse;
-import me.aurium.branch.nodes.model.IdentifiableNode;
+import me.aurium.branch.nodes.IdentifiableNode;
 import me.aurium.branch.fallback.permissions.Permission;
 import me.aurium.branch.nodes.results.model.Result;
-import me.aurium.branch.utility.PreStoredHashSet;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.nodes.results.SearchInput;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * TODO: missing a Node for noargs will cause it to rely on fallback rather than throwning exceptions and being bad (DONE - ish)
- *
  * Nodes should always assume that the first block in the blockpath is theirs to consume
  *
  * @param <T>
  */
 public class BranchingNode<T> implements IdentifiableNode<T> {
 
-    private final PreStoredHashSet<IdentifiableNode<T>> nodes;
+    private final PrestoredSet<T> nodes;
     private final Block path;
     private final BranchHandler<T> handler;
+    private final Description description;
 
     private final Permission<T> permission;
 
-    public BranchingNode(PreStoredHashSet<IdentifiableNode<T>> nodes, Block path, Permission<T> permission) {
+    public BranchingNode(PrestoredSet<T> nodes, Block path, Description description, Permission<T> permission) {
         this.nodes = nodes;
         this.path = path;
+        this.description = description;
         this.permission = permission;
 
         this.handler = new BranchingHandler<>(nodes);
@@ -64,10 +64,15 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
         return path;
     }
 
+    @Override
+    public Description getDescription() {
+        return description;
+    }
+
     //args[] = join aMatch
     //let's say this is the base
     @Override
-    public SearchInfo<T> getSpecificNode(SearchInput input) {
+    public Result<SearchInfo<T>> getSpecificNode(SearchInput input) {
         //if there is something left, the first thing in the queue is our argument
         //if there is nothing left no args time
 
@@ -82,7 +87,7 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
         }
 
-        return new SearchInfo<>(this,input);
+        return Result.success(new SearchInfo<>(this,input));
     }
 
     @Override
@@ -97,27 +102,30 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
     public static final class BranchingHandler<T> implements BranchHandler<T> {
 
-        private final PreStoredHashSet<IdentifiableNode<T>> nodeShit;
+        private final PrestoredSet<T> nodeShit;
 
-        public BranchingHandler(PreStoredHashSet<IdentifiableNode<T>> nodeShit) {
+        public BranchingHandler(PrestoredSet<T> nodeShit) {
             this.nodeShit = nodeShit;
         }
 
 
         @Override
-        public Result<Execution<T>> getExecution(NodeContext<T> context) {
-            if (nodeShit.getAlreadyStored() == null) {
-                return Result.fail(NoIntegratedArgsResponse.of(context));
-            } else {
-                return nodeShit.getAlreadyStored().getHandling().getExecution(context);
-            }
+        public Execution<T> getExecution(NodeContext<T> context) {
+                return nodeShit.getSideNode().getHandling().getExecution(context);
         }
 
         @Override
         public List<String> getSuggestions(NodeContext<T> context) {
 
-            //TODO fix this bullshit, add close-to-queue
-            return nodeShit.getContents().stream().map(s -> s.getIdentifier().getIdentifier()).collect(Collectors.toList());
+            List<String> strings = new ArrayList<>();
+
+            for (IdentifiableNode<T> node : nodeShit.getContents()) {
+                if (node.getPermission().attempt(context) && node.getIdentifier().isVisual()) {
+                    strings.add(node.getIdentifier().getIdentifier());
+                }
+            }
+
+            return strings;
         }
 
     }

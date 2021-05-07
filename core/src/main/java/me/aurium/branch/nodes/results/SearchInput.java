@@ -25,44 +25,42 @@ import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.StringBlock;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 public class SearchInput {
 
-    private final Deque<Block> initialPath; //TODO make list or something - i don't care but it must be immutable
+    private final List<Block> initialPath; //TODO make list or something - i don't care but it must be immutable
     private final Deque<Block> reducablePath;
 
-    public SearchInput(Deque<Block> initialPath, Deque<Block> reducablePath) {
+    public SearchInput(List<Block> initialPath, Deque<Block> reducablePath) {
         this.initialPath = initialPath;
         this.reducablePath = reducablePath;
     }
 
-    public Deque<Block> getInitialPath() {
-        return initialPath;
+    public List<Block> getInitialPath() {
+        return List.copyOf(initialPath);
     }
     public Deque<Block> getReducablePath() {
         return reducablePath;
     }
 
     public SearchInput withoutTop() {
-        Deque<Block> newBase = new ArrayDeque<>(initialPath);
+        List<Block> newBase = new ArrayList<>(initialPath);
 
-        newBase.removeLast();
+        newBase.remove(newBase.size() - 1);
 
-        return of(newBase);
-    }
-
-    public static SearchInput of(Deque<Block> initialPath) {
-        return new SearchInput(initialPath,new ArrayDeque<>(initialPath));
+        return new SearchInput(newBase, new ArrayDeque<>(newBase));
     }
 
     public static SearchInput of(String[] args) {
-        Deque<Block> blocks = new ArrayDeque<>();
+        List<Block> blocks = new ArrayList<>();
 
         for (String string : args) {
-            blocks.addLast(StringBlock.of(string));
+            blocks.add(StringBlock.of(string));
         }
 
-        return of(blocks);
+        return new SearchInput(blocks, new ArrayDeque<>(blocks));
     }
 }

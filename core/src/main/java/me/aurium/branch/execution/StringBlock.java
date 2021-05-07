@@ -52,8 +52,8 @@ public class StringBlock implements Block {
     }
 
     @Override
-    public boolean isEmpty() {
-        return false;
+    public boolean isVisual() {
+        return true;
     }
 
     @Override

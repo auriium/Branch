@@ -19,12 +19,38 @@
  *
  */
 
-package me.aurium.branch.nodes.model;
+package me.aurium.branch.nodes.argument.types;
+
+import me.aurium.branch.execution.Block;
+import me.aurium.branch.execution.NodeContext;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
- * Marker interface for a node that is alone (so not branching, but not merging either)
+ * Represents a kind of parser that converts blocks into a typed argument.
+ * @param <T>
  *
- * This usually means the end of whatever branch it is connected to.
+ *     TODO: maybe let arguments consume more than one Block.
  */
-public interface EndpointNode<T> extends IdentifiableNode<T> {
+public interface Argument<T> {
+
+    /**
+     * What the argument identifies as
+     * @return what it identifies as
+     */
+    String getLabel();
+
+    /**
+     * Gets the bounds of the object
+     * @param context the context used to calculate
+     * @return
+     */
+    List<String> getBounds(NodeContext<T> context);
+
+    boolean check(Block toParse);
+    T parse(Block block);
+
+    Optional<T> getDefault();
+
 }

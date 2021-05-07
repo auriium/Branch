@@ -32,7 +32,7 @@ import java.util.List;
  */
 public interface BranchHandler<T> {
 
-    Result<Execution<T>> getExecution(NodeContext<T> context);
+    Execution<T> getExecution(NodeContext<T> context);
     List<String> getSuggestions(NodeContext<T> context);
 
 }

@@ -46,12 +46,4 @@ public class NoIntegratedArgsResponse implements Response {
         return alternativeCommands;
     }
 
-    /**
-     * Use a basic nodeContext to produce a simple no integrated args response
-     * @param context lah
-     * @return lah
-     */
-    public static NoIntegratedArgsResponse of(NodeContext<?> context) {
-        return new NoIntegratedArgsResponse(new ArrayList<>()); //TODO IMPLEMENT
-    }
 }

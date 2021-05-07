@@ -19,24 +19,26 @@
  *
  */
 
-package me.aurium.branch.nodes.builders;
+package me.aurium.branch.nodes.single;
 
 import me.aurium.branch.execution.Block;
-import me.aurium.branch.execution.EmptyBlock;
 import me.aurium.branch.execution.StringBlock;
 import me.aurium.branch.execution.api.ExecutionHandler;
-import me.aurium.branch.nodes.SingleNode;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.information.description.Description;
+import me.aurium.branch.information.description.StringDescription;
+import me.aurium.branch.nodes.Builder;
+import me.aurium.branch.nodes.CommandNode;
 import me.aurium.branch.fallback.permissions.Permission;
 import me.aurium.branch.fallback.permissions.EmptyPermission;
 
 import java.util.Objects;
 
-public class SingleBuilder<C> implements AloneBuilder<C> {
+public class SingleBuilder<C> implements Builder<C> {
 
     private Block block;
     private ExecutionHandler<C> contextHandler;
     private Permission<C> permission = new EmptyPermission<>();
+    private Description description;
 
     public void withIdentifier(Block identifier) {
         this.block = identifier;
@@ -54,18 +56,17 @@ public class SingleBuilder<C> implements AloneBuilder<C> {
         this.permission = permission;
     }
 
-    public SingleNode<C> build() {
+    public void withDescription(Description description) {
+        this.description = description;
+    }
+
+    public CommandNode<C> build() {
         Objects.requireNonNull(block);
         Objects.requireNonNull(contextHandler);
 
-        return new SingleNode<>(block, contextHandler, permission);
-    }
+        Description returned = Objects.requireNonNullElse(description,new StringDescription("Default description for subcommand " + block.getIdentifier()));
 
-    @Override
-    public CommandNode<C> buildWithoutIdentifier() {
-        Objects.requireNonNull(contextHandler);
-
-        return new SingleNode<>(EmptyBlock.of(),contextHandler, permission);
+        return new SingleNode<>(block, contextHandler, permission, returned);
     }
 
 }

@@ -19,14 +19,36 @@
  *
  */
 
-package me.aurium.branch.fallback.permissions;
+package me.aurium.branch.nodes.single;
+
+import me.aurium.branch.execution.Block;
+import me.aurium.branch.execution.api.BranchHandler;
+import me.aurium.branch.fallback.permissions.Permission;
+import me.aurium.branch.information.description.Description;
+import me.aurium.branch.nodes.single.EndpointNode;
 
 /**
- * Represents a permission that is controlled by a string identifier
- * @param <T> the string identifier, duh
+ * Represents a node that pregenerates help entries based on the message context
  */
-public interface StringPermission<T> extends Permission<T> {
+public class HelpNode<T> extends EndpointNode<T> {
 
-    String permissionIdentifier();
+    @Override
+    public BranchHandler<T> getHandling() {
+        return null;
+    }
 
+    @Override
+    public Permission<T> getPermission() {
+        return null;
+    }
+
+    @Override
+    public Block getIdentifier() {
+        return null;
+    }
+
+    @Override
+    public Description getDescription() {
+        return null;
+    }
 }

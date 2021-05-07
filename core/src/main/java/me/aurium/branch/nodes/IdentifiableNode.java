@@ -19,26 +19,14 @@
  *
  */
 
-package me.aurium.branch.execution;
+package me.aurium.branch.nodes;
 
-/**
- * Represents a block with no content
- */
-public class EmptyBlock implements Block{
+import me.aurium.branch.execution.Block;
+import me.aurium.branch.information.description.Description;
 
-    @Override
-    public String getIdentifier() {
-        throw new UnsupportedOperationException("Empty block should not exist in path!");
-    }
+public interface IdentifiableNode<T> extends CommandNode<T> {
 
-    @Override
-    public boolean isEmpty() {
-        return true;
-    }
-
-    public static EmptyBlock of() {
-        return new EmptyBlock();
-    }
+    Block getIdentifier();
 
 
 }

@@ -19,11 +19,11 @@
  *
  */
 
-package me.aurium.branch.nodes.builders;
+package me.aurium.branch.nodes;
 
-/**
- * yet another marker interface
- * @param <C>
- */
-public interface AloneBuilder<C> extends Builder<C> {
+
+public interface Builder<T>{
+
+    CommandNode<T> build();
+
 }

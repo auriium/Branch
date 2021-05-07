@@ -43,7 +43,7 @@ public class PredicatePermission<T> implements Permission<T> {
     }
 
     @Override
-    public String easyName() {
+    public String failureIdentifiableName() {
         return easyName;
     }
 }

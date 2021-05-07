@@ -22,7 +22,7 @@
 package me.aurium.branch.fallback.strategies;
 
 import me.aurium.branch.interfacing.responses.NoPermissionResponse;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.nodes.CommandNode;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.nodes.results.SearchInput;
 import me.aurium.branch.nodes.results.model.Result;
@@ -36,12 +36,13 @@ public class PermissionLockoutStrategy<T> implements FallbackSearchStrategy<T> {
     public Result<SearchInfo<T>> attemptPreprocess(T sender, String alias, String[] args, CommandNode<T> baseNode) {
 
         SearchInput input = SearchInput.of(args);
-        SearchInfo<T> toBeExecuted = baseNode.getSpecificNode(input);
+        Result<SearchInfo<T>> toBeExecuted = baseNode.getSpecificNode(input);
 
-        if (!toBeExecuted.resultingNode().getPermission().attempt(sender, alias, args)) {
-            return Result.fail(new NoPermissionResponse(toBeExecuted.resultingNode().getPermission().easyName()));
+        //peak object oriented code
+        if (toBeExecuted.isSuccessful() && !toBeExecuted.getSuccess().resultingNode().getPermission().attempt(sender, alias, args)) {
+            return Result.fail(new NoPermissionResponse(toBeExecuted.getSuccess().resultingNode().getPermission().failureIdentifiableName()));
         }
 
-        return Result.success(toBeExecuted);
+        return toBeExecuted;
     }
 }

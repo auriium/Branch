@@ -19,16 +19,14 @@
  *
  */
 
-package me.aurium.branch.nodes;
+package me.aurium.branch.nodes.single;
 
 import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.api.BranchHandler;
 import me.aurium.branch.execution.api.ExecutionHandler;
 import me.aurium.branch.execution.api.Execution;
 import me.aurium.branch.execution.NodeContext;
-import me.aurium.branch.interfacing.responses.TooManyArgsResponse;
-import me.aurium.branch.nodes.model.EndpointNode;
-import me.aurium.branch.nodes.results.SearchInput;
+import me.aurium.branch.information.description.Description;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.fallback.permissions.Permission;
 import me.aurium.branch.nodes.results.model.Result;
@@ -40,18 +38,19 @@ import java.util.List;
  * Represents a node that can do one action and takes no arguments and has no tabcompletion
  * @param <T> the type of executor
  */
-public class SingleNode<T> implements EndpointNode<T> {
+public class SingleNode<T> extends EndpointNode<T> {
 
     private final Block identifier;
     private final Permission<T> permission;
-
     private final SingleHandler<T> handler;
+    private final Description description;
 
-    public SingleNode(Block identifier, ExecutionHandler<T> executionHandler, Permission<T> permission) {
+    public SingleNode(Block identifier, ExecutionHandler<T> executionHandler, Permission<T> permission, Description description) {
         this.identifier = identifier;
 
         this.handler = new SingleHandler<>(executionHandler);
         this.permission = permission;
+        this.description = description;
     }
 
     @Override
@@ -60,15 +59,14 @@ public class SingleNode<T> implements EndpointNode<T> {
     }
 
     @Override
-    public SearchInfo<T> getSpecificNode(SearchInput input) {
-        return new SearchInfo<>(this,input);
+    public Description getDescription() {
+        return description;
     }
 
     @Override
     public BranchHandler<T> getHandling() {
         return handler;
     }
-
 
     @Override
     public Permission<T> getPermission() {
@@ -84,16 +82,16 @@ public class SingleNode<T> implements EndpointNode<T> {
         }
 
         @Override
-        public Result<Execution<T>> getExecution(NodeContext<T> context) {
+        public Execution<T> getExecution(NodeContext<T> context) {
             SearchInfo<T> info = context.getResults();
 
             /*if (info.hasMoreArguments()) {
                 return Result.fail(
-                        new TooManyArgsResponse(0,info.reducedPath().size()) //TODO change this so it actually reflects
+                        new TooManyArgsResponse(0,info.reducedPath().size()) //TODO move this to search details
                 );
             }*/
 
-            return Result.success(new Execution<>(handler,context));
+            return new Execution<>(handler,context);
         }
 
         @Override

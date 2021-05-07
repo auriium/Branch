@@ -19,7 +19,21 @@
  *
  */
 
-package me.aurium.branch.nodes.model;
+package me.aurium.branch.nodes.single;
 
-public class ResponseHandler {
+import me.aurium.branch.nodes.IdentifiableNode;
+import me.aurium.branch.nodes.results.SearchInfo;
+import me.aurium.branch.nodes.results.SearchInput;
+import me.aurium.branch.nodes.results.model.Result;
+
+/**
+ * A node that cannot point to any node other than itself (and therefore ends the branching of a node-path)
+ */
+public abstract class EndpointNode<T> implements IdentifiableNode<T> {
+
+    @Override
+    public final Result<SearchInfo<T>> getSpecificNode(SearchInput input) {
+        return Result.success(new SearchInfo<>(this,input));
+    }
+
 }

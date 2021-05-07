@@ -33,7 +33,7 @@ public class EmptyPermission<T> implements Permission<T> {
     }
 
     @Override
-    public String easyName() {
-        return "none"; //TODO perhaps throw? This shouldn't happen.
+    public String failureIdentifiableName() {
+        return "None";
     }
 }

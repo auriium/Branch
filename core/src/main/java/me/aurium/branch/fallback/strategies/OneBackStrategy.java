@@ -22,12 +22,15 @@
 package me.aurium.branch.fallback.strategies;
 
 import me.aurium.branch.interfacing.responses.NoPermissionResponse;
-import me.aurium.branch.nodes.model.CommandNode;
+import me.aurium.branch.nodes.CommandNode;
 import me.aurium.branch.nodes.results.SearchInput;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.nodes.results.model.Result;
 
 /**
+ *
+ * /// FIXME: 5/7/2021 This strat is possibly broken thanks to the update that changes nodes to return execution results.
+ *
  * Fallback and processing strategy that does the following actions:
  *
  * Attempts to get a node via arguments search. It then checks if the user has permission to access the node.
@@ -54,23 +57,23 @@ public class OneBackStrategy<T> implements FallbackSearchStrategy<T> {
     public Result<SearchInfo<T>> attemptPreprocess(T sender, String alias, String[] args, CommandNode<T> baseNode) {
 
         SearchInput input = SearchInput.of(args);
-        SearchInfo<T> toBeExecuted = baseNode.getSpecificNode(input);
+        Result<SearchInfo<T>> toBeExecuted = baseNode.getSpecificNode(input);
 
 
         //1. Check permissions and access (preprocessing)
 
-        while (!toBeExecuted.resultingNode().getPermission().attempt(sender, alias, args)) {
+        while (toBeExecuted.isSuccessful() && !toBeExecuted.getSuccess().resultingNode().getPermission().attempt(sender, alias, args)) {
             //something is wrong with the execution (e.g. wrong args or you did something bad), pass above one.
 
-            if (toBeExecuted.resultingNode().equals(baseNode)) {
-                return Result.fail(new NoPermissionResponse(baseNode.getPermission().easyName()));
+            if (toBeExecuted.getSuccess().resultingNode().equals(baseNode)) {
+                return Result.fail(new NoPermissionResponse(baseNode.getPermission().failureIdentifiableName()));
 
             } else {
                 toBeExecuted = baseNode.getSpecificNode(input.withoutTop()); //regress backwards a node
             }
         }
 
-        return Result.success(toBeExecuted);
+        return toBeExecuted;
     }
 
 

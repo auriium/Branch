@@ -21,5 +21,8 @@
 
 package me.aurium.branch.information.description;
 
-public class Description {
+public interface Description {
+
+    String getTextDescription();
+
 }

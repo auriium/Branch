@@ -19,7 +19,7 @@
  *
  */
 
-package me.aurium.branch.nodes;
+package me.aurium.branch.nodes.argument;
 
 //kinda like a branching node except it throws forward and not to the sides
 
