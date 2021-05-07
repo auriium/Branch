@@ -25,6 +25,7 @@ import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.api.BranchHandler;
 import me.aurium.branch.execution.api.Execution;
 import me.aurium.branch.execution.NodeContext;
+import me.aurium.branch.information.description.Description;
 import me.aurium.branch.interfacing.responses.NoIntegratedArgsResponse;
 import me.aurium.branch.nodes.IdentifiableNode;
 import me.aurium.branch.fallback.permissions.Permission;
@@ -32,8 +33,8 @@ import me.aurium.branch.nodes.results.model.Result;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.nodes.results.SearchInput;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Nodes should always assume that the first block in the blockpath is theirs to consume
@@ -45,12 +46,14 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     private final PrestoredSet<T> nodes;
     private final Block path;
     private final BranchHandler<T> handler;
+    private final Description description;
 
     private final Permission<T> permission;
 
-    public BranchingNode(PrestoredSet<T> nodes, Block path, Permission<T> permission) {
+    public BranchingNode(PrestoredSet<T> nodes, Block path, Description description, Permission<T> permission) {
         this.nodes = nodes;
         this.path = path;
+        this.description = description;
         this.permission = permission;
 
         this.handler = new BranchingHandler<>(nodes);
@@ -59,6 +62,11 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     @Override
     public Block getIdentifier() {
         return path;
+    }
+
+    @Override
+    public Description getDescription() {
+        return description;
     }
 
     //args[] = join aMatch
@@ -113,8 +121,15 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
         @Override
         public List<String> getSuggestions(NodeContext<T> context) {
 
-            //TODO fix this bullshit, add close-to-queue
-            return nodeShit.getContents().stream().map(s -> s.getIdentifier().getIdentifier()).collect(Collectors.toList());
+            List<String> strings = new ArrayList<>();
+
+            for (IdentifiableNode<T> node : nodeShit.getContents()) {
+                if (node.getPermission().attempt(context) && node.getIdentifier().isVisual()) {
+                    strings.add(node.getIdentifier().getIdentifier());
+                }
+            }
+
+            return strings;
         }
 
     }

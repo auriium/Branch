@@ -24,12 +24,14 @@ package me.aurium.branch.nodes.single;
 import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.api.BranchHandler;
 import me.aurium.branch.fallback.permissions.Permission;
+import me.aurium.branch.information.description.Description;
 import me.aurium.branch.nodes.single.EndpointNode;
 
 /**
  * Represents a node that pregenerates help entries based on the message context
  */
 public class HelpNode<T> extends EndpointNode<T> {
+
     @Override
     public BranchHandler<T> getHandling() {
         return null;
@@ -42,6 +44,11 @@ public class HelpNode<T> extends EndpointNode<T> {
 
     @Override
     public Block getIdentifier() {
+        return null;
+    }
+
+    @Override
+    public Description getDescription() {
         return null;
     }
 }

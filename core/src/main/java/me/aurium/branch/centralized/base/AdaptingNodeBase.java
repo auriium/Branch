@@ -26,6 +26,7 @@ import me.aurium.branch.execution.api.Execution;
 import me.aurium.branch.execution.ContextProvider;
 import me.aurium.branch.execution.NodeContext;
 import me.aurium.branch.fallback.strategies.FallbackSearchStrategy;
+import me.aurium.branch.information.description.Description;
 import me.aurium.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.branch.nodes.CommandNode;
 import me.aurium.branch.nodes.results.SearchInfo;
@@ -38,7 +39,7 @@ import java.util.List;
  * @param <T> the input type of nodebase
  * @param <C> the adapted adjusted type desired, based on a similar adapter.
  */
-public class AdaptingNodeBase<T,C extends T> implements NodeBase<T> {
+public abstract class AdaptingNodeBase<T,C extends T> implements NodeBase<T> {
 
     private final ManagerAdapter<T,C> adapter;
 
@@ -86,4 +87,5 @@ public class AdaptingNodeBase<T,C extends T> implements NodeBase<T> {
     public List<String> suggest(T t, String alias, String[] args) {
         return null; //TODO
     }
+
 }

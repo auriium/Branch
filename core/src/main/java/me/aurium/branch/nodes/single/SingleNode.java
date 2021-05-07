@@ -26,7 +26,7 @@ import me.aurium.branch.execution.api.BranchHandler;
 import me.aurium.branch.execution.api.ExecutionHandler;
 import me.aurium.branch.execution.api.Execution;
 import me.aurium.branch.execution.NodeContext;
-import me.aurium.branch.nodes.results.SearchInput;
+import me.aurium.branch.information.description.Description;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.fallback.permissions.Permission;
 import me.aurium.branch.nodes.results.model.Result;
@@ -42,19 +42,25 @@ public class SingleNode<T> extends EndpointNode<T> {
 
     private final Block identifier;
     private final Permission<T> permission;
-
     private final SingleHandler<T> handler;
+    private final Description description;
 
-    public SingleNode(Block identifier, ExecutionHandler<T> executionHandler, Permission<T> permission) {
+    public SingleNode(Block identifier, ExecutionHandler<T> executionHandler, Permission<T> permission, Description description) {
         this.identifier = identifier;
 
         this.handler = new SingleHandler<>(executionHandler);
         this.permission = permission;
+        this.description = description;
     }
 
     @Override
     public Block getIdentifier() {
         return identifier;
+    }
+
+    @Override
+    public Description getDescription() {
+        return description;
     }
 
     @Override

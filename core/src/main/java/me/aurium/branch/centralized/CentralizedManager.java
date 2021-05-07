@@ -33,6 +33,7 @@ import me.aurium.branch.centralized.typeadapter.ManagerAdapter;
 public interface CentralizedManager<T,V> {
 
     CentralizedManagerBinder getBinder(V platform);
+    CommonNodeSource<T> getSource();
 
     NodeBaseBuilder<T,T> newCommand();
     <C extends T> NodeBaseBuilder<T,C> newCommand(ManagerAdapter<T,C> adapter);

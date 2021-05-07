@@ -22,9 +22,11 @@
 package me.aurium.branch.nodes;
 
 import me.aurium.branch.execution.Block;
+import me.aurium.branch.information.description.Description;
 
 public interface IdentifiableNode<T> extends CommandNode<T> {
 
     Block getIdentifier();
+
 
 }

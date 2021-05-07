@@ -22,6 +22,7 @@
 package me.aurium.branch.nodes;
 
 import me.aurium.branch.execution.api.BranchHandler;
+import me.aurium.branch.information.description.Description;
 import me.aurium.branch.nodes.results.SearchInput;
 import me.aurium.branch.nodes.results.SearchInfo;
 import me.aurium.branch.fallback.permissions.Permission;
@@ -32,6 +33,8 @@ import me.aurium.branch.fallback.permissions.Permission;
  */
 public interface CommandNode<T> {
 
+    //int getExpectedConsumeAmount() //used to check how much was expected as you pass through vs how much was received, among other htings.
+
     SearchInfo<T> getSpecificNode(SearchInput path);
     BranchHandler<T> getHandling();
 
@@ -41,4 +44,6 @@ public interface CommandNode<T> {
      * @return the permission binding
      */
     Permission<T> getPermission();
+    Description getDescription();
+
 }

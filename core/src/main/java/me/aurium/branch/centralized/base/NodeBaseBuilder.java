@@ -27,11 +27,13 @@ import me.aurium.branch.execution.ContextProvider;
 import me.aurium.branch.fallback.strategies.FallbackSearchStrategy;
 import me.aurium.branch.interfacing.handlers.InterfacingHandler;
 import me.aurium.branch.nodes.CommandNode;
+import me.aurium.branch.nodes.IdentifiableNode;
 
 import java.util.Objects;
 
 /**
- * Class that produces adaptingNodeBases
+ * Default implementation of a class that produces adaptingNodeBases
+ *
  * @param <T> Input type
  * @param <C> Adapted type
  */
@@ -40,7 +42,7 @@ public class NodeBaseBuilder<T,C extends T> {
     private final CentralizedManager<T,?> manager;
     private final ManagerAdapter<T,C> adapter;
 
-    private CommandNode<C> node;
+    private IdentifiableNode<C> node;
     private FallbackSearchStrategy<C> strategy;
     private ContextProvider<C> provider;
     private InterfacingHandler<T> handler;
@@ -59,7 +61,7 @@ public class NodeBaseBuilder<T,C extends T> {
         this.handler = handler;
     }
 
-    public NodeBaseBuilder<T,C> setNode(CommandNode<C> node) {
+    public NodeBaseBuilder<T,C> setNode(IdentifiableNode<C> node) {
         this.node = node;
 
         return this;
@@ -89,6 +91,6 @@ public class NodeBaseBuilder<T,C extends T> {
         Objects.requireNonNull(provider);
         Objects.requireNonNull(handler);
 
-        manager.injectCommand(new AdaptingNodeBase<>(adapter,node,strategy,provider,handler));
+        manager.injectCommand(new DelegatingNodeBase<>(adapter,node,strategy,provider,handler));
     }
 }

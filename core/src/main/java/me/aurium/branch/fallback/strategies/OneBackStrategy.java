@@ -63,7 +63,7 @@ public class OneBackStrategy<T> implements FallbackSearchStrategy<T> {
             //something is wrong with the execution (e.g. wrong args or you did something bad), pass above one.
 
             if (toBeExecuted.resultingNode().equals(baseNode)) {
-                return Result.fail(new NoPermissionResponse(baseNode.getPermission().easyName()));
+                return Result.fail(new NoPermissionResponse(baseNode.getPermission().failureIdentifiableName()));
 
             } else {
                 toBeExecuted = baseNode.getSpecificNode(input.withoutTop()); //regress backwards a node

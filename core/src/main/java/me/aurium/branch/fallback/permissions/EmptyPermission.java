@@ -33,7 +33,7 @@ public class EmptyPermission<T> implements Permission<T> {
     }
 
     @Override
-    public String easyName() {
-        return "none";
+    public String failureIdentifiableName() {
+        return "None";
     }
 }

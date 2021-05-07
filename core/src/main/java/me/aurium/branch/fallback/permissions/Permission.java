@@ -21,13 +21,30 @@
 
 package me.aurium.branch.fallback.permissions;
 
+import me.aurium.branch.execution.NodeContext;
+
 /**
  * Represents the accessibility predicate of a command -> whether a command can be executed or not
  */
 public interface Permission<T> {
 
+   /**
+    * Checks whether the sender has acccess or not
+    * @param sender sender
+    * @param alias alias
+    * @param args args
+    * @return true if so, false if not
+    */
    boolean attempt(T sender, String alias, String[] args); //because fuck you
 
-   String easyName();
+   default boolean attempt(NodeContext<T> nodeContext) {
+      return attempt(nodeContext.getSender(),nodeContext.getAlias(), nodeContext.getArgs());
+   }
+
+   /**
+    * Represents the name shown when the permission fails.
+    * @return the name shown if the permission fails, injected into a Result.
+    */
+   String failureIdentifiableName();
 
 }

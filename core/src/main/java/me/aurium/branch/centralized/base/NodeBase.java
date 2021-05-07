@@ -21,6 +21,9 @@
 
 package me.aurium.branch.centralized.base;
 
+import me.aurium.branch.information.description.Description;
+
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,5 +34,12 @@ public interface NodeBase<T> {
 
     void execute(T t, String alias, String[] args); //may execute instantly or take some time
     List<String> suggest(T t, String alias, String[] args);
+
+    Description getDescription();
+    String getIdentifier();
+
+    default List<String> getAliases() {
+        return Collections.emptyList();
+    }
 
 }

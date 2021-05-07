@@ -25,6 +25,8 @@ import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.StringBlock;
 import me.aurium.branch.fallback.permissions.Permission;
 import me.aurium.branch.fallback.permissions.EmptyPermission;
+import me.aurium.branch.information.description.Description;
+import me.aurium.branch.information.description.StringDescription;
 import me.aurium.branch.nodes.single.EndpointNode;
 import me.aurium.branch.nodes.single.HelpNode;
 import me.aurium.branch.nodes.Builder;
@@ -42,6 +44,7 @@ public class InclusiveBranchingBuilder<T> implements Builder<T> {
     private Block block;
     private EndpointNode<T> noArgs;
     private Permission<T> permission;
+    private Description description;
 
     public InclusiveBranchingBuilder() {
         this.commands = new HashSet<>();
@@ -79,13 +82,21 @@ public class InclusiveBranchingBuilder<T> implements Builder<T> {
         return this;
     }
 
+    public InclusiveBranchingBuilder<T> withDescription(Description description) {
+        this.description = description;
+
+        return this;
+    }
+
     public CommandNode<T> build() {
 
         Objects.requireNonNull(block);
         Objects.requireNonNull(permission);
         Objects.requireNonNull(noArgs);
 
-        return new BranchingNode<>(new InclusivePrestoredSet<>(noArgs,commands),block,permission);
+        Description returned = Objects.requireNonNullElse(description,new StringDescription("Default description for subcommand " + block.getIdentifier()));
+
+        return new BranchingNode<>(new InclusivePrestoredSet<>(noArgs,commands),block, returned, permission);
     }
 
 }

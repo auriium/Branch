@@ -39,7 +39,7 @@ public class PermissionLockoutStrategy<T> implements FallbackSearchStrategy<T> {
         SearchInfo<T> toBeExecuted = baseNode.getSpecificNode(input);
 
         if (!toBeExecuted.resultingNode().getPermission().attempt(sender, alias, args)) {
-            return Result.fail(new NoPermissionResponse(toBeExecuted.resultingNode().getPermission().easyName()));
+            return Result.fail(new NoPermissionResponse(toBeExecuted.resultingNode().getPermission().failureIdentifiableName()));
         }
 
         return Result.success(toBeExecuted);
