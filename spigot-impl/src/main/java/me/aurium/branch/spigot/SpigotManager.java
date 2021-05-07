@@ -23,6 +23,7 @@ package me.aurium.branch.spigot;
 
 import me.aurium.branch.centralized.CentralizedManager;
 import me.aurium.branch.centralized.CentralizedManagerBinder;
+import me.aurium.branch.centralized.NodeSource;
 import me.aurium.branch.centralized.base.NodeBase;
 import me.aurium.branch.centralized.typeadapter.ManagerAdapter;
 import me.aurium.branch.centralized.base.NodeBaseBuilder;
@@ -58,6 +59,11 @@ public class SpigotManager implements CentralizedManager<CommandSender, JavaPlug
     @Override
     public CentralizedManagerBinder getBinder(JavaPlugin platform) {
         return new SpigotManagerBinder(platform.getName(), platform.getServer().getCommandMap(), senders);
+    }
+
+    @Override
+    public NodeSource<CommandSender> getSource() {
+        return null;
     }
 
     @Override

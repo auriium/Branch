@@ -4,7 +4,7 @@ import me.aurium.branch.nodes.branching.ExclusiveBranchingBuilder;
 import me.aurium.branch.nodes.branching.InclusiveBranchingBuilder;
 import me.aurium.branch.nodes.single.SingleBuilder;
 
-public interface CommonNodeSource<T> {
+public interface NodeSource<T> {
 
     SingleBuilder<T> single();
     InclusiveBranchingBuilder<T> inclusiveBranching();
