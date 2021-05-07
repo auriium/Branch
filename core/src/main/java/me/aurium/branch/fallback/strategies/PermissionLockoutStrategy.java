@@ -36,12 +36,13 @@ public class PermissionLockoutStrategy<T> implements FallbackSearchStrategy<T> {
     public Result<SearchInfo<T>> attemptPreprocess(T sender, String alias, String[] args, CommandNode<T> baseNode) {
 
         SearchInput input = SearchInput.of(args);
-        SearchInfo<T> toBeExecuted = baseNode.getSpecificNode(input);
+        Result<SearchInfo<T>> toBeExecuted = baseNode.getSpecificNode(input);
 
-        if (!toBeExecuted.resultingNode().getPermission().attempt(sender, alias, args)) {
-            return Result.fail(new NoPermissionResponse(toBeExecuted.resultingNode().getPermission().failureIdentifiableName()));
+        //peak object oriented code
+        if (toBeExecuted.isSuccessful() && !toBeExecuted.getSuccess().resultingNode().getPermission().attempt(sender, alias, args)) {
+            return Result.fail(new NoPermissionResponse(toBeExecuted.getSuccess().resultingNode().getPermission().failureIdentifiableName()));
         }
 
-        return Result.success(toBeExecuted);
+        return toBeExecuted;
     }
 }

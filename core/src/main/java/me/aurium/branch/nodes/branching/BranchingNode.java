@@ -72,7 +72,7 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     //args[] = join aMatch
     //let's say this is the base
     @Override
-    public SearchInfo<T> getSpecificNode(SearchInput input) {
+    public Result<SearchInfo<T>> getSpecificNode(SearchInput input) {
         //if there is something left, the first thing in the queue is our argument
         //if there is nothing left no args time
 
@@ -87,7 +87,7 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
         }
 
-        return new SearchInfo<>(this,input);
+        return Result.success(new SearchInfo<>(this,input));
     }
 
     @Override
@@ -110,12 +110,8 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
 
 
         @Override
-        public Result<Execution<T>> getExecution(NodeContext<T> context) {
-            if (nodeShit.getSideNode() == null) {
-                return Result.fail(NoIntegratedArgsResponse.of(context));
-            } else {
+        public Execution<T> getExecution(NodeContext<T> context) {
                 return nodeShit.getSideNode().getHandling().getExecution(context);
-            }
         }
 
         @Override

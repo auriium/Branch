@@ -74,14 +74,9 @@ public abstract class AdaptingNodeBase<T,C extends T> implements NodeBase<T> {
         SearchInfo<C> info = result.getSuccess();
         NodeContext<C> produced = provider.produce(adaptedSender,alias,args,baseNode,info);
 
-        Result<Execution<C>> execution = info.resultingNode().getHandling().getExecution(produced);
+        Execution<C> execution = info.resultingNode().getHandling().getExecution(produced);
 
-        if (!execution.isSuccessful()) {
-            handler.sendMessage(t, execution.getFailure());
-            return;
-        }
-
-        execution.getSuccess().run();
+        execution.run();
     }
 
     public List<String> suggest(T t, String alias, String[] args) {

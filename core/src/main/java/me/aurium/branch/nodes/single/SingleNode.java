@@ -82,16 +82,16 @@ public class SingleNode<T> extends EndpointNode<T> {
         }
 
         @Override
-        public Result<Execution<T>> getExecution(NodeContext<T> context) {
+        public Execution<T> getExecution(NodeContext<T> context) {
             SearchInfo<T> info = context.getResults();
 
             /*if (info.hasMoreArguments()) {
                 return Result.fail(
-                        new TooManyArgsResponse(0,info.reducedPath().size()) //TODO change this so it actually reflects
+                        new TooManyArgsResponse(0,info.reducedPath().size()) //TODO move this to search details
                 );
             }*/
 
-            return Result.success(new Execution<>(handler,context));
+            return new Execution<>(handler,context);
         }
 
         @Override
