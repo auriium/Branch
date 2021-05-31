@@ -24,7 +24,6 @@ package me.aurium.branch.spigot;
 import me.aurium.branch.centralized.base.NodeBase;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -38,14 +37,14 @@ public class CommandWrapper extends Command {
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender commandSender, @NotNull String s, String[] strings) {
+    public boolean execute(CommandSender commandSender, String s, String[] strings) {
         base.execute(commandSender, s, strings);
 
         return true;
     }
 
     @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args) throws IllegalArgumentException {
+    public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
         return base.suggest(sender, alias, args);
     }
 }

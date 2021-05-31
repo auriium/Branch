@@ -58,7 +58,7 @@ public class SpigotManager implements CentralizedManager<CommandSender, JavaPlug
 
     @Override
     public CentralizedManagerBinder getBinder(JavaPlugin platform) {
-        return new SpigotManagerBinder(platform.getName(), platform.getServer().getCommandMap(), senders);
+        return new SpigotManagerBinder(platform.getName(), null, senders);
     }
 
     @Override

@@ -23,6 +23,7 @@ package me.aurium.branch.nodes.argument.types;
 
 import me.aurium.branch.execution.Block;
 import me.aurium.branch.execution.NodeContext;
+import me.aurium.branch.nodes.results.model.Result;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,9 +49,17 @@ public interface Argument<T> {
      */
     List<String> getBounds(NodeContext<T> context);
 
-    boolean check(Block toParse);
-    T parse(Block block);
+    /**
+     * Attempts to parse the value
+     * @param context the targeted context
+     * @return the result if present or a failure if not.
+     */
+    Result<T> parse(NodeContext<T> context);
 
+    /**
+     * Returns the default value of the argument if it is present. If it is not present the argument is not optional.
+     * @return the presence of the argument value
+     */
     Optional<T> getDefault();
 
 }
