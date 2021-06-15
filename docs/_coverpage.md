@@ -1,6 +1,6 @@
 ![logo](media/branch.png)
 
-# branch framework <small>1.0</small>
+# branch framework <small>1.0.0</small>
 
 > A powerful Java command framework
 
@@ -9,5 +9,5 @@
 - Annotations, or builder format
 - Easy for beginners, flexible enough for experienced devs
 
-[GitHub](https://github.com/docsifyjs/docsify/)
+[Source](https://github.com/docsifyjs/docsify/)
 [Get Started](#docsify)
