@@ -8,7 +8,7 @@ Built for use with Beetle but can be used independently
 
 # How can I ask for support?
 
-DM **Aesthetik#9784** on discord!
+DM **Auriium#0001** on discord!
 
 # Contributing
 
