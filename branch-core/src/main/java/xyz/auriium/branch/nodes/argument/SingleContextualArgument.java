@@ -1,0 +1,21 @@
+package xyz.auriium.branch.nodes.argument;
+
+import xyz.auriium.branch.execution.Block;
+import xyz.auriium.branch.nodes.results.model.Result;
+
+import java.util.List;
+
+public interface SingleContextualArgument<T,O> extends ContextualBaseArgument<T,O> {
+
+    @Override
+    default int reservedBlockAmount() {
+        return 1;
+    }
+
+    @Override
+    default Result<O> parse(T sender, String alias, List<Block> reserved) {
+        return microParse(sender,alias,reserved.get(0));
+    }
+
+    Result<O> microParse(T sender, String alias, Block toParse);
+}
