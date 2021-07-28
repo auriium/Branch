@@ -42,4 +42,5 @@ public class InnerMap<T> implements MessageMap<T> {
     public InterfacingHandler<T> make() {
         return new CommonInterfacingHandler<>(map);
     }
+
 }

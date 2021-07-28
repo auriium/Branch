@@ -1,4 +1,4 @@
-package xyz.auriium.branch.nodes.argument;
+package xyz.auriium.branch.nodes.argument.model;
 
 import xyz.auriium.branch.execution.Block;
 import xyz.auriium.branch.execution.NodeContext;

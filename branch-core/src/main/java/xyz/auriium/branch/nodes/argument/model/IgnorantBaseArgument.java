@@ -1,4 +1,4 @@
-package xyz.auriium.branch.nodes.argument;
+package xyz.auriium.branch.nodes.argument.model;
 
 /**
  * Base argument that ignores context

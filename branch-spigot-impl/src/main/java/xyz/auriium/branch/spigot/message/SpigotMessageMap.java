@@ -25,7 +25,7 @@ import xyz.auriium.branch.interfacing.Anomaly;
 import xyz.auriium.branch.interfacing.ResponseAction;
 import xyz.auriium.branch.interfacing.handlers.DelegatingDefaultMap;
 import xyz.auriium.branch.interfacing.handlers.InnerMap;
-import xyz.auriium.branch.centralized.typeadapter.FailedAdaptingAnomaly;
+import xyz.auriium.branch.anomalies.WrongTypeAnomaly;
 import org.bukkit.command.CommandSender;
 
 /**
@@ -43,7 +43,7 @@ public class SpigotMessageMap<C extends CommandSender> extends DelegatingDefault
     protected InnerMap<C> defaultMap() {
         InnerMap<C> map = new InnerMap<>();
 
-        map.add(FailedAdaptingAnomaly.class, response -> new TextMessage<>(
+        map.add(WrongTypeAnomaly.class, response -> new TextMessage<>(
                 "Expected class: " + response.getExpectedClass().getName() + "Got class: " + response.getReceivedClass()
         ));
 

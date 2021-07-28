@@ -19,7 +19,7 @@
  *
  */
 
-package xyz.auriium.branch.centralized.typeadapter;
+package xyz.auriium.branch.anomalies;
 
 import xyz.auriium.branch.interfacing.Anomaly;
 
@@ -27,12 +27,12 @@ import xyz.auriium.branch.interfacing.Anomaly;
  * Represents a response to the scenario in which a certain object was attempted to be adapted to an extending type
  * but it was not an instance of it (or similar scenarios, such as attempting to flatmap a certain type to another.)
  */
-public class FailedAdaptingAnomaly implements Anomaly {
+public class WrongTypeAnomaly implements Anomaly {
 
     private final Class<?> expectedClass;
     private final Class<?> receivedClass;
 
-    public FailedAdaptingAnomaly(Class<?> expectedClass, Class<?> receivedClass) {
+    public WrongTypeAnomaly(Class<?> expectedClass, Class<?> receivedClass) {
         this.expectedClass = expectedClass;
         this.receivedClass = receivedClass;
     }

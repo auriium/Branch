@@ -1,10 +1,12 @@
 package xyz.auriium.branch.nodes.argument;
 
+import xyz.auriium.branch.anomalies.NoInputProvidedAnomaly;
 import xyz.auriium.branch.execution.Block;
 import xyz.auriium.branch.execution.NodeContext;
 import xyz.auriium.branch.execution.api.ArgExecution;
 import xyz.auriium.branch.execution.api.Execution;
 import xyz.auriium.branch.execution.api.SuggestionHandler;
+import xyz.auriium.branch.nodes.argument.model.ContextualBaseArgument;
 import xyz.auriium.branch.nodes.results.model.Result;
 import xyz.auriium.branch.nodes.EndpointNode;
 
@@ -25,9 +27,13 @@ public abstract class AbstractArgNode<T> extends EndpointNode<T> {
         Arguments argumentObject = new Arguments();
         Deque<Block> subdeque = new ArrayDeque<>(context.getResults().reducedPath());
 
+        int argsLeft = getArguments().size();
+
         for (ContextualBaseArgument<T,?> argument : getArguments()) {
 
-            if (subdeque.peek() == null) return Result.fail(null); //noInputProvidedExternal if there
+            if (subdeque.peek() == null) return Result.fail(
+                    new NoInputProvidedAnomaly(argument.getClass(), argument.getType(), argument.getLabel(), context.getArgs().length + 1, context.getArgs().length)
+            ); //noInputProvidedExternal if there
 
             assert argument.reservedBlockAmount() > 0 : "Cannot be negative or zero";
 

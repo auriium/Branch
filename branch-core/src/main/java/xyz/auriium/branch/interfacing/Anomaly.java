@@ -22,7 +22,10 @@
 package xyz.auriium.branch.interfacing;
 
 /**
- * Marker interface for a data-carrying object that can be consumed by a responseActionhandler
+ * Marker interface for a data-carrying control flow object that is
+ * similar to an exception. Key distinction in that it
+ * does not interrupt control flow by existing but rather must be manually
+ * returned. Typically carries data, consumed by a responseActionhandler
  */
 public interface Anomaly {
 

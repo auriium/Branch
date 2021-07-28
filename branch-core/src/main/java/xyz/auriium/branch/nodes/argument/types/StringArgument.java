@@ -1,7 +1,7 @@
 package xyz.auriium.branch.nodes.argument.types;
 
 import xyz.auriium.branch.execution.Block;
-import xyz.auriium.branch.nodes.argument.SingleIgnorantArgument;
+import xyz.auriium.branch.nodes.argument.model.SingleIgnorantArgument;
 import xyz.auriium.branch.nodes.results.model.Result;
 
 public class StringArgument implements SingleIgnorantArgument<String> {
