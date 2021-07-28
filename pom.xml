@@ -60,4 +60,11 @@
         </dependencies>
     </dependencyManagement>
 
+    <repositories>
+        <repository>
+            <id>central-repo</id>
+            <url>https://repo.auriium.xyz/releases</url>
+        </repository>
+    </repositories>
+
 </project>
