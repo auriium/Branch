@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.spigot.adapter;
 
-import xyz.auriium.branch.anomalies.WrongTypeAnomaly;
+import xyz.auriium.branch.interfacing.exceptional.anomalies.WrongTypeParseAnomaly;
 import xyz.auriium.branch.centralized.typeadapter.ManagerAdapter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -43,8 +43,8 @@ public class PlayerAdapter implements ManagerAdapter<CommandSender, Player> {
     }
 
     @Override
-    public WrongTypeAnomaly failedParseResponse(CommandSender sender) {
-        return new WrongTypeAnomaly(Player.class, CommandSender.class);
+    public WrongTypeParseAnomaly failedParseResponse(CommandSender sender) {
+        return new WrongTypeParseAnomaly(Player.class, CommandSender.class);
     }
 
 

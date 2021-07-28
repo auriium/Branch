@@ -3,8 +3,9 @@ package xyz.auriium.branch.centralized.base;
 import xyz.auriium.branch.centralized.typeadapter.ManagerAdapter;
 import xyz.auriium.branch.execution.ContextProvider;
 import xyz.auriium.branch.fallback.strategies.FallbackSearchStrategy;
-import xyz.auriium.branch.interfacing.information.description.Description;
-import xyz.auriium.branch.interfacing.handlers.InterfacingHandler;
+import xyz.auriium.branch.centralized.information.description.Description;
+import xyz.auriium.branch.interfacing.exceptional.AnomalyHandler;
+import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.IdentifiableNode;
 
 /**
@@ -14,11 +15,12 @@ public class DelegatingNodeBase<A,C extends A> extends RunNodeBase<A,C> {
 
     private final IdentifiableNode<C> baseNode;
 
-    public DelegatingNodeBase(ManagerAdapter<A, C> adapter, IdentifiableNode<C> baseNode, FallbackSearchStrategy<C> strategy, ContextProvider<C> provider, InterfacingHandler<A> handler) {
-        super(adapter, baseNode, strategy, provider, handler);
+    protected DelegatingNodeBase(ManagerAdapter<A, C> adapter, AnomalyHandler<A, C> handler, IdentifiableNode<C> baseNode, FallbackSearchStrategy<C> strategy, ContextProvider<C> provider) {
+        super(adapter, handler, baseNode, strategy, provider);
 
         this.baseNode = baseNode;
     }
+
 
     @Override
     public Description getDescription() {

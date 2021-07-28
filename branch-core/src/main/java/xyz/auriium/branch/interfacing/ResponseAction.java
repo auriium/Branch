@@ -21,6 +21,8 @@
 
 package xyz.auriium.branch.interfacing;
 
+import xyz.auriium.branch.interfacing.exceptional.Anomaly;
+
 /**
  * Represents an action that is fired when a response is received
  * @param <T> t

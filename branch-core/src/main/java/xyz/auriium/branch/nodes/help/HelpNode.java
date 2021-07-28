@@ -28,7 +28,7 @@ import xyz.auriium.branch.execution.api.BasicExecution;
 import xyz.auriium.branch.execution.api.Execution;
 import xyz.auriium.branch.execution.api.SuggestionHandler;
 import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.interfacing.information.description.Description;
+import xyz.auriium.branch.centralized.information.description.Description;
 import xyz.auriium.branch.nodes.EndpointNode;
 import xyz.auriium.branch.nodes.results.SearchInfo;
 import xyz.auriium.branch.nodes.results.SearchInput;

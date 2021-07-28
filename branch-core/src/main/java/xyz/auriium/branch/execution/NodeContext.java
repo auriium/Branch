@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.execution;
 
-import xyz.auriium.branch.interfacing.Anomaly;
+import xyz.auriium.branch.interfacing.exceptional.Anomaly;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInfo;
 
@@ -47,18 +47,6 @@ public interface NodeContext<T> {
     String[] getArgs();
     CommandNode<T> getBaseExecutedNode();
     SearchInfo<T> getResults();
-
-    /**
-     * Sends an ugly string to the player using the platform's message handler. Whatever floats your boat!
-     * @param string string
-     */
-    void stringSender(String string);
-
-    /**
-     * Sends a formatted response to a player coded to a key
-     * @param failure the response
-     */
-    void response(Anomaly failure);
 
     /**
      * Gets whether the context's delegating sender has access to a permission. On some platforms, this may always be false.

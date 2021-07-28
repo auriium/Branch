@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.centralized.base;
 
-import xyz.auriium.branch.interfacing.information.description.Description;
+import xyz.auriium.branch.centralized.information.description.Description;
 
 import java.util.Collections;
 import java.util.List;

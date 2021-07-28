@@ -25,7 +25,7 @@ import xyz.auriium.branch.centralized.CentralizedManager;
 import xyz.auriium.branch.centralized.typeadapter.ManagerAdapter;
 import xyz.auriium.branch.execution.ContextProvider;
 import xyz.auriium.branch.fallback.strategies.FallbackSearchStrategy;
-import xyz.auriium.branch.interfacing.handlers.InterfacingHandler;
+import xyz.auriium.branch.interfacing.exceptional.AnomalyHandler;
 import xyz.auriium.branch.nodes.IdentifiableNode;
 
 import java.util.*;
@@ -33,27 +33,26 @@ import java.util.*;
 /**
  * Default implementation of a class that produces adaptingNodeBases
  *
- * @param <T> Input type
- * @param <C> Adapted type
+ * @param <I> Input type
+ * @param <A> Adapted type
  */
-public class NodeBaseBuilder<T,C extends T> {
+public class NodeBaseBuilder<I, A extends I> {
 
-    private final CentralizedManager<T,?> manager;
-    private final ManagerAdapter<T,C> adapter;
+    private final CentralizedManager<I,?> manager;
 
-    private IdentifiableNode<C> node;
-    private FallbackSearchStrategy<C> strategy;
-    private ContextProvider<C> provider;
-    private InterfacingHandler<T> handler;
+    private final ManagerAdapter<I, A> adapter;
+    private AnomalyHandler<I,A> handler;
 
-    private final List<String> aliases = new ArrayList<>();
+    private IdentifiableNode<A> node;
+    private FallbackSearchStrategy<A> strategy;
+    private ContextProvider<A> provider;
 
-    public NodeBaseBuilder(CentralizedManager<T, ?> manager, ManagerAdapter<T, C> adapter) {
+    public NodeBaseBuilder(CentralizedManager<I, ?> manager, ManagerAdapter<I, A> adapter) {
         this.manager = manager;
         this.adapter = adapter;
     }
 
-    public NodeBaseBuilder(CentralizedManager<T, ?> manager, ManagerAdapter<T, C> adapter, FallbackSearchStrategy<C> strategy, ContextProvider<C> provider, InterfacingHandler<T> handler) {
+    public NodeBaseBuilder(CentralizedManager<I, ?> manager, ManagerAdapter<I, A> adapter, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider, AnomalyHandler<I,A> handler) {
         this.manager = manager;
         this.adapter = adapter;
         this.strategy = strategy;
@@ -61,31 +60,25 @@ public class NodeBaseBuilder<T,C extends T> {
         this.handler = handler;
     }
 
-    public NodeBaseBuilder<T,C> withNode(IdentifiableNode<C> node) {
+    public NodeBaseBuilder<I, A> withNode(IdentifiableNode<A> node) {
         this.node = node;
 
         return this;
     }
 
-    public NodeBaseBuilder<T,C> withAliases(String... aliases) {
-        this.aliases.addAll(Arrays.asList(aliases));
-
-        return this;
-    }
-
-    public NodeBaseBuilder<T,C> customStrategy(FallbackSearchStrategy<C> strategy) {
+    public NodeBaseBuilder<I, A> customStrategy(FallbackSearchStrategy<A> strategy) {
         this.strategy = strategy;
 
         return this;
     }
 
-    public NodeBaseBuilder<T,C> customProvider(ContextProvider<C> provider) {
+    public NodeBaseBuilder<I, A> customProvider(ContextProvider<A> provider) {
         this.provider = provider;
 
         return this;
     }
 
-    public NodeBaseBuilder<T,C> customInterfacing(InterfacingHandler<T> handler) {
+    public NodeBaseBuilder<I, A> customInterfacing(AnomalyHandler<I,A> handler) {
         this.handler = handler;
 
         return this;
@@ -97,6 +90,6 @@ public class NodeBaseBuilder<T,C extends T> {
         Objects.requireNonNull(provider);
         Objects.requireNonNull(handler);
 
-        manager.newCommand(new DelegatingNodeBase<>(adapter,node,strategy,provider,handler));
+        manager.newCommand(new DelegatingNodeBase<>(adapter,handler,node,strategy,provider));
     }
 }

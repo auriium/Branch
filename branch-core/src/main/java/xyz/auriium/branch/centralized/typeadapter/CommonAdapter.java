@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.centralized.typeadapter;
 
-import xyz.auriium.branch.anomalies.WrongTypeAnomaly;
+import xyz.auriium.branch.interfacing.exceptional.anomalies.WrongTypeParseAnomaly;
 
 /**
  * Represents an adapter that does not convert and simply returns the same object
@@ -40,7 +40,7 @@ public interface CommonAdapter<T> extends ManagerAdapter<T,T> {
     }
 
     @Override
-    default WrongTypeAnomaly failedParseResponse(T input) {
+    default WrongTypeParseAnomaly failedParseResponse(T input) {
         throw new IllegalStateException("How did you get here (Since canAdapt is always true this should never occur?)");
     }
 }

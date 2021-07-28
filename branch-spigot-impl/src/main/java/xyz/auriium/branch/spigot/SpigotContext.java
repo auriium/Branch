@@ -22,34 +22,19 @@
 package xyz.auriium.branch.spigot;
 
 
+import org.bukkit.command.CommandSender;
 import xyz.auriium.branch.execution.AbstractNodeContext;
-import xyz.auriium.branch.interfacing.handlers.InterfacingHandler;
-import xyz.auriium.branch.interfacing.Anomaly;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInfo;
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 
 public class SpigotContext<T extends CommandSender> extends AbstractNodeContext<T> {
 
     private final T sender;
-    private final InterfacingHandler<CommandSender> handler;
 
-    protected SpigotContext(T sender, String alias, String[] args, CommandNode<T> baseNode, SearchInfo<T> result, InterfacingHandler<CommandSender> handler) {
+    protected SpigotContext(T sender, String alias, String[] args, CommandNode<T> baseNode, SearchInfo<T> result) {
         super(sender, alias, args, baseNode, result);
 
         this.sender = sender;
-        this.handler = handler;
-    }
-
-    @Override
-    public void stringSender(String string) {
-        this.sender.sendMessage(ChatColor.translateAlternateColorCodes('&',string));
-    }
-
-    @Override
-    public void response(Anomaly failure) {
-        handler.sendMessage(sender,failure);
     }
 
     @Override

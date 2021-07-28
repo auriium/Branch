@@ -4,8 +4,8 @@ import xyz.auriium.branch.execution.Block;
 import xyz.auriium.branch.execution.api.ExecutionHandler;
 import xyz.auriium.branch.fallback.permissions.EmptyPermission;
 import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.interfacing.information.description.Description;
-import xyz.auriium.branch.interfacing.information.description.StringDescription;
+import xyz.auriium.branch.centralized.information.description.Description;
+import xyz.auriium.branch.centralized.information.description.StringDescription;
 
 public class SingleNode<T> extends AbstractSingleNode<T> {
 

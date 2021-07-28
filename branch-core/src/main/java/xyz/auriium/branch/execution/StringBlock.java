@@ -37,6 +37,11 @@ public class StringBlock implements Block {
         return identifier;
     }
 
+    @Override
+    public BlockType getType() {
+        return BlockType.INPUT; /// FIXME: 7/28/2021 replace this entire class with specialized blocks (potentially with actual node refs)
+    }
+
     public static Block of(String string) {
         if (string.contains(" ")) throw new IllegalStateException("Identifier cannot have spaces!");
 
@@ -49,11 +54,6 @@ public class StringBlock implements Block {
         if (o == null || getClass() != o.getClass()) return false;
         StringBlock that = (StringBlock) o;
         return identifier.equalsIgnoreCase(that.identifier);
-    }
-
-    @Override
-    public boolean isVisual() {
-        return true;
     }
 
     @Override

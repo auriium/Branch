@@ -1,6 +1,6 @@
 package xyz.auriium.branch.nodes.argument;
 
-import xyz.auriium.branch.anomalies.NoInputProvidedAnomaly;
+import xyz.auriium.branch.interfacing.exceptional.anomalies.TooFewInputsInternalAnomaly;
 import xyz.auriium.branch.execution.Block;
 import xyz.auriium.branch.execution.NodeContext;
 import xyz.auriium.branch.execution.api.ArgExecution;
@@ -32,7 +32,7 @@ public abstract class AbstractArgNode<T> extends EndpointNode<T> {
         for (ContextualBaseArgument<T,?> argument : getArguments()) {
 
             if (subdeque.peek() == null) return Result.fail(
-                    new NoInputProvidedAnomaly(argument.getClass(), argument.getType(), argument.getLabel(), context.getArgs().length + 1, context.getArgs().length)
+                    new TooFewInputsInternalAnomaly(argument.getClass(), argument.getType(), argument.getLabel(), context.getArgs().length + 1, context.getArgs().length)
             ); //noInputProvidedExternal if there
 
             assert argument.reservedBlockAmount() > 0 : "Cannot be negative or zero";

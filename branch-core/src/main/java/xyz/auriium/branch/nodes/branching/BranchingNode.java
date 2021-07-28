@@ -25,7 +25,7 @@ import xyz.auriium.branch.execution.Block;
 import xyz.auriium.branch.execution.api.Execution;
 import xyz.auriium.branch.execution.NodeContext;
 import xyz.auriium.branch.execution.api.SuggestionHandler;
-import xyz.auriium.branch.interfacing.information.description.Description;
+import xyz.auriium.branch.centralized.information.description.Description;
 import xyz.auriium.branch.nodes.IdentifiableNode;
 import xyz.auriium.branch.fallback.permissions.Permission;
 import xyz.auriium.branch.nodes.results.model.Result;
@@ -57,7 +57,7 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
             List<Block> strings = new ArrayList<>();
 
             for (IdentifiableNode<T> node : nodes.getContents()) {
-                if (node.getPermission().attempt(ctx) && node.getIdentifier().isVisual()) {
+                if (node.getPermission().attempt(ctx)) {
                     strings.add(node.getIdentifier());
                 }
             }

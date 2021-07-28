@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.fallback.strategies;
 
-import xyz.auriium.branch.fallback.NoPermissionAnomaly;
+import xyz.auriium.branch.interfacing.exceptional.anomalies.NoPermissionAnomaly;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInput;
 import xyz.auriium.branch.nodes.results.SearchInfo;

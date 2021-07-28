@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 import xyz.auriium.branch.centralized.NodeSource;
 import xyz.auriium.branch.execution.StringBlock;
 import xyz.auriium.branch.fallback.permissions.EmptyPermission;
-import xyz.auriium.branch.interfacing.information.description.StringDescription;
+import xyz.auriium.branch.centralized.information.description.StringDescription;
 import xyz.auriium.branch.nodes.IdentifiableNode;
 import xyz.auriium.branch.nodes.single.SingleNode;
 import xyz.auriium.branch.tests.StringManager;

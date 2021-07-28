@@ -24,21 +24,14 @@ package xyz.auriium.branch.spigot;
 
 import xyz.auriium.branch.execution.ContextProvider;
 import xyz.auriium.branch.execution.NodeContext;
-import xyz.auriium.branch.interfacing.handlers.InterfacingHandler;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInfo;
 import org.bukkit.command.CommandSender;
 
 public class SpigotContextProvider<C extends CommandSender> implements ContextProvider<C> {
 
-    private final InterfacingHandler<CommandSender> handler;
-
-    public SpigotContextProvider(InterfacingHandler<CommandSender> handler) {
-        this.handler = handler;
-    }
-
     @Override
     public NodeContext<C> produce(C sender, String alias, String[] strings, CommandNode<C> baseNode, SearchInfo<C> search) {
-        return new SpigotContext<>(sender,alias,strings,baseNode,search, handler);
+        return new SpigotContext<>(sender,alias,strings,baseNode,search);
     }
 }

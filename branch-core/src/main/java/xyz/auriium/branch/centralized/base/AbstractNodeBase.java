@@ -26,7 +26,7 @@ import xyz.auriium.branch.execution.api.Execution;
 import xyz.auriium.branch.execution.ContextProvider;
 import xyz.auriium.branch.execution.NodeContext;
 import xyz.auriium.branch.fallback.strategies.FallbackSearchStrategy;
-import xyz.auriium.branch.interfacing.handlers.InterfacingHandler;
+import xyz.auriium.branch.interfacing.exceptional.AnomalyHandler;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInfo;
 import xyz.auriium.branch.nodes.results.model.Result;
@@ -40,20 +40,22 @@ import java.util.List;
  */
 public abstract class AbstractNodeBase<I, A extends I> implements NodeBase<I> {
 
+
     private final ManagerAdapter<I, A> adapter;
+    private final AnomalyHandler<I, A> handler;
 
     private final CommandNode<A> baseNode;
     private final FallbackSearchStrategy<A> strategy;
     private final ContextProvider<A> provider;
-    private final InterfacingHandler<I> handler;
 
-    public AbstractNodeBase(ManagerAdapter<I, A> adapter, CommandNode<A> baseNode, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider, InterfacingHandler<I> handler) {
+    protected AbstractNodeBase(ManagerAdapter<I, A> adapter, AnomalyHandler<I, A> handler, CommandNode<A> baseNode, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider) {
         this.adapter = adapter;
+        this.handler = handler;
         this.baseNode = baseNode;
         this.strategy = strategy;
         this.provider = provider;
-        this.handler = handler;
     }
+
 
     /**
      * Method for execution of runnable once runnable is found
@@ -67,8 +69,8 @@ public abstract class AbstractNodeBase<I, A extends I> implements NodeBase<I> {
         //have not aqcuired C-type (cannot use Result object or message handling-parsing)
 
         if (!adapter.canAdapt(input)) {
-            handler.sendMessage(input,adapter.failedParseResponse(input)); //invalid access of handler with new c-type/t-type ruleset
-            //to remedy we must implement a base-type handler in all handlers.
+            handler.communicateNotAdapted(input, adapter.failedParseResponse(input));
+
             return;
         }
 
@@ -79,7 +81,8 @@ public abstract class AbstractNodeBase<I, A extends I> implements NodeBase<I> {
         Result<SearchInfo<A>> result = strategy.attemptPreprocess(adaptedSender,alias,args,baseNode);
 
         if (!result.isSuccessful()) {
-            handler.sendMessage(input, result.getFailure());
+            handler.communicateAdapted(adaptedSender, result.getFailure());
+
             return;
         }
 
@@ -89,7 +92,9 @@ public abstract class AbstractNodeBase<I, A extends I> implements NodeBase<I> {
         Result<Execution<A>> executionResult = info.resultingNode().getExecution(produced);
 
         if (!executionResult.isSuccessful()) {
-            handler.sendMessage(input, result.getFailure());
+            handler.communicateAdapted(adaptedSender, result.getFailure());
+
+            return;
         }
 
         submitExecution(executionResult.getSuccess());

@@ -21,7 +21,8 @@
 
 package xyz.auriium.branch.nodes;
 
-import xyz.auriium.branch.interfacing.Anomaly;
+import xyz.auriium.branch.interfacing.exceptional.Anomaly;
+import xyz.auriium.branch.interfacing.exceptional.AnomalyType;
 
 public class TooManyArgsAnomaly implements Anomaly {
 
@@ -39,5 +40,10 @@ public class TooManyArgsAnomaly implements Anomaly {
 
     public int getSuppliedArgs() {
         return suppliedArgs;
+    }
+
+    @Override
+    public AnomalyType type() {
+        return AnomalyType.INVALID_SYNTAX;
     }
 }

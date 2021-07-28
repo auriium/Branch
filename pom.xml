@@ -39,16 +39,25 @@
         <developerConnection>scm:git:https://github.com/Auriium/Branch.git</developerConnection>
     </scm>
 
-
-
     <modules>
         <module>branch-core</module>
         <module>branch-spigot-impl</module>
+        <module>branch-adventure</module>
     </modules>
 
     <properties>
         <maven.compiler.source>${compiler.version}</maven.compiler.source>
         <maven.compiler.target>${compiler.version}</maven.compiler.target>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>xyz.auriium</groupId>
+                <artifactId>branch-core</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

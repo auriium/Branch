@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.centralized.typeadapter;
 
-import xyz.auriium.branch.anomalies.WrongTypeAnomaly;
+import xyz.auriium.branch.interfacing.exceptional.anomalies.WrongTypeParseAnomaly;
 
 /**
  * Represents something that can convert an object of a certain type to another object
@@ -35,6 +35,6 @@ public interface ManagerAdapter<INPUT,OUTPUT extends INPUT> {
     OUTPUT adapt(INPUT input);
     boolean canAdapt(INPUT input);
 
-    WrongTypeAnomaly failedParseResponse(INPUT input);
+    WrongTypeParseAnomaly failedParseResponse(INPUT input);
 
 }

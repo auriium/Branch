@@ -22,13 +22,14 @@
 package xyz.auriium.branch.execution;
 
 /**
- * Represents an unparsed component of a command argument input structure
+ * Represents a Branch-provided identification structure for the identifier of specific structures
  */
 public interface Block {
 
     String getIdentifier();
+    BlockType getType();
 
-    boolean equals(Object object);
-    boolean isVisual();
-
+    default boolean matches(String string) {
+        return getIdentifier().equalsIgnoreCase(string);
+    }
 }

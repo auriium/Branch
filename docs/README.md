@@ -1,35 +1,33 @@
-# Branch
+# Website
 
-An opinionated command framework based around the concept of an argument handling node
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-Has support for both builder format and annotation format
+## Installation
 
-Built for use with Beetle but can be used independently 
-
-## How can I ask for support?
-
-DM **Aesthetik#9784** on discord!
-
-## Contributing
-
-Make pull requests that arent bad and I accept them. It's about that simple!
-
-## Repositories
-
+```console
+yarn install
 ```
-    <dependencies>
-        <dependency>
-            <groupId>me.aurium</groupId>
-            <artifactId>branch-core</artifactId>
-            <version>0.1.0</version>
-        </dependency>
-    </dependencies>
+
+## Local Development
+
+```console
+yarn start
 ```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+## Build
+
+```console
+yarn build
 ```
-    <repositories>
-        <repository>
-            <id>aurium</id>
-            <url>https://repo.repsy.io/mvn/elytraforce/default</url>
-        </repository>
-    </repositories>
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+## Deployment
+
+```console
+GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 ```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

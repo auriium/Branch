@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.nodes.results.model;
 
-import xyz.auriium.branch.interfacing.Anomaly;
+import xyz.auriium.branch.interfacing.exceptional.Anomaly;
 
 public class SuccessfulResult<T> implements Result<T> {
 

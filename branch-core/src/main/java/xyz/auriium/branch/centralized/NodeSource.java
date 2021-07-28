@@ -2,7 +2,7 @@ package xyz.auriium.branch.centralized;
 
 import xyz.auriium.branch.execution.api.ExecutionHandler;
 import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.interfacing.information.description.Description;
+import xyz.auriium.branch.centralized.information.description.Description;
 import xyz.auriium.branch.nodes.branching.ExclusiveBranchingBuilder;
 import xyz.auriium.branch.nodes.branching.InclusiveBranchingBuilder;
 import xyz.auriium.branch.nodes.single.SingleNode;
