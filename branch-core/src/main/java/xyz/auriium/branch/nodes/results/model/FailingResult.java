@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.nodes.results.model;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 
 /**
  * A result that has failed
@@ -29,9 +29,9 @@ import xyz.auriium.branch.interfacing.Response;
  */
 public class FailingResult<T> implements Result<T> {
 
-    private final Response failure;
+    private final Anomaly failure;
 
-    public FailingResult(Response failure) {
+    public FailingResult(Anomaly failure) {
         this.failure = failure;
     }
 
@@ -46,7 +46,7 @@ public class FailingResult<T> implements Result<T> {
     }
 
     @Override
-    public Response getFailure() {
+    public Anomaly getFailure() {
         return failure;
     }
 

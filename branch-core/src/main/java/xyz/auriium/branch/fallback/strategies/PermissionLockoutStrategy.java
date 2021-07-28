@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.fallback.strategies;
 
-import xyz.auriium.branch.interfacing.responses.NoPermissionResponse;
+import xyz.auriium.branch.fallback.NoPermissionAnomaly;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInfo;
 import xyz.auriium.branch.nodes.results.SearchInput;
@@ -40,7 +40,7 @@ public class PermissionLockoutStrategy<T> implements FallbackSearchStrategy<T> {
 
         //peak object oriented code
         if (toBeExecuted.isSuccessful() && !toBeExecuted.getSuccess().resultingNode().getPermission().attempt(sender, alias, args)) {
-            return Result.fail(new NoPermissionResponse(toBeExecuted.getSuccess().resultingNode().getPermission().failureIdentifiableName()));
+            return Result.fail(new NoPermissionAnomaly(toBeExecuted.getSuccess().resultingNode().getPermission().failureIdentifiableName()));
         }
 
         return toBeExecuted;

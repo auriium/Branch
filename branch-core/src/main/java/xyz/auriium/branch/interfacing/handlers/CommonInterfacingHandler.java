@@ -22,16 +22,16 @@
 package xyz.auriium.branch.interfacing.handlers;
 
 import xyz.auriium.branch.interfacing.Message;
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 import xyz.auriium.branch.interfacing.ResponseAction;
 
 import java.util.Map;
 
 public class CommonInterfacingHandler<T> implements InterfacingHandler<T> {
 
-    private final Map<Class<? extends Response>, ResponseAction<T,? extends Response>> map;
+    private final Map<Class<? extends Anomaly>, ResponseAction<T,? extends Anomaly>> map;
 
-    CommonInterfacingHandler(Map<Class<? extends Response>, ResponseAction<T, ? extends Response>> map) {
+    CommonInterfacingHandler(Map<Class<? extends Anomaly>, ResponseAction<T, ? extends Anomaly>> map) {
         this.map = map;
     }
 
@@ -41,12 +41,12 @@ public class CommonInterfacingHandler<T> implements InterfacingHandler<T> {
     }
 
     @Override
-    public void sendMessage(T recipent, Response response) {
-        getMessage(response).accept(recipent);
+    public void sendMessage(T recipent, Anomaly anomaly) {
+        getMessage(anomaly).accept(recipent);
     }
 
     @SuppressWarnings("unchecked")
-    private <C extends Response> ResponseAction<T, C> get(Class<C> clazz) {
+    private <C extends Anomaly> ResponseAction<T, C> get(Class<C> clazz) {
         ResponseAction<T,C> action = (ResponseAction<T, C>) map.get(clazz);
 
         if (action == null) throw new IllegalStateException("A response was requested but internal map had no binding!");
@@ -55,7 +55,7 @@ public class CommonInterfacingHandler<T> implements InterfacingHandler<T> {
     }
 
     @SuppressWarnings("unchecked")
-    private  <C extends Response> Message<T> getMessage(C response) {
+    private  <C extends Anomaly> Message<T> getMessage(C response) {
         return get((Class<C>) response.getClass()).consume(response);
     }
 }

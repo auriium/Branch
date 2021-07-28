@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.fallback.strategies;
 
-import xyz.auriium.branch.interfacing.responses.NoPermissionResponse;
+import xyz.auriium.branch.fallback.NoPermissionAnomaly;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInput;
 import xyz.auriium.branch.nodes.results.SearchInfo;
@@ -66,7 +66,7 @@ public class OneBackStrategy<T> implements FallbackSearchStrategy<T> {
             //something is wrong with the execution (e.g. wrong args or you did something bad), pass above one.
 
             if (toBeExecuted.getSuccess().resultingNode().equals(baseNode)) {
-                return Result.fail(new NoPermissionResponse(baseNode.getPermission().failureIdentifiableName()));
+                return Result.fail(new NoPermissionAnomaly(baseNode.getPermission().failureIdentifiableName()));
 
             } else {
                 toBeExecuted = baseNode.getSpecificNode(input.withoutTop()); //regress backwards a node

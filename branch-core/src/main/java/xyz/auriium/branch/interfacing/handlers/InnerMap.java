@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.interfacing.handlers;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 import xyz.auriium.branch.interfacing.ResponseAction;
 
 import java.util.HashMap;
@@ -29,10 +29,10 @@ import java.util.Map;
 
 public class InnerMap<T> implements MessageMap<T> {
 
-    private final Map<Class<? extends Response>,ResponseAction<T,? extends Response>> map = new HashMap<>();
+    private final Map<Class<? extends Anomaly>,ResponseAction<T,? extends Anomaly>> map = new HashMap<>();
 
     @Override
-    public <F extends Response> InnerMap<T> add(Class<F> key, ResponseAction<T, F> action) {
+    public <F extends Anomaly> InnerMap<T> add(Class<F> key, ResponseAction<T, F> action) {
         this.map.put(key,action);
 
         return this;

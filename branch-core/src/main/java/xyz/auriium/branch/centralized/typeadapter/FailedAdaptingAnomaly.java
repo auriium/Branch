@@ -19,19 +19,30 @@
  *
  */
 
-package xyz.auriium.branch.interfacing.responses;
+package xyz.auriium.branch.centralized.typeadapter;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 
-public class NoPermissionResponse implements Response {
+/**
+ * Represents a response to the scenario in which a certain object was attempted to be adapted to an extending type
+ * but it was not an instance of it (or similar scenarios, such as attempting to flatmap a certain type to another.)
+ */
+public class FailedAdaptingAnomaly implements Anomaly {
 
-    private final String lackingPermission;
+    private final Class<?> expectedClass;
+    private final Class<?> receivedClass;
 
-    public NoPermissionResponse(String lackingPermission) {
-        this.lackingPermission = lackingPermission;
+    public FailedAdaptingAnomaly(Class<?> expectedClass, Class<?> receivedClass) {
+        this.expectedClass = expectedClass;
+        this.receivedClass = receivedClass;
     }
 
-    public String getLackingPermission() {
-        return lackingPermission;
+    public Class<?> getExpectedClass() {
+        return expectedClass;
     }
+
+    public Class<?> getReceivedClass() {
+        return receivedClass;
+    }
+
 }

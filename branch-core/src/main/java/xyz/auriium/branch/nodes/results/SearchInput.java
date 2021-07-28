@@ -31,7 +31,7 @@ import java.util.List;
 
 public class SearchInput {
 
-    private final List<Block> initialPath; //TODO make list or something - i don't care but it must be immutable
+    private final List<Block> initialPath;
     private final Deque<Block> reducablePath;
 
     public SearchInput(List<Block> initialPath, Deque<Block> reducablePath) {

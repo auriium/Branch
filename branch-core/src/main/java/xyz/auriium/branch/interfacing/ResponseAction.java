@@ -26,7 +26,7 @@ package xyz.auriium.branch.interfacing;
  * @param <T> t
  * @param <C>c
  */
-public interface ResponseAction<T,C extends Response> {
+public interface ResponseAction<T,C extends Anomaly> {
 
     Message<T> consume(C response);
 

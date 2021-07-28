@@ -19,30 +19,25 @@
  *
  */
 
-package xyz.auriium.branch.interfacing.responses;
+package xyz.auriium.branch.nodes;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 
-/**
- * Represents a response to the scenario in which a certain object was attempted to be adapted to an extending type
- * but it was not an instance of it (or similar scenarios, such as attempting to flatmap a certain type to another.)
- */
-public class FailedAdaptingResponse implements Response {
+public class TooManyArgsAnomaly implements Anomaly {
 
-    private final Class<?> expectedClass;
-    private final Class<?> receivedClass;
+    private final int expectedArgs;
+    private final int suppliedArgs;
 
-    public FailedAdaptingResponse(Class<?> expectedClass, Class<?> receivedClass) {
-        this.expectedClass = expectedClass;
-        this.receivedClass = receivedClass;
+    public TooManyArgsAnomaly(int expectedArgs, int suppliedArgs) {
+        this.expectedArgs = expectedArgs;
+        this.suppliedArgs = suppliedArgs;
     }
 
-    public Class<?> getExpectedClass() {
-        return expectedClass;
+    public int getExpectedArgs() {
+        return expectedArgs;
     }
 
-    public Class<?> getReceivedClass() {
-        return receivedClass;
+    public int getSuppliedArgs() {
+        return suppliedArgs;
     }
-
 }

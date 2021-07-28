@@ -22,7 +22,7 @@
 package xyz.auriium.branch.interfacing.handlers;
 
 import xyz.auriium.branch.interfacing.Message;
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 
 /**
  * Represents a centralized source for message providing as well as context creation. I am aware i spelled recipient wrong.
@@ -33,6 +33,6 @@ import xyz.auriium.branch.interfacing.Response;
 public interface InterfacingHandler<T> {
 
     void sendMessage(T recipent, Message<T> message);
-    void sendMessage(T recipent, Response response);
+    void sendMessage(T recipent, Anomaly anomaly);
 
 }

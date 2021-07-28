@@ -24,7 +24,7 @@ package xyz.auriium.branch.spigot;
 
 import xyz.auriium.branch.execution.AbstractNodeContext;
 import xyz.auriium.branch.interfacing.handlers.InterfacingHandler;
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInfo;
 import org.bukkit.ChatColor;
@@ -48,7 +48,7 @@ public class SpigotContext<T extends CommandSender> extends AbstractNodeContext<
     }
 
     @Override
-    public void response(Response failure) {
+    public void response(Anomaly failure) {
         handler.sendMessage(sender,failure);
     }
 

@@ -21,8 +21,6 @@
 
 package xyz.auriium.branch.centralized.typeadapter;
 
-import xyz.auriium.branch.interfacing.responses.FailedAdaptingResponse;
-
 /**
  * Represents something that can convert an object of a certain type to another object
  * It is used to enable the use of nodes of a unique type on a centralized manager of a separate type.
@@ -35,6 +33,6 @@ public interface ManagerAdapter<INPUT,OUTPUT extends INPUT> {
     OUTPUT adapt(INPUT input);
     boolean canAdapt(INPUT input);
 
-    FailedAdaptingResponse failedParseResponse(INPUT input);
+    FailedAdaptingAnomaly failedParseResponse(INPUT input);
 
 }

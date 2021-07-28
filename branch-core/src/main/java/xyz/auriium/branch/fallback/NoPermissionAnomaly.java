@@ -19,25 +19,22 @@
  *
  */
 
-package xyz.auriium.branch.interfacing.responses;
+package xyz.auriium.branch.fallback;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 
-public class TooManyArgsResponse implements Response {
+/**
+ * Response fired when someone lacks a permission
+ */
+public class NoPermissionAnomaly implements Anomaly {
 
-    private final int expectedArgs;
-    private final int suppliedArgs;
+    private final String lackingPermission;
 
-    public TooManyArgsResponse(int expectedArgs, int suppliedArgs) {
-        this.expectedArgs = expectedArgs;
-        this.suppliedArgs = suppliedArgs;
+    public NoPermissionAnomaly(String lackingPermission) {
+        this.lackingPermission = lackingPermission;
     }
 
-    public int getExpectedArgs() {
-        return expectedArgs;
-    }
-
-    public int getSuppliedArgs() {
-        return suppliedArgs;
+    public String getLackingPermission() {
+        return lackingPermission;
     }
 }

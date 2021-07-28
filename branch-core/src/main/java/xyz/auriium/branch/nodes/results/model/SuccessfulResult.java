@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.nodes.results.model;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 
 public class SuccessfulResult<T> implements Result<T> {
 
@@ -42,7 +42,7 @@ public class SuccessfulResult<T> implements Result<T> {
     }
 
     @Override
-    public Response getFailure() {
+    public Anomaly getFailure() {
         throw new IllegalStateException("Attempted to get failure of a successful result!");
     }
 }

@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.spigot.adapter;
 
-import xyz.auriium.branch.interfacing.responses.FailedAdaptingResponse;
+import xyz.auriium.branch.centralized.typeadapter.FailedAdaptingAnomaly;
 import xyz.auriium.branch.centralized.typeadapter.ManagerAdapter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -43,8 +43,8 @@ public class PlayerAdapter implements ManagerAdapter<CommandSender, Player> {
     }
 
     @Override
-    public FailedAdaptingResponse failedParseResponse(CommandSender sender) {
-        return new FailedAdaptingResponse(Player.class, CommandSender.class);
+    public FailedAdaptingAnomaly failedParseResponse(CommandSender sender) {
+        return new FailedAdaptingAnomaly(Player.class, CommandSender.class);
     }
 
 

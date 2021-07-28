@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.execution;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.nodes.results.SearchInfo;
 
@@ -58,7 +58,7 @@ public interface NodeContext<T> {
      * Sends a formatted response to a player coded to a key
      * @param failure the response
      */
-    void response(Response failure);
+    void response(Anomaly failure);
 
     /**
      * Gets whether the context's delegating sender has access to a permission. On some platforms, this may always be false.

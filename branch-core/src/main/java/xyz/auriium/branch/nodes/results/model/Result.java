@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.nodes.results.model;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 
 public interface Result<T> {
 
@@ -29,12 +29,12 @@ public interface Result<T> {
 
     T getSuccess();
 
-    Response getFailure();
+    Anomaly getFailure();
 
     static <X> SuccessfulResult<X> success(X t) {
         return new SuccessfulResult<>(t);
     }
-    static <X> FailingResult<X> fail(Response failure) {
+    static <X> FailingResult<X> fail(Anomaly failure) {
         return new FailingResult<>(failure);
     }
 

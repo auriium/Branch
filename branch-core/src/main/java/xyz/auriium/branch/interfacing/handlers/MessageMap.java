@@ -21,12 +21,12 @@
 
 package xyz.auriium.branch.interfacing.handlers;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 import xyz.auriium.branch.interfacing.ResponseAction;
 
 public interface MessageMap<T> {
 
-    <F extends Response> MessageMap<T> add(Class<F> key, ResponseAction<T,F> action);
+    <F extends Anomaly> MessageMap<T> add(Class<F> key, ResponseAction<T,F> action);
 
     InterfacingHandler<T> make();
 

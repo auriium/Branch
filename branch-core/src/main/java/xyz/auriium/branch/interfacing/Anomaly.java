@@ -24,6 +24,6 @@ package xyz.auriium.branch.interfacing;
 /**
  * Marker interface for a data-carrying object that can be consumed by a responseActionhandler
  */
-public interface Response {
+public interface Anomaly {
 
 }

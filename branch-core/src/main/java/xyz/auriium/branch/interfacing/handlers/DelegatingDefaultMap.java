@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.interfacing.handlers;
 
-import xyz.auriium.branch.interfacing.Response;
+import xyz.auriium.branch.interfacing.Anomaly;
 import xyz.auriium.branch.interfacing.ResponseAction;
 
 public abstract class DelegatingDefaultMap<T> implements MessageMap<T> {
@@ -30,7 +30,7 @@ public abstract class DelegatingDefaultMap<T> implements MessageMap<T> {
     protected abstract InnerMap<T> defaultMap();
 
     @Override
-    public <F extends Response> DelegatingDefaultMap<T> add(Class<F> key, ResponseAction<T, F> action) {
+    public <F extends Anomaly> DelegatingDefaultMap<T> add(Class<F> key, ResponseAction<T, F> action) {
         delegate.add(key,action);
 
         return this;
