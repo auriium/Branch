@@ -4,9 +4,7 @@ import xyz.auriium.branch.interfacing.exceptional.Anomaly;
 
 /**
  * Represents something that can handle anomalies and retrieve stringly simplified messages based on them
- * These strings will then be redistributed to the
- *
- * TODO make these return type M message
+ * These messages are then distributed to a AnomalyPrinter.
  */
 public interface AnomalyCaptioner<M> {
 

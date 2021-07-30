@@ -5,6 +5,7 @@ import xyz.auriium.branch.execution.blocks.ArgumentBlock;
 import xyz.auriium.branch.nodes.results.model.Result;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Base-type SPI interface describing an
@@ -17,12 +18,6 @@ import java.util.List;
  * @param <O> output type of argument parsing e.g. world or string
  */
 public interface ContextualBaseArgument<T,O> {
-
-    /**
-     * Method used for reflective-type parsing (interface scanners like ProxyNode)
-     * @return output -type class
-     */
-    Class<O> outputClass();
 
     /**
      * Method describing the single-word "type" of this argument, like
@@ -45,6 +40,12 @@ public interface ContextualBaseArgument<T,O> {
      * @return the amount of blocks this argument requires
      */
     int reservedBlockAmount();
+
+    /**
+     * If this object is an optional, return a value. If it is not, will always return empty
+     * @return the optional describing whether this object is optional or not
+     */
+    Optional<O> getOptional();
 
     /**
      * Method describing how this object parses

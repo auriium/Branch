@@ -28,8 +28,6 @@ import xyz.auriium.branch.nodes.results.model.Result;
 
 /**
  *
- * /// FIXME: 5/7/2021 This strat is possibly broken thanks to the update that changes nodes to return execution results.
- *
  * Fallback and processing strategy that does the following actions:
  *
  * Attempts to get a node via arguments search. It then checks if the user has permission to access the node.
@@ -76,8 +74,6 @@ public class OneBackStrategy<T> implements FallbackSearchStrategy<T> {
     }
 
 
-
-    //TODO old code - refer to it if you need to
     /*SearchInput input = SearchInput.of(args);
 
     SearchResult<T> toBeExecuted = baseNode.getSpecificNode(input);

@@ -1,6 +1,7 @@
 package xyz.auriium.branch.nodes.argument;
 
 import xyz.auriium.branch.execution.EnhancedNodeContext;
+import xyz.auriium.branch.interfacing.exceptional.anomalies.TooFewInputsExternalAnomaly;
 import xyz.auriium.branch.interfacing.exceptional.anomalies.TooFewInputsInternalAnomaly;
 import xyz.auriium.branch.execution.Block;
 import xyz.auriium.branch.execution.NodeContext;
@@ -37,9 +38,20 @@ public abstract class AbstractArgNode<T> implements ProcessingNode<T, Arguments>
 
         for (ContextualBaseArgument<T,?> argument : getArguments()) {
 
-            if (subQueue.peek() == null) return Result.fail(
-                    new TooFewInputsInternalAnomaly(argument.getClass(), argument.getType(), context.getArgs().length + 1, context.getArgs().length)
-            ); //noInputProvidedExternal if there
+            if (subQueue.peek() == null) {
+
+                if (argument.getOptional().isPresent()) { //if this is an optional argument
+                    argumentObject.put(argument.getLabel(),argument.getOptional().get());
+
+                    continue;
+                } else {
+                    return Result.fail(
+                            new TooFewInputsExternalAnomaly()
+                    ); //throw
+                }
+
+
+            }
 
             assert argument.reservedBlockAmount() > 0 : "Cannot be negative or zero";
 

@@ -4,44 +4,36 @@ import xyz.auriium.branch.execution.blocks.ArgumentBlock;
 import xyz.auriium.branch.nodes.argument.model.SingleIgnorantArgument;
 import xyz.auriium.branch.nodes.results.model.Result;
 
+import java.util.Objects;
+import java.util.Optional;
+
 public class StringArgument implements SingleIgnorantArgument<String> {
 
     private final String label;
-    private final String option;
+    private final String nullableOptional;
 
-    StringArgument(String label, String option) {
+    private final ArgumentBlock block;
+
+    StringArgument(String label, String nullableOptional) {
         this.label = label;
-        this.option = option;
+        this.nullableOptional = nullableOptional;
+
+        this.block = new ArgumentBlock(label, "string", nullableOptional != null);
     }
 
-    /**
-     * Requires a new required string argument
-     * @param label label
-     * @return value to return
-     */
-    public static StringArgument ofRequired(String label) {
+    public static StringArgument of(String label) {
         return new StringArgument(label, null);
     }
 
-    /**
-     * Returns a new optional string argument
-     * @param label the label
-     * @param defaultVar the default value that is inserted if nothing is present
-     *                   use null if you don't have any idea what to default
-     * @return argument
-     */
-    public static StringArgument ofOptional(String label, String defaultVar) {
-        return new StringArgument(label, defaultVar);
-    }
+    public static StringArgument ofOptional(String label, String optional) {
+        Objects.requireNonNull(optional);
 
-    @Override
-    public Class<String> outputClass() {
-        return String.class;
+        return new StringArgument(label, optional);
     }
 
     @Override
     public ArgumentBlock getType() {
-        return new ArgumentBlock(label,"string",option == null);
+        return block;
     }
 
     @Override
@@ -50,7 +42,12 @@ public class StringArgument implements SingleIgnorantArgument<String> {
     }
 
     @Override
+    public Optional<String> getOptional() {
+        return Optional.ofNullable(nullableOptional);
+    }
+
+    @Override
     public Result<String> microParse(Object sender, String alias, String toParse) {
-        return null; //TODO
+        return Result.success(toParse);
     }
 }
