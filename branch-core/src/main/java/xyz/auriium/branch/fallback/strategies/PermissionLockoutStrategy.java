@@ -23,24 +23,27 @@ package xyz.auriium.branch.fallback.strategies;
 
 import xyz.auriium.branch.interfacing.exceptional.anomalies.NoPermissionAnomaly;
 import xyz.auriium.branch.nodes.CommandNode;
-import xyz.auriium.branch.nodes.results.SearchInfo;
-import xyz.auriium.branch.nodes.results.SearchInput;
+import xyz.auriium.branch.nodes.results.*;
 import xyz.auriium.branch.nodes.results.model.Result;
+
+import java.util.ArrayList;
 
 /**
  * Simple fallback strategy that if the sender has no permission to execute the command they are sent a failing response.
  * @param <T>
  */
 public class PermissionLockoutStrategy<T> implements FallbackSearchStrategy<T> {
-    @Override
-    public Result<SearchInfo<T>> attemptPreprocess(T sender, String alias, String[] args, CommandNode<T> baseNode) {
 
-        SearchInput input = SearchInput.of(args);
-        Result<SearchInfo<T>> toBeExecuted = baseNode.getSpecificNode(input);
+    @Override
+    public Result<PreProcessSearch<T>> attemptPreprocess(T sender, String alias, String[] args, SearcherEquality equality, CommandNode<T> baseNode) {
+
+        InitialSearch<T> search = InitialSearch.of(equality,args);
+        Result<PreProcessSearch<T>> toBeExecuted = baseNode.searchNode(search);
 
         //peak object oriented code
-        if (toBeExecuted.isSuccessful() && !toBeExecuted.getSuccess().resultingNode().getPermission().attempt(sender, alias, args)) {
-            return Result.fail(new NoPermissionAnomaly(toBeExecuted.getSuccess().resultingNode().getPermission().failureIdentifiableName()));
+
+        if (toBeExecuted.isSuccessful() && !toBeExecuted.getSuccess().getFoundNode().getPermission().attempt(sender, alias, args)) {
+            return Result.fail(new NoPermissionAnomaly(toBeExecuted.getSuccess().getFoundNode().getPermission().failureIdentifiableName()));
         }
 
         return toBeExecuted;

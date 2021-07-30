@@ -21,10 +21,6 @@
 
 package xyz.auriium.branch.execution;
 
-import xyz.auriium.branch.interfacing.exceptional.Anomaly;
-import xyz.auriium.branch.nodes.CommandNode;
-import xyz.auriium.branch.nodes.results.SearchInfo;
-
 
 /**
  * Represents the in-context of an executed command -> Basically, all the important information gleaned from the execution of a command
@@ -35,7 +31,7 @@ public interface NodeContext<T> {
 
     /**
      * Gets the parsed sender object used by this object
-     * @return
+     * @return the sender object
      */
     T getSender();
 
@@ -45,8 +41,6 @@ public interface NodeContext<T> {
      */
     String getAlias();
     String[] getArgs();
-    CommandNode<T> getBaseExecutedNode();
-    SearchInfo<T> getResults();
 
     /**
      * Gets whether the context's delegating sender has access to a permission. On some platforms, this may always be false.

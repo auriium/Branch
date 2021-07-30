@@ -25,7 +25,7 @@ import xyz.auriium.branch.execution.api.ExecutionHandler;
 
 public class EmptyExecutionHandler<T> implements ExecutionHandler<T> {
     @Override
-    public void handle(NodeContext<T> adapter) {
+    public void handle(EnhancedNodeContext<T> adapter) {
 
     }
 }

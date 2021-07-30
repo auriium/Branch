@@ -25,7 +25,6 @@ package xyz.auriium.branch.spigot;
 import xyz.auriium.branch.execution.ContextProvider;
 import xyz.auriium.branch.execution.NodeContext;
 import xyz.auriium.branch.nodes.CommandNode;
-import xyz.auriium.branch.nodes.results.SearchInfo;
 import org.bukkit.command.CommandSender;
 
 public class SpigotContextProvider<C extends CommandSender> implements ContextProvider<C> {

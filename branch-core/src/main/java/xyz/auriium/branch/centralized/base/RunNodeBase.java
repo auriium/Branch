@@ -6,6 +6,7 @@ import xyz.auriium.branch.execution.api.Execution;
 import xyz.auriium.branch.fallback.strategies.FallbackSearchStrategy;
 import xyz.auriium.branch.interfacing.exceptional.AnomalyHandler;
 import xyz.auriium.branch.nodes.CommandNode;
+import xyz.auriium.branch.nodes.results.SearcherEquality;
 
 /**
  * Nodebase that simply runs the execution runnable
@@ -14,9 +15,8 @@ import xyz.auriium.branch.nodes.CommandNode;
  */
 public abstract class RunNodeBase<I,A extends I> extends AbstractNodeBase<I,A> {
 
-
-    protected RunNodeBase(ManagerAdapter<I, A> adapter, AnomalyHandler<I, A> handler, CommandNode<A> baseNode, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider) {
-        super(adapter, handler, baseNode, strategy, provider);
+    protected RunNodeBase(ManagerAdapter<I, A> adapter, AnomalyHandler<I, A> handler, CommandNode<A> baseNode, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider, SearcherEquality equality) {
+        super(adapter, handler, baseNode, strategy, provider, equality);
     }
 
     @Override

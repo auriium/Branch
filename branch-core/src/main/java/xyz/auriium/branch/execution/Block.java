@@ -21,15 +21,66 @@
 
 package xyz.auriium.branch.execution;
 
+import xyz.auriium.branch.execution.blocks.BracketPattern;
+
 /**
  * Represents a Branch-provided identification structure for the identifier of specific structures
  */
 public interface Block {
 
-    String getIdentifier();
-    BlockType getType();
+    /**
+     * Gets the literal identifier of the block
+     *
+     * If the object is an endpoint block "join" of /kitpvp join, the identifier is "join"
+     * (pretty obvious)
+     * @return the identifier
+     */
+    String getLabel();
+
+    /**
+     * Gets the prettified "version" of the block used to display it
+     *
+     * If the object is an endpoint block "join" of /kitpvp join,
+     * the prettified identifier will be "<join>"
+     *
+     * @return the pretty string alone
+     */
+    default String getPretty() {
+        return getBracketPattern().parse(getLabel());
+    }
+
+    /**
+     * Gets identifier and type wrapped with prettified bracketing
+     *
+     * If the object is an endpoint block "join" of /kitpvp join, the
+     * prettified + type string is "<endpoint:join>"
+     *
+     * @return the prettified string
+     */
+    default String getPrettyAndType() {
+        return getBracketPattern().parse(String.format("%s:%s", getType(), getLabel()));
+    }
+
+    /**
+     * Gets just the type string used for this object. Typically delegates to {@link #getTypeObject()} except
+     * for argument blocks, in which case
+     * @return the type
+     */
+    String getType();
+
+    /**
+     * Returns a bracket pattern for use with {@link #getPretty()}
+     * @return returns the bracket pattern
+     */
+    BracketPattern getBracketPattern();
+
+    /**
+     * Gets the blocktype this belongs to
+     * @return the blocktype
+     */
+    BlockType getTypeObject();
 
     default boolean matches(String string) {
-        return getIdentifier().equalsIgnoreCase(string);
+        return getLabel().equalsIgnoreCase(string);
     }
 }

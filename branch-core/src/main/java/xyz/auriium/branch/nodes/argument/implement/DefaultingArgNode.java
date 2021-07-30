@@ -7,7 +7,7 @@ public abstract class DefaultingArgNode<T> extends ImplementableArgNode<T> {
 
     @Override
     public Permission<T> getPermission() {
-        return new EmptyPermission<>();
+        return EmptyPermission.instance();
     }
 
 }

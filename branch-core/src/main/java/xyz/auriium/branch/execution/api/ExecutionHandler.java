@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.execution.api;
 
-import xyz.auriium.branch.execution.NodeContext;
+import xyz.auriium.branch.execution.EnhancedNodeContext;
 
 /**
  * Functional interface typically used in simple nodes that only need to do one action
@@ -30,6 +30,6 @@ import xyz.auriium.branch.execution.NodeContext;
 @FunctionalInterface
 public interface ExecutionHandler<T> {
 
-    void handle(NodeContext<T> context);
+    void handle(EnhancedNodeContext<T> context);
 
 }

@@ -25,10 +25,10 @@ import xyz.auriium.branch.execution.NodeContext;
 import xyz.auriium.branch.execution.api.Execution;
 import xyz.auriium.branch.execution.api.SuggestionHandler;
 import xyz.auriium.branch.centralized.information.description.Description;
-import xyz.auriium.branch.nodes.results.SearchInput;
-import xyz.auriium.branch.nodes.results.SearchInfo;
 import xyz.auriium.branch.fallback.permissions.Permission;
 import xyz.auriium.branch.nodes.results.model.Result;
+import xyz.auriium.branch.nodes.results.InitialSearch;
+import xyz.auriium.branch.nodes.results.PreProcessSearch;
 
 /**
  * Base object
@@ -38,10 +38,24 @@ public interface CommandNode<T> {
 
     //int getExpectedConsumeAmount() //used to check how much was expected as you pass through vs how much was received, among other htings.
 
-    Result<SearchInfo<T>> getSpecificNode(SearchInput path);
-
-    Result<Execution<T>> getExecution(NodeContext<T> context);
     SuggestionHandler<T> getSuggestionHandler();
+
+    /**
+     * Method called first. Locates the node to execute and adds all found nodes along the path to the SearcherOutput
+     *
+     * Is not finished since some nodes still need to add blocks to the final output
+     *
+     * @return a result containing the node required and all initial blocks found.
+     */
+    Result<PreProcessSearch<T>> searchNode(InitialSearch<T> input);
+
+    /**
+     * Method called next. Typically adds all node-specific blocks to the search
+     * and returns an execution.
+     *
+     * @return execution of the node
+     */
+    Result<Execution<T>> searchExecute(NodeContext<T> context, PreProcessSearch<T> input);
 
 
     /**

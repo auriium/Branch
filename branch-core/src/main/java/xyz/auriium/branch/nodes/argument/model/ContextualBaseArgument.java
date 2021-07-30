@@ -1,11 +1,10 @@
 package xyz.auriium.branch.nodes.argument.model;
 
 import xyz.auriium.branch.execution.Block;
-import xyz.auriium.branch.execution.NodeContext;
+import xyz.auriium.branch.execution.blocks.ArgumentBlock;
 import xyz.auriium.branch.nodes.results.model.Result;
 
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Base-type SPI interface describing an
@@ -31,7 +30,7 @@ public interface ContextualBaseArgument<T,O> {
      *
      * @return the type
      */
-    String getType();
+    ArgumentBlock getType();
 
     /**
      * Method describing what label this argument uses
@@ -55,6 +54,6 @@ public interface ContextualBaseArgument<T,O> {
      *
      * @return a result describing the execution success of parsing
      */
-    Result<O> parse(T sender, String alias, List<Block> reserved);
+    Result<O> parse(T sender, String alias, List<String> reserved);
 
 }

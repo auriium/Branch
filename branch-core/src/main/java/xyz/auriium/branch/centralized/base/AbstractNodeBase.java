@@ -28,7 +28,8 @@ import xyz.auriium.branch.execution.NodeContext;
 import xyz.auriium.branch.fallback.strategies.FallbackSearchStrategy;
 import xyz.auriium.branch.interfacing.exceptional.AnomalyHandler;
 import xyz.auriium.branch.nodes.CommandNode;
-import xyz.auriium.branch.nodes.results.SearchInfo;
+import xyz.auriium.branch.nodes.results.PreProcessSearch;
+import xyz.auriium.branch.nodes.results.SearcherEquality;
 import xyz.auriium.branch.nodes.results.model.Result;
 
 import java.util.List;
@@ -40,20 +41,21 @@ import java.util.List;
  */
 public abstract class AbstractNodeBase<I, A extends I> implements NodeBase<I> {
 
-
     private final ManagerAdapter<I, A> adapter;
     private final AnomalyHandler<I, A> handler;
 
     private final CommandNode<A> baseNode;
     private final FallbackSearchStrategy<A> strategy;
     private final ContextProvider<A> provider;
+    private final SearcherEquality equality;
 
-    protected AbstractNodeBase(ManagerAdapter<I, A> adapter, AnomalyHandler<I, A> handler, CommandNode<A> baseNode, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider) {
+    protected AbstractNodeBase(ManagerAdapter<I, A> adapter, AnomalyHandler<I, A> handler, CommandNode<A> baseNode, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider, SearcherEquality equality) {
         this.adapter = adapter;
         this.handler = handler;
         this.baseNode = baseNode;
         this.strategy = strategy;
         this.provider = provider;
+        this.equality = equality;
     }
 
 
@@ -78,21 +80,21 @@ public abstract class AbstractNodeBase<I, A extends I> implements NodeBase<I> {
 
         A adaptedSender = adapter.adapt(input);
 
-        Result<SearchInfo<A>> result = strategy.attemptPreprocess(adaptedSender,alias,args,baseNode);
+        Result<PreProcessSearch<A>> preprocessResult = strategy.attemptPreprocess(adaptedSender, alias, args, equality, baseNode);
 
-        if (!result.isSuccessful()) {
-            handler.communicateAdapted(adaptedSender, result.getFailure());
+        if (!preprocessResult.isSuccessful()) {
+            handler.communicateAdapted(adaptedSender, preprocessResult.getFailure());
 
             return;
         }
 
-        SearchInfo<A> info = result.getSuccess();
-        NodeContext<A> produced = provider.produce(adaptedSender,alias,args,baseNode,info);
+        PreProcessSearch<A> info = preprocessResult.getSuccess();
+        NodeContext<A> produced = provider.produce(adaptedSender, alias, args);
 
-        Result<Execution<A>> executionResult = info.resultingNode().getExecution(produced);
+        Result<Execution<A>> executionResult = info.getFoundNode().searchExecute(produced, info);
 
         if (!executionResult.isSuccessful()) {
-            handler.communicateAdapted(adaptedSender, result.getFailure());
+            handler.communicateAdapted(adaptedSender, preprocessResult.getFailure());
 
             return;
         }

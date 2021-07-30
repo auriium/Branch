@@ -22,16 +22,13 @@
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.auriium.branch.centralized.NodeSource;
-import xyz.auriium.branch.execution.StringBlock;
 import xyz.auriium.branch.fallback.permissions.EmptyPermission;
 import xyz.auriium.branch.centralized.information.description.StringDescription;
-import xyz.auriium.branch.nodes.IdentifiableNode;
 import xyz.auriium.branch.nodes.single.SingleNode;
-import xyz.auriium.branch.tests.StringManager;
 
 public class ExecutionTest {
 
-    private final static Logger logger = LoggerFactory.getLogger(ExecutionTest.class);
+    /*private final static Logger logger = LoggerFactory.getLogger(ExecutionTest.class);
 
     private final StringManager manager = new StringManager();
     private final NodeSource<String> source = manager.getSource();
@@ -45,23 +42,12 @@ public class ExecutionTest {
                         }).build()
                 ).finish();
 
-        manager.newCommandWithNode(SingleNode.of(StringBlock.of("test"), act -> {
+        manager.newCommandWithNode(SingleNode.of("hi", act -> {
 
-        },new EmptyPermission<>(), new StringDescription("cum")));
-
-        manager.newCommandWithNode(SingleNode.of(StringBlock.of("hi"), handler -> {
-
-        }));
-
-        IdentifiableNode<String> cum = SingleNode.of(StringBlock.of("hi"), act -> {
-
-        });
-
-        manager.newCommandWithBuilder()
-                .withNode(source.exclusiveBranching().withNode(SingleNode.of(StringBlock.of("hi"), act -> {})).build());
+        },EmptyPermission.instance(), new StringDescription("cum")));
 
         //oh my god i can't believe singlenode is actually working
 
-    }
+    }*/
 
 }

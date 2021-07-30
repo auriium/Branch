@@ -28,10 +28,18 @@ import java.util.List;
 
 public class EmptySuggestionHandler<T> implements SuggestionHandler<T> {
 
+    EmptySuggestionHandler() {}
+
     private static final List<Block> empty = new ArrayList<>();
+    private static final EmptySuggestionHandler<?> INSTANCE = new EmptySuggestionHandler<>();
 
     @Override
     public List<Block> handle(NodeContext<T> adapter) {
         return empty;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> EmptySuggestionHandler<T> instance() {
+        return (EmptySuggestionHandler<T>) INSTANCE;
     }
 }

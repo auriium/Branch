@@ -21,19 +21,28 @@
 
 package xyz.auriium.branch.nodes;
 
-import xyz.auriium.branch.nodes.IdentifiableNode;
-import xyz.auriium.branch.nodes.results.SearchInfo;
-import xyz.auriium.branch.nodes.results.SearchInput;
+import xyz.auriium.branch.execution.EmptySuggestionHandler;
+import xyz.auriium.branch.execution.api.SuggestionHandler;
+import xyz.auriium.branch.execution.blocks.EndpointBlock;
+import xyz.auriium.branch.nodes.results.InitialSearch;
+import xyz.auriium.branch.nodes.results.PreProcessSearch;
 import xyz.auriium.branch.nodes.results.model.Result;
 
 /**
  * A node that cannot point to any node other than itself (and therefore ends the branching of a node-path)
  */
-public abstract class EndpointNode<T> implements IdentifiableNode<T> {
+public interface EndpointNode<T> extends IdentifiableNode<T> {
 
     @Override
-    public final Result<SearchInfo<T>> getSpecificNode(SearchInput input) {
-        return Result.success(new SearchInfo<>(this,input));
+    EndpointBlock getIdentifier();
+
+    @Override
+    default SuggestionHandler<T> getSuggestionHandler() {
+        return EmptySuggestionHandler.instance();
     }
 
+    @Override
+    default Result<PreProcessSearch<T>> searchNode(InitialSearch<T> input) {
+        return Result.success(PreProcessSearch.generate(this,input)); //new generation
+    }
 }

@@ -27,6 +27,10 @@ package xyz.auriium.branch.fallback.permissions;
  */
 public class EmptyPermission<T> implements Permission<T> {
 
+    private static final EmptyPermission<?> INSTANCE = new EmptyPermission<>();
+
+    EmptyPermission() {}
+
     @Override
     public boolean attempt(T sender, String alias, String[] args) {
         return true;
@@ -35,5 +39,10 @@ public class EmptyPermission<T> implements Permission<T> {
     @Override
     public String failureIdentifiableName() {
         return "None";
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> EmptyPermission<T> instance() {
+        return (EmptyPermission<T>) INSTANCE;
     }
 }

@@ -27,6 +27,7 @@ import xyz.auriium.branch.execution.ContextProvider;
 import xyz.auriium.branch.fallback.strategies.FallbackSearchStrategy;
 import xyz.auriium.branch.interfacing.exceptional.AnomalyHandler;
 import xyz.auriium.branch.nodes.IdentifiableNode;
+import xyz.auriium.branch.nodes.results.SearcherEquality;
 
 import java.util.*;
 
@@ -46,18 +47,20 @@ public class NodeBaseBuilder<I, A extends I> {
     private IdentifiableNode<A> node;
     private FallbackSearchStrategy<A> strategy;
     private ContextProvider<A> provider;
+    private SearcherEquality equality;
 
     public NodeBaseBuilder(CentralizedManager<I, ?> manager, ManagerAdapter<I, A> adapter) {
         this.manager = manager;
         this.adapter = adapter;
     }
 
-    public NodeBaseBuilder(CentralizedManager<I, ?> manager, ManagerAdapter<I, A> adapter, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider, AnomalyHandler<I,A> handler) {
+    public NodeBaseBuilder(CentralizedManager<I, ?> manager, ManagerAdapter<I, A> adapter, FallbackSearchStrategy<A> strategy, ContextProvider<A> provider, AnomalyHandler<I,A> handler, SearcherEquality equality) {
         this.manager = manager;
         this.adapter = adapter;
         this.strategy = strategy;
         this.provider = provider;
         this.handler = handler;
+        this.equality = equality;
     }
 
     public NodeBaseBuilder<I, A> withNode(IdentifiableNode<A> node) {
@@ -84,12 +87,15 @@ public class NodeBaseBuilder<I, A extends I> {
         return this;
     }
 
-    public void finish() {
-        Objects.requireNonNull(node);
-        Objects.requireNonNull(strategy);
-        Objects.requireNonNull(provider);
-        Objects.requireNonNull(handler);
 
-        manager.newCommand(new DelegatingNodeBase<>(adapter,handler,node,strategy,provider));
+
+    public void finish() {
+        Objects.requireNonNull(node, "Node cannot be null!");
+        Objects.requireNonNull(strategy, "Strategy cannot be null!");
+        Objects.requireNonNull(provider, "Provider cannot be null!");
+        Objects.requireNonNull(handler, "AnomalyHandler cannot be null!");
+        Objects.requireNonNull(equality, "SearcherEquality cannot be null!");
+
+        manager.newCommand(new DelegatingNodeBase<>(adapter,handler,node,strategy,provider,equality));
     }
 }

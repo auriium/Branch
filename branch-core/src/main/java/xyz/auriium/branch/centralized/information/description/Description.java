@@ -21,6 +21,7 @@
 
 package xyz.auriium.branch.centralized.information.description;
 
+//TODO make functional interface in order to generate str
 public interface Description {
 
     String getTextDescription();

@@ -23,9 +23,7 @@ package xyz.auriium.branch.spigot;
 
 
 import org.bukkit.command.CommandSender;
-import xyz.auriium.branch.execution.AbstractNodeContext;
 import xyz.auriium.branch.nodes.CommandNode;
-import xyz.auriium.branch.nodes.results.SearchInfo;
 
 public class SpigotContext<T extends CommandSender> extends AbstractNodeContext<T> {
 

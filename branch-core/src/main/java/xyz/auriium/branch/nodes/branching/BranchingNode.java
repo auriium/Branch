@@ -21,36 +21,41 @@
 
 package xyz.auriium.branch.nodes.branching;
 
+import xyz.auriium.branch.centralized.information.description.StringDescription;
 import xyz.auriium.branch.execution.Block;
 import xyz.auriium.branch.execution.api.Execution;
 import xyz.auriium.branch.execution.NodeContext;
 import xyz.auriium.branch.execution.api.SuggestionHandler;
 import xyz.auriium.branch.centralized.information.description.Description;
+import xyz.auriium.branch.execution.blocks.GroupBlock;
+import xyz.auriium.branch.fallback.permissions.EmptyPermission;
 import xyz.auriium.branch.nodes.IdentifiableNode;
 import xyz.auriium.branch.fallback.permissions.Permission;
 import xyz.auriium.branch.nodes.results.model.Result;
-import xyz.auriium.branch.nodes.results.SearchInfo;
-import xyz.auriium.branch.nodes.results.SearchInput;
+import xyz.auriium.branch.nodes.results.InitialSearch;
+import xyz.auriium.branch.nodes.results.PreProcessSearch;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Nodes should always assume that the first block in the blockpath is theirs to consume
+ * Nodes should always assume that the first block in the blockpath is theirs to consume TODO write docs
+ *
+ * TODO make ordered
  *
  * @param <T>
  */
 public class BranchingNode<T> implements IdentifiableNode<T> {
 
-    private final PrestoredSet<T> nodes;
-    private final Block path;
+    private final GroupBlock identifier;
+    private final PreStoredList<T> nodes;
     private final Description description;
     private final Permission<T> permission;
     private final SuggestionHandler<T> suggestion;
 
-    public BranchingNode(PrestoredSet<T> nodes, Block path, Description description, Permission<T> permission) {
+    public BranchingNode(String identifier, PreStoredList<T> nodes, Description description, Permission<T> permission) {
         this.nodes = nodes;
-        this.path = path;
+        this.identifier = new GroupBlock(identifier);
         this.description = description;
         this.permission = permission;
         this.suggestion = (ctx) -> {
@@ -67,34 +72,13 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     }
 
     @Override
-    public Block getIdentifier() {
-        return path;
+    public GroupBlock getIdentifier() {
+        return identifier;
     }
 
     @Override
     public Description getDescription() {
         return description;
-    }
-
-    //args[] = join aMatch
-    //let's say this is the base
-    @Override
-    public Result<SearchInfo<T>> getSpecificNode(SearchInput input) {
-        //if there is something left, the first thing in the queue is our argument
-        //if there is nothing left no args time
-
-        if (!input.getReducablePath().isEmpty()) {
-            Block block = input.getReducablePath().getFirst(); //reveal
-
-            for (IdentifiableNode<T> node : nodes.getContents()) {
-                if (node.getIdentifier().equals(block)) {
-                    return node.getSpecificNode(input); //consume
-                }
-            }
-
-        }
-
-        return Result.success(new SearchInfo<>(this,input));
     }
 
     @Override
@@ -103,14 +87,39 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     }
 
     @Override
-    public Result<Execution<T>> getExecution(NodeContext<T> context) {
-        return nodes.getSideNode().getExecution(context);
-    }
-
-    @Override
     public SuggestionHandler<T> getSuggestionHandler() {
         return suggestion;
     }
 
+    @Override
+    public Result<PreProcessSearch<T>> searchNode(InitialSearch<T> input) {
 
+        if (!input.getRemainingStrings().isEmpty()) {
+            String popped = input.getRemainingStrings().peek(); //reveal
+
+            for (IdentifiableNode<T> node : nodes.getContents()) {
+                if (input.getEquality().equal(identifier,popped)) {
+                    input.getRemainingStrings().remove(); //pop string
+
+                    return node.searchNode(input); //consume
+                }
+            }
+
+        }
+
+        return nodes.getSideNode().searchNode(input);
+    }
+
+    @Override
+    public Result<Execution<T>> searchExecute(NodeContext<T> context, PreProcessSearch<T> input) {
+        return nodes.getSideNode().searchExecute(context, input);
+    }
+
+    public static <T> BranchingNode<T> of(String identifier, PreStoredList<T> nodes, Description description, Permission<T> permission) {
+        return new BranchingNode<>(identifier, nodes, description, permission);
+    }
+
+    public static <T> BranchingNode<T> of(String identifier, PreStoredList<T> nodes) {
+        return new BranchingNode<>(identifier, nodes, new StringDescription("Default description for branching command"), EmptyPermission.instance());
+    }
 }

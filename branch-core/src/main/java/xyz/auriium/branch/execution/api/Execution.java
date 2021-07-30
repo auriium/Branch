@@ -21,8 +21,6 @@
 
 package xyz.auriium.branch.execution.api;
 
-import xyz.auriium.branch.execution.NodeContext;
-
 /**
  * Marker runnable representing the supplying of all required dependencies to an execution handler
  * or significant derivative and actual execution of said handler.

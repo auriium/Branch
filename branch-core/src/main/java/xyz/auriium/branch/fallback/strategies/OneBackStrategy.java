@@ -23,8 +23,7 @@ package xyz.auriium.branch.fallback.strategies;
 
 import xyz.auriium.branch.interfacing.exceptional.anomalies.NoPermissionAnomaly;
 import xyz.auriium.branch.nodes.CommandNode;
-import xyz.auriium.branch.nodes.results.SearchInput;
-import xyz.auriium.branch.nodes.results.SearchInfo;
+import xyz.auriium.branch.nodes.results.*;
 import xyz.auriium.branch.nodes.results.model.Result;
 
 /**
@@ -54,22 +53,22 @@ import xyz.auriium.branch.nodes.results.model.Result;
 public class OneBackStrategy<T> implements FallbackSearchStrategy<T> {
 
     @Override
-    public Result<SearchInfo<T>> attemptPreprocess(T sender, String alias, String[] args, CommandNode<T> baseNode) {
+    public Result<PreProcessSearch<T>> attemptPreprocess(T sender, String alias, String[] args, SearcherEquality equality, CommandNode<T> baseNode) {
 
-        SearchInput input = SearchInput.of(args);
-        Result<SearchInfo<T>> toBeExecuted = baseNode.getSpecificNode(input);
+        InitialSearch<T> search = InitialSearch.of(equality, args);
+        Result<PreProcessSearch<T>> toBeExecuted = baseNode.searchNode(search);
 
 
         //1. Check permissions and access (preprocessing)
 
-        while (toBeExecuted.isSuccessful() && !toBeExecuted.getSuccess().resultingNode().getPermission().attempt(sender, alias, args)) {
+        while (toBeExecuted.isSuccessful() && !toBeExecuted.getSuccess().getFoundNode().getPermission().attempt(sender, alias, args)) {
             //something is wrong with the execution (e.g. wrong args or you did something bad), pass above one.
 
-            if (toBeExecuted.getSuccess().resultingNode().equals(baseNode)) {
+            if (toBeExecuted.getSuccess().getFoundNode().equals(baseNode)) {
                 return Result.fail(new NoPermissionAnomaly(baseNode.getPermission().failureIdentifiableName()));
 
             } else {
-                toBeExecuted = baseNode.getSpecificNode(input.withoutTop()); //regress backwards a node
+                toBeExecuted = baseNode.searchNode(search = InitialSearch.withoutTop(search)); //regress backwards a node //TODO fix all of this
             }
         }
 

@@ -22,7 +22,8 @@
 package xyz.auriium.branch.fallback.strategies;
 
 import xyz.auriium.branch.nodes.CommandNode;
-import xyz.auriium.branch.nodes.results.SearchInfo;
+import xyz.auriium.branch.nodes.results.PreProcessSearch;
+import xyz.auriium.branch.nodes.results.SearcherEquality;
 import xyz.auriium.branch.nodes.results.model.Result;
 
 /**
@@ -35,7 +36,7 @@ import xyz.auriium.branch.nodes.results.model.Result;
 public interface FallbackSearchStrategy<T> {
 
 
-    Result<SearchInfo<T>> attemptPreprocess(T sender, String alias, String[] args, CommandNode<T> baseNode);
+    Result<PreProcessSearch<T>> attemptPreprocess(T sender, String alias, String[] args, SearcherEquality equality, CommandNode<T> baseNode);
 
 
 }

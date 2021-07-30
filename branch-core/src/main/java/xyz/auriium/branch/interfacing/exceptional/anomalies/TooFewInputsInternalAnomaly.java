@@ -1,30 +1,25 @@
 package xyz.auriium.branch.interfacing.exceptional.anomalies;
 
+import xyz.auriium.branch.execution.blocks.ArgumentBlock;
 import xyz.auriium.branch.interfacing.exceptional.Anomaly;
 import xyz.auriium.branch.interfacing.exceptional.AnomalyType;
 
 public class TooFewInputsInternalAnomaly implements Anomaly {
 
     private final Class<?> argumentClass;
-    private final String argumentType;
-    private final String argumentLabel;
+    private final ArgumentBlock argumentType;
     private final int expectedArgs;
     private final int gotArgs;
 
-    public TooFewInputsInternalAnomaly(Class<?> argumentClass, String argumentType, String argumentLabel, int expectedArgs, int gotArgs) {
+    public TooFewInputsInternalAnomaly(Class<?> argumentClass, ArgumentBlock argumentType, int expectedArgs, int gotArgs) {
         this.argumentClass = argumentClass;
         this.argumentType = argumentType;
-        this.argumentLabel = argumentLabel;
         this.expectedArgs = expectedArgs;
         this.gotArgs = gotArgs;
     }
 
     public Class<?> getArgumentClass() {
         return argumentClass;
-    }
-
-    public String getArgumentType() {
-        return argumentType;
     }
 
     public int getExpectedArgs() {

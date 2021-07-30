@@ -14,9 +14,9 @@ public interface SingleContextualArgument<T,O> extends ContextualBaseArgument<T,
     }
 
     @Override
-    default Result<O> parse(T sender, String alias, List<Block> reserved) {
+    default Result<O> parse(T sender, String alias, List<String> reserved) {
         return microParse(sender,alias,reserved.get(0));
     }
 
-    Result<O> microParse(T sender, String alias, Block toParse);
+    Result<O> microParse(T sender, String alias, String toParse);
 }

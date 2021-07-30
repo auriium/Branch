@@ -21,14 +21,11 @@
 
 package xyz.auriium.branch.execution;
 
-import xyz.auriium.branch.nodes.CommandNode;
-import xyz.auriium.branch.nodes.results.SearchInfo;
-
 /**
  * Represents something that produces specific context based on a platform
  */
 public interface ContextProvider<T> {
 
-    NodeContext<T> produce(T sender, String alias, String[] strings, CommandNode<T> baseNode, SearchInfo<T> search);
+    NodeContext<T> produce(T sender, String alias, String[] strings);
 
 }

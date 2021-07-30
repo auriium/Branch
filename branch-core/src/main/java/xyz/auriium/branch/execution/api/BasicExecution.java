@@ -1,13 +1,13 @@
 package xyz.auriium.branch.execution.api;
 
-import xyz.auriium.branch.execution.NodeContext;
+import xyz.auriium.branch.execution.EnhancedNodeContext;
 
 public class BasicExecution<T> implements Execution<T> {
 
     private final ExecutionHandler<T> handler;
-    private final NodeContext<T> node;
+    private final EnhancedNodeContext<T> node;
 
-    public BasicExecution(ExecutionHandler<T> handler, NodeContext<T> node) {
+    public BasicExecution(ExecutionHandler<T> handler, EnhancedNodeContext<T> node) {
         this.handler = handler;
         this.node = node;
     }

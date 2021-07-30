@@ -9,19 +9,20 @@ import xyz.auriium.branch.centralized.information.description.StringDescription;
 
 import java.util.Objects;
 
+@Deprecated //TODO undeprecate when all builders are done. for now, use each node's static method
 public final class SingleNodeBuilder<T> {
 
 
-    private final Block identifier;
+    private final String identifier;
     private Permission<T> permission;
     private Description description;
     private ExecutionHandler<T> handler;
 
-    SingleNodeBuilder(Block identifier) {
+    SingleNodeBuilder(String identifier) {
         this.identifier = identifier;
     }
 
-    public static <T> SingleNodeBuilder<T> builder(Block identifier) {
+    public static <T> SingleNodeBuilder<T> builder(String identifier) {
         return new SingleNodeBuilder<>(identifier);
     }
 
@@ -42,9 +43,9 @@ public final class SingleNodeBuilder<T> {
 
     public SingleNode<T> build() {
 
-        return new SingleNode<T>(
+        return new SingleNode<>(
                 identifier,
-                Objects.requireNonNullElse(permission, new EmptyPermission<>()),
+                Objects.requireNonNullElse(permission, EmptyPermission.instance()),
                 Objects.requireNonNullElse(description, new StringDescription("Default description")),
                 handler
         );
