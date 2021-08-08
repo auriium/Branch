@@ -23,13 +23,13 @@ package xyz.auriium.branch.spigot;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.auriium.branch.centralized.CentralizedManager;
-import xyz.auriium.branch.centralized.CentralizedManagerBinder;
-import xyz.auriium.branch.centralized.NodeSource;
-import xyz.auriium.branch.centralized.base.NodeBase;
-import xyz.auriium.branch.centralized.base.NodeBaseBuilder;
-import xyz.auriium.branch.centralized.typeadapter.ManagerAdapter;
-import xyz.auriium.branch.fallback.strategies.OneBackStrategy;
+import xyz.auriium.branch.CentralizedManager;
+import xyz.auriium.branch.CentralizedManagerBinder;
+import xyz.auriium.branch.NodeSource;
+import xyz.auriium.branch.base.NodeBase;
+import xyz.auriium.branch.base.NodeBaseBuilder;
+import xyz.auriium.branch.typeadapter.ManagerAdapter;
+import xyz.auriium.branch.base.execution.OneBackStrategy;
 import xyz.auriium.branch.nodes.CommandNode;
 import xyz.auriium.branch.spigot.adapter.SenderAdapter;
 

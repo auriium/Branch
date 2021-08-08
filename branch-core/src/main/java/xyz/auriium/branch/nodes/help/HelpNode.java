@@ -21,16 +21,16 @@
 
 package xyz.auriium.branch.nodes.help;
 
-import xyz.auriium.branch.centralized.information.description.StringDescription;
-import xyz.auriium.branch.execution.NodeContext;
-import xyz.auriium.branch.execution.api.Execution;
-import xyz.auriium.branch.execution.blocks.EndpointBlock;
-import xyz.auriium.branch.fallback.permissions.EmptyPermission;
-import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.centralized.information.description.Description;
+import xyz.auriium.branch.nodes.description.StringDescription;
+import xyz.auriium.branch.base.NodeContext;
+import xyz.auriium.branch.base.execution.Execution;
+import xyz.auriium.branch.base.execution.blocks.EndpointBlock;
+import xyz.auriium.branch.base.permissions.EmptyPermission;
+import xyz.auriium.branch.base.permissions.Permission;
+import xyz.auriium.branch.nodes.description.Description;
 import xyz.auriium.branch.nodes.EndpointNode;
-import xyz.auriium.branch.nodes.results.PreProcessSearch;
-import xyz.auriium.branch.nodes.results.model.Result;
+import xyz.auriium.branch.results.PreProcessSearch;
+import xyz.auriium.branch.results.Result;
 
 /**
  * Represents a node that pregenerates help entries based on the message context
@@ -63,7 +63,7 @@ public class HelpNode<T> implements EndpointNode<T> {
     }
 
     @Override
-    public Result<Execution<T>> searchExecute(NodeContext<T> context, PreProcessSearch<T> input) {
+    public Result<Execution<T>> searchExecute(NodeContext<T> ctx, PreProcessSearch<T> input) {
 
         /*List<Block> blocks = new ArrayList<>();
             String[] strong = ct.getArgs();

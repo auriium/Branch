@@ -1,12 +1,10 @@
 package xyz.auriium.branch.nodes.argument;
 
-import xyz.auriium.branch.execution.Block;
-import xyz.auriium.branch.execution.blocks.ArgumentBlock;
-import xyz.auriium.branch.execution.blocks.EndpointBlock;
-import xyz.auriium.branch.fallback.permissions.EmptyPermission;
-import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.centralized.information.description.Description;
-import xyz.auriium.branch.centralized.information.description.StringDescription;
+import xyz.auriium.branch.base.execution.blocks.EndpointBlock;
+import xyz.auriium.branch.base.permissions.EmptyPermission;
+import xyz.auriium.branch.base.permissions.Permission;
+import xyz.auriium.branch.nodes.description.Description;
+import xyz.auriium.branch.nodes.description.StringDescription;
 import xyz.auriium.branch.nodes.argument.model.ContextualBaseArgument;
 
 import java.util.List;

@@ -1,20 +1,16 @@
 package xyz.auriium.branch.nodes.argument;
 
-import xyz.auriium.branch.execution.EnhancedNodeContext;
+import xyz.auriium.branch.base.EnhancedNodeContext;
 import xyz.auriium.branch.interfacing.exceptional.anomalies.TooFewInputsExternalAnomaly;
-import xyz.auriium.branch.interfacing.exceptional.anomalies.TooFewInputsInternalAnomaly;
-import xyz.auriium.branch.execution.Block;
-import xyz.auriium.branch.execution.NodeContext;
-import xyz.auriium.branch.execution.api.ArgExecution;
-import xyz.auriium.branch.execution.api.Execution;
-import xyz.auriium.branch.execution.api.SuggestionHandler;
+import xyz.auriium.branch.base.NodeContext;
+import xyz.auriium.branch.base.execution.ArgExecution;
+import xyz.auriium.branch.base.execution.Execution;
 import xyz.auriium.branch.nodes.ProcessingNode;
 import xyz.auriium.branch.nodes.argument.model.ContextualBaseArgument;
-import xyz.auriium.branch.nodes.results.PostProcessSearch;
-import xyz.auriium.branch.nodes.results.PreProcessSearch;
-import xyz.auriium.branch.nodes.results.SearchPair;
-import xyz.auriium.branch.nodes.results.model.Result;
-import xyz.auriium.branch.nodes.EndpointNode;
+import xyz.auriium.branch.results.PostProcessSearch;
+import xyz.auriium.branch.results.PreProcessSearch;
+import xyz.auriium.branch.results.SearchPair;
+import xyz.auriium.branch.results.Result;
 
 import java.util.*;
 
@@ -24,8 +20,13 @@ public abstract class AbstractArgNode<T> implements ProcessingNode<T, Arguments>
     protected abstract ArgumentContextHandler<T> getContextHandler();
 
     @Override
-    public SuggestionHandler<T> getSuggestionHandler() {
-        return null; //TODO implement
+    public Result<Execution<T>> searchExecute(NodeContext<T> ctx, PreProcessSearch<T> input) {
+
+        for (ContextualBaseArgument<T,?> argument : getArguments()) {
+
+        }
+
+        return Result.success(null);
     }
 
     @Override
@@ -48,6 +49,8 @@ public abstract class AbstractArgNode<T> implements ProcessingNode<T, Arguments>
                     return Result.fail(
                             new TooFewInputsExternalAnomaly()
                     ); //throw
+
+
                 }
 
 

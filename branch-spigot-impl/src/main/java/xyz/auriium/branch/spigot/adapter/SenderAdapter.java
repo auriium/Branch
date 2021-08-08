@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.spigot.adapter;
 
-import xyz.auriium.branch.centralized.typeadapter.CommonAdapter;
+import xyz.auriium.branch.typeadapter.CommonAdapter;
 import org.bukkit.command.CommandSender;
 
 public class SenderAdapter implements CommonAdapter<CommandSender> {

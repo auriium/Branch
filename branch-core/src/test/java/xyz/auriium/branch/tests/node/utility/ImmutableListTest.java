@@ -2,8 +2,8 @@ package xyz.auriium.branch.tests.node.utility;
 
 
 import org.junit.jupiter.api.Test;
-import xyz.auriium.branch.nodes.results.DelegatingImmutableList;
-import xyz.auriium.branch.nodes.results.ImmutableList;
+import xyz.auriium.branch.results.DelegatingImmutableList;
+import xyz.auriium.branch.results.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.List;

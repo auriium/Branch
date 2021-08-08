@@ -1,8 +1,7 @@
 package xyz.auriium.branch.nodes.argument.model;
 
-import xyz.auriium.branch.execution.Block;
-import xyz.auriium.branch.execution.blocks.ArgumentBlock;
-import xyz.auriium.branch.nodes.results.model.Result;
+import xyz.auriium.branch.base.execution.blocks.ArgumentBlock;
+import xyz.auriium.branch.results.Result;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,5 +55,7 @@ public interface ContextualBaseArgument<T,O> {
      * @return a result describing the execution success of parsing
      */
     Result<O> parse(T sender, String alias, List<String> reserved);
+
+    
 
 }

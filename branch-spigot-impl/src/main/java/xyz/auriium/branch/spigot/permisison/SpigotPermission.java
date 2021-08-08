@@ -1,6 +1,7 @@
 package xyz.auriium.branch.spigot.permisison;
 
-import xyz.auriium.branch.fallback.permissions.Permission;
+import xyz.auriium.branch.base.NodeContext;
+import xyz.auriium.branch.base.permissions.Permission;
 import org.bukkit.command.CommandSender;
 
 public class SpigotPermission implements Permission<CommandSender> {
@@ -12,8 +13,8 @@ public class SpigotPermission implements Permission<CommandSender> {
     }
 
     @Override
-    public boolean attempt(CommandSender sender, String alias, String[] args) {
-        return sender.hasPermission(permission);
+    public boolean attempt(NodeContext<CommandSender> nodeContext) {
+        return nodeContext.hasStringPermissible(permission);
     }
 
     @Override

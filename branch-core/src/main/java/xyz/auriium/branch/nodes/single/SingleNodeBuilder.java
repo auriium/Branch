@@ -1,11 +1,10 @@
 package xyz.auriium.branch.nodes.single;
 
-import xyz.auriium.branch.execution.Block;
-import xyz.auriium.branch.execution.api.ExecutionHandler;
-import xyz.auriium.branch.fallback.permissions.EmptyPermission;
-import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.centralized.information.description.Description;
-import xyz.auriium.branch.centralized.information.description.StringDescription;
+import xyz.auriium.branch.base.execution.ExecutionHandler;
+import xyz.auriium.branch.base.permissions.EmptyPermission;
+import xyz.auriium.branch.base.permissions.Permission;
+import xyz.auriium.branch.nodes.description.Description;
+import xyz.auriium.branch.nodes.description.StringDescription;
 
 import java.util.Objects;
 

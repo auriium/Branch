@@ -22,8 +22,8 @@
 package xyz.auriium.branch.spigot;
 
 
-import xyz.auriium.branch.execution.ContextProvider;
-import xyz.auriium.branch.execution.NodeContext;
+import xyz.auriium.branch.base.ContextProvider;
+import xyz.auriium.branch.base.NodeContext;
 import xyz.auriium.branch.nodes.CommandNode;
 import org.bukkit.command.CommandSender;
 

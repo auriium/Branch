@@ -1,8 +1,8 @@
 package xyz.auriium.branch.nodes.argument.types;
 
-import xyz.auriium.branch.execution.blocks.ArgumentBlock;
+import xyz.auriium.branch.base.execution.blocks.ArgumentBlock;
 import xyz.auriium.branch.nodes.argument.model.SingleIgnorantArgument;
-import xyz.auriium.branch.nodes.results.model.Result;
+import xyz.auriium.branch.results.Result;
 
 import java.util.Objects;
 import java.util.Optional;

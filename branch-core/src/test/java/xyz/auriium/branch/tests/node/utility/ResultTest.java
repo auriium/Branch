@@ -2,7 +2,7 @@ package xyz.auriium.branch.tests.node.utility;
 
 import org.junit.jupiter.api.Test;
 import xyz.auriium.branch.interfacing.exceptional.AnomalyType;
-import xyz.auriium.branch.nodes.results.model.Result;
+import xyz.auriium.branch.results.Result;
 
 import static org.junit.jupiter.api.Assertions.*;
 

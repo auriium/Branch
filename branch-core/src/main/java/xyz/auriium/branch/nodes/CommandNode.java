@@ -21,14 +21,16 @@
 
 package xyz.auriium.branch.nodes;
 
-import xyz.auriium.branch.execution.NodeContext;
-import xyz.auriium.branch.execution.api.Execution;
-import xyz.auriium.branch.execution.api.SuggestionHandler;
-import xyz.auriium.branch.centralized.information.description.Description;
-import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.nodes.results.model.Result;
-import xyz.auriium.branch.nodes.results.InitialSearch;
-import xyz.auriium.branch.nodes.results.PreProcessSearch;
+import xyz.auriium.branch.base.NodeContext;
+import xyz.auriium.branch.base.execution.Execution;
+import xyz.auriium.branch.base.suggestion.Suggestion;
+import xyz.auriium.branch.nodes.description.Description;
+import xyz.auriium.branch.base.permissions.Permission;
+import xyz.auriium.branch.results.Result;
+import xyz.auriium.branch.results.InitialSearch;
+import xyz.auriium.branch.results.PreProcessSearch;
+
+import java.util.List;
 
 /**
  * Base object
@@ -38,7 +40,12 @@ public interface CommandNode<T> {
 
     //int getExpectedConsumeAmount() //used to check how much was expected as you pass through vs how much was received, among other htings.
 
-    SuggestionHandler<T> getSuggestionHandler();
+    /**
+     * Suggestion-handling analogy to
+     *
+     * @return returns a result containing all suggestions
+     */
+    Result<List<Suggestion<T>>> searchSuggestion(NodeContext<T> ctx, PreProcessSearch<T> input);
 
     /**
      * Method called first. Locates the node to execute and adds all found nodes along the path to the SearcherOutput
@@ -55,7 +62,7 @@ public interface CommandNode<T> {
      *
      * @return execution of the node
      */
-    Result<Execution<T>> searchExecute(NodeContext<T> context, PreProcessSearch<T> input);
+    Result<Execution<T>> searchExecute(NodeContext<T> ctx, PreProcessSearch<T> input);
 
 
     /**

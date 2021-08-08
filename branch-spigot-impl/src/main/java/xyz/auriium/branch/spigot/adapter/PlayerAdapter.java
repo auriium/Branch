@@ -22,7 +22,7 @@
 package xyz.auriium.branch.spigot.adapter;
 
 import xyz.auriium.branch.interfacing.exceptional.anomalies.WrongTypeParseAnomaly;
-import xyz.auriium.branch.centralized.typeadapter.ManagerAdapter;
+import xyz.auriium.branch.typeadapter.ManagerAdapter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

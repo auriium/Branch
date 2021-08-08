@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.nodes.argument;
 
-import xyz.auriium.branch.execution.NodeContext;
+import xyz.auriium.branch.base.NodeContext;
 
 public class ArgumentContext<T> {
 

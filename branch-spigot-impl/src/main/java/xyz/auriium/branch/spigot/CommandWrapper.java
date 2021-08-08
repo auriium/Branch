@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.spigot;
 
-import xyz.auriium.branch.centralized.base.NodeBase;
+import xyz.auriium.branch.base.NodeBase;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 

@@ -21,19 +21,18 @@
 
 package xyz.auriium.branch.nodes.branching;
 
-import xyz.auriium.branch.centralized.information.description.StringDescription;
-import xyz.auriium.branch.execution.Block;
-import xyz.auriium.branch.execution.api.Execution;
-import xyz.auriium.branch.execution.NodeContext;
-import xyz.auriium.branch.execution.api.SuggestionHandler;
-import xyz.auriium.branch.centralized.information.description.Description;
-import xyz.auriium.branch.execution.blocks.GroupBlock;
-import xyz.auriium.branch.fallback.permissions.EmptyPermission;
+import xyz.auriium.branch.base.suggestion.Suggestion;
+import xyz.auriium.branch.nodes.description.StringDescription;
+import xyz.auriium.branch.base.execution.Execution;
+import xyz.auriium.branch.base.NodeContext;
+import xyz.auriium.branch.nodes.description.Description;
+import xyz.auriium.branch.base.execution.blocks.GroupBlock;
+import xyz.auriium.branch.base.permissions.EmptyPermission;
 import xyz.auriium.branch.nodes.IdentifiableNode;
-import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.nodes.results.model.Result;
-import xyz.auriium.branch.nodes.results.InitialSearch;
-import xyz.auriium.branch.nodes.results.PreProcessSearch;
+import xyz.auriium.branch.base.permissions.Permission;
+import xyz.auriium.branch.results.Result;
+import xyz.auriium.branch.results.InitialSearch;
+import xyz.auriium.branch.results.PreProcessSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,24 +50,25 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     private final PreStoredList<T> nodes;
     private final Description description;
     private final Permission<T> permission;
-    private final SuggestionHandler<T> suggestion;
 
     public BranchingNode(String identifier, PreStoredList<T> nodes, Description description, Permission<T> permission) {
         this.nodes = nodes;
         this.identifier = new GroupBlock(identifier);
         this.description = description;
         this.permission = permission;
-        this.suggestion = (ctx) -> {
-            List<Block> strings = new ArrayList<>();
+    }
 
-            for (IdentifiableNode<T> node : nodes.getContents()) {
-                if (node.getPermission().attempt(ctx)) {
-                    strings.add(node.getIdentifier());
-                }
-            }
+    @Override
+    public Result<List<Suggestion<T>>> searchSuggestion(NodeContext<T> ctx, PreProcessSearch<T> input) {
 
-            return strings;
-        };
+        List<Suggestion<T>> suggestions = new ArrayList<>();
+
+        for (IdentifiableNode<T> node : nodes.getContents()) {
+            suggestions.add(new Suggestion<>(node.getPermission(), node.getIdentifier()));
+        }
+
+        return Result.success(suggestions);
+
     }
 
     @Override
@@ -84,11 +84,6 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     @Override
     public Permission<T> getPermission() {
         return permission;
-    }
-
-    @Override
-    public SuggestionHandler<T> getSuggestionHandler() {
-        return suggestion;
     }
 
     @Override
@@ -111,8 +106,8 @@ public class BranchingNode<T> implements IdentifiableNode<T> {
     }
 
     @Override
-    public Result<Execution<T>> searchExecute(NodeContext<T> context, PreProcessSearch<T> input) {
-        return nodes.getSideNode().searchExecute(context, input);
+    public Result<Execution<T>> searchExecute(NodeContext<T> ctx, PreProcessSearch<T> input) {
+        return nodes.getSideNode().searchExecute(ctx, input);
     }
 
     public static <T> BranchingNode<T> of(String identifier, PreStoredList<T> nodes, Description description, Permission<T> permission) {

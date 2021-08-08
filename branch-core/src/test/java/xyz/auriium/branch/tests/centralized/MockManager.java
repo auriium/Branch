@@ -1,11 +1,11 @@
 package xyz.auriium.branch.tests.centralized;
 
-import xyz.auriium.branch.centralized.CentralizedManager;
-import xyz.auriium.branch.centralized.CentralizedManagerBinder;
-import xyz.auriium.branch.centralized.NodeSource;
-import xyz.auriium.branch.centralized.base.NodeBase;
-import xyz.auriium.branch.centralized.base.NodeBaseBuilder;
-import xyz.auriium.branch.centralized.typeadapter.ManagerAdapter;
+import xyz.auriium.branch.CentralizedManager;
+import xyz.auriium.branch.CentralizedManagerBinder;
+import xyz.auriium.branch.NodeSource;
+import xyz.auriium.branch.base.NodeBase;
+import xyz.auriium.branch.base.NodeBaseBuilder;
+import xyz.auriium.branch.typeadapter.ManagerAdapter;
 import xyz.auriium.branch.nodes.CommandNode;
 
 public class MockManager implements CentralizedManager<MockSender,Void> {

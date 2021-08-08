@@ -1,6 +1,5 @@
 package xyz.auriium.branch.interfacing.exceptional.anomalies;
 
-import xyz.auriium.branch.execution.blocks.ArgumentBlock;
 import xyz.auriium.branch.interfacing.exceptional.Anomaly;
 import xyz.auriium.branch.interfacing.exceptional.AnomalyType;
 

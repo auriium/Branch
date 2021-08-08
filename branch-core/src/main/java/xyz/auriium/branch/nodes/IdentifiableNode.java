@@ -21,7 +21,7 @@
 
 package xyz.auriium.branch.nodes;
 
-import xyz.auriium.branch.execution.Block;
+import xyz.auriium.branch.base.execution.blocks.Block;
 
 public interface IdentifiableNode<T> extends CommandNode<T> {
 

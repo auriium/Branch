@@ -1,13 +1,11 @@
 package xyz.auriium.branch.nodes.single;
 
-import xyz.auriium.branch.execution.Block;
-import xyz.auriium.branch.execution.api.ExecutionHandler;
-import xyz.auriium.branch.execution.blocks.EndpointBlock;
-import xyz.auriium.branch.fallback.permissions.EmptyPermission;
-import xyz.auriium.branch.fallback.permissions.Permission;
-import xyz.auriium.branch.centralized.information.description.Description;
-import xyz.auriium.branch.centralized.information.description.StringDescription;
-import xyz.auriium.branch.nodes.EndpointNode;
+import xyz.auriium.branch.base.execution.ExecutionHandler;
+import xyz.auriium.branch.base.execution.blocks.EndpointBlock;
+import xyz.auriium.branch.base.permissions.EmptyPermission;
+import xyz.auriium.branch.base.permissions.Permission;
+import xyz.auriium.branch.nodes.description.Description;
+import xyz.auriium.branch.nodes.description.StringDescription;
 
 public class SingleNode<T> extends AbstractSingleNode<T> {
 

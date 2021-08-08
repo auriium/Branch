@@ -1,12 +1,12 @@
 package xyz.auriium.branch.nodes;
 
-import xyz.auriium.branch.execution.EnhancedNodeContext;
-import xyz.auriium.branch.execution.NodeContext;
-import xyz.auriium.branch.execution.api.Execution;
-import xyz.auriium.branch.nodes.results.PostProcessSearch;
-import xyz.auriium.branch.nodes.results.PreProcessSearch;
-import xyz.auriium.branch.nodes.results.SearchPair;
-import xyz.auriium.branch.nodes.results.model.Result;
+import xyz.auriium.branch.base.EnhancedNodeContext;
+import xyz.auriium.branch.base.NodeContext;
+import xyz.auriium.branch.base.execution.Execution;
+import xyz.auriium.branch.results.PostProcessSearch;
+import xyz.auriium.branch.results.PreProcessSearch;
+import xyz.auriium.branch.results.SearchPair;
+import xyz.auriium.branch.results.Result;
 
 /**
  * Node that doesn't give a shit but still handles enhancedNodeContexts
