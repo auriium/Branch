@@ -25,20 +25,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>xyz.auriium</groupId>
+        <artifactId>insect</artifactId>
+        <version>0.3.0</version>
+    </parent>
+
     <artifactId>branch</artifactId>
     <packaging>pom</packaging>
     <version>0.1.0</version>
 
-    <parent>
-        <groupId>me.aurium</groupId>
-        <artifactId>insect</artifactId>
-        <version>0.2.1</version>
-    </parent>
+    <scm>
+        <developerConnection>scm:git:https://github.com/Auriium/Branch.git</developerConnection>
+    </scm>
 
     <modules>
-        <module>core</module>
-        <module>core-tests</module>
-        <module>spigot-impl</module>
+        <module>branch-core</module>
+        <module>branch-spigot-impl</module>
+        <module>branch-adventure</module>
     </modules>
 
     <properties>
@@ -49,18 +53,35 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>xyz.auriium</groupId>
                 <artifactId>branch-core</artifactId>
-                <groupId>me.aurium</groupId>
-                <version>${project.version}</version>
+                <version>0.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.7.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.32</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>5.7.0</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <repositories>
         <repository>
-            <id>jfrog</id>
-            <name>a0phrw82hnl4g-artifactory-primary-0-releases</name>
-            <url>https://aurium.jfrog.io/artifactory/aurium-libs-release-local</url>
+            <id>central-repo</id>
+            <url>https://repo.auriium.xyz/releases</url>
         </repository>
     </repositories>
 
